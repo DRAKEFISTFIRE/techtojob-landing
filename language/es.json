@@ -1,0 +1,359 @@
+{
+  "skipLink": "Saltar al contenido",
+  "nav": {
+    "ariaLabel": "Navegación principal",
+    "brandAlt": "TechToJob",
+    "openMenu": "Abrir menú",
+    "closeMenu": "Cerrar menú",
+    "whatIsIt": "Qué es",
+    "pillars": "Pilares",
+    "howItWorks": "Cómo funciona",
+    "tournaments": "Torneos",
+    "offers": "Ofertas",
+    "faq": "FAQ",
+    "testimonials": "Testimonios",
+    "newsletter": "Newsletter",
+    "joinDiscord": "Unirme al Discord"
+  },
+  "hero": {
+    "eyebrow": "100% gratis para quien busca trabajo",
+    "titleLine1": "Que tu trabajo",
+    "titleHighlight": "hable por ti.",
+    "text": "Retos reales, perfiles con contexto y oportunidades que empiezan viendo lo que eres capaz de construir. Menos promesas. Más pruebas.",
+    "ctaPrimary": "Unirme al Discord",
+    "ctaSecondary": "Explorar torneos",
+    "proof": ["Retos reales", "Feedback directo", "Perfil verificable"],
+    "evidenceImageAlt": "Muestra de una entrega técnica",
+    "evidenceTop": { "tag": "ENTREGA / FRONTEND", "status": "EN REVISIÓN" },
+    "evidenceBody": {
+      "text": "Una entrega puede contar más que una descripción.",
+      "chips": ["Reto real", "Feedback", "Insignia"]
+    },
+    "floatingTop": { "label": "Nuevo torneo", "value": "Frontend · mensual" },
+    "floatingBottom": {
+      "label": "Trabajo visible",
+      "value": "Tu trabajo ↔ una oportunidad",
+      "badge": "LISTO"
+    }
+  },
+  "intro": {
+    "kicker": "Una forma distinta de buscar",
+    "visualLabel": "Antes → Ahora",
+    "before": { "fileName": "CV.pdf", "version": "v12" },
+    "after": {
+      "fileName": "entrega.tsx",
+      "tag": "FRONTEND / 02",
+      "text": "Una entrega real, revisable."
+    },
+    "sideNote": { "line1": "Menos interpretación.", "line2": "Más evidencia." },
+    "titleLine1": "Tu búsqueda no debería",
+    "titleHighlight": "empezar con un CV.",
+    "leadStart": "El problema no es que falte talento. ",
+    "leadStrong": "Es que cuesta verlo.",
+    "leadEnd": " TechToJob reúne retos, perfiles y oportunidades para que tu trabajo llegue antes que cualquier descripción.",
+    "shift": {
+      "ariaLabel": "Comparación entre la búsqueda tradicional y TechToJob",
+      "before": "Lo habitual",
+      "after": "Con TechToJob",
+      "rows": [
+        { "before": "Explicar tu nivel con un CV", "after": "Una entrega que demuestra lo que sabes hacer" },
+        { "before": "Esperar a que alguien encuentre tu perfil", "after": "Un perfil con proyectos, contexto y evolución" },
+        { "before": "Procesos que no enseñan cómo trabajas", "after": "Una comunidad que hace visible tu trabajo" }
+      ]
+    },
+    "ecosystem": {
+      "ariaLabel": "Talento, empresas y comunidad conectados por TechToJob",
+      "label": "El punto de encuentro",
+      "titleLine1": "Talento que se ve.",
+      "titleLine2": "Empresas que encuentran.",
+      "flow": ["Talento", "Empresas", "Comunidad"],
+      "result": "TechToJob"
+    }
+  },
+  "pillars": {
+    "kicker": "Las cuatro patas",
+    "titleLine1": "Cuatro formas",
+    "titleHighlight": "de avanzar.",
+    "lead": "No necesitas encajar en un proceso tradicional. Entra, participa y encuentra tu manera de crecer.",
+    "mapTag": "Mapa de la comunidad",
+    "items": {
+      "tournaments": {
+        "title": "Torneos mensuales por especialidad",
+        "description": "Demuestra lo que sabes haciendo. Retos por especialidad para construir portfolio y ganar visibilidad.",
+        "tag": "Nuevo reto cada mes"
+      },
+      "companies": {
+        "title": "Empresas publicando ofertas dentro de la comunidad",
+        "description": "Empresas de tecnología publican oportunidades directamente donde ya está el talento.",
+        "tag": "Sin intermediarios"
+      },
+      "selfPublish": {
+        "title": "Publícate tú mismo",
+        "description": "Tu perfil visible para que las empresas te encuentren, sin esperar a que abran un proceso.",
+        "tag": "Tú decides qué mostrar"
+      },
+      "networking": {
+        "title": "Networking con gente del sector",
+        "description": "Conecta con gente del sector, comparte conocimiento y abre puertas sin hacer ruido.",
+        "tag": "Voces reales del sector"
+      }
+    }
+  },
+  "nextTournament": {
+    "kicker": "01 / RETO MENSUAL",
+    "titleLine1": "El próximo torneo",
+    "titleHighlight": "empieza en:",
+    "text": "Un reto nuevo por especialidad cada mes. Preséntate, la comunidad ve tu solución y te llevas una insignia verificada para tu perfil.",
+    "cta": "Apuntarme en Discord",
+    "countdown": { "days": "días", "hours": "horas", "minutes": "min", "seconds": "seg" },
+    "hiddenNote": "Los torneos empiezan el día 1 de cada mes."
+  },
+  "badges": {
+    "kicker": "Evidencia que puedes enseñar",
+    "titleLine1": "Cada reto deja",
+    "titleHighlight": "una prueba real.",
+    "eyebrowNumber": "04 / CREDENCIALES",
+    "leadStart": "No es un icono por participar. Es una credencial que deja claro ",
+    "leadStrong": "qué has resuelto y cómo lo has demostrado.",
+    "completedLabel": "RETO COMPLETADO",
+    "defaultLevel": "Especialidad",
+    "defaultText": "Demuestra cómo trabajas en un reto real.",
+    "emblemBrand": "TECHTOJOB",
+    "emblemVerified": "VERIFIED",
+    "verifiedNote": "Revisada por la comunidad",
+    "listAriaLabel": "Seleccionar credencial",
+    "note": { "count": "4 especialidades", "text": "activas en la comunidad" },
+    "items": {
+      "frontend": {
+        "level": "Nivel frontend",
+        "title": "Frontend Sólido",
+        "text": "Se gana en el torneo mensual de frontend: maquetación, interacción y accesibilidad, evaluadas por gente que también las trabaja.",
+        "skills": ["Maquetación", "Interacción", "A11y"]
+      },
+      "backend": {
+        "level": "Nivel backend",
+        "title": "Backend Sólido",
+        "text": "Diseña una API, defiéndela con buenas prácticas y demuéstralo en un reto real, no en una entrevista teórica.",
+        "skills": ["APIs", "Arquitectura", "Buenas prácticas"]
+      },
+      "security": {
+        "level": "Nivel seguridad",
+        "title": "Blue Team",
+        "text": "Responde a un incidente de seguridad simulado bajo presión de tiempo, como en el torneo mensual.",
+        "skills": ["Respuesta a incidentes", "Defensa"]
+      },
+      "algorithms": {
+        "level": "Nivel algoritmos",
+        "title": "Problem Solver",
+        "text": "Algoritmos y estructuras de datos, para cualquiera que quiera ponerse a prueba, sin importar el nivel de partida.",
+        "skills": ["Algoritmos", "Estructuras de datos"]
+      }
+    }
+  },
+  "stats": {
+    "ariaTitle": "Datos de TechToJob",
+    "items": [
+      { "value": "100%", "label": "gratis para\nquien busca trabajo" },
+      { "value": "04", "label": "pilares de\nla comunidad" },
+      { "value": "01×", "label": "torneo por\nespecialidad / mes" }
+    ],
+    "accent": { "label": "Construida por", "value": "quien participa." }
+  },
+  "process": {
+    "kicker": "Lo que pasa después",
+    "titleLine1": "Construyes algo.",
+    "titleHighlight": "Y empieza a moverse.",
+    "leadStart": "Una entrega no termina cuando haces clic en enviar.",
+    "leadStrong": " Puede abrir una conversación, una colaboración o una oportunidad.",
+    "steps": ["PARTICIPA", "PUBLICA", "CONECTA", "QUÉDATE"],
+    "hero": {
+      "imageAlt": "Entrega de un torneo de TechToJob",
+      "eyebrow": "UN RETO CONCRETO",
+      "titleLine1": "Empieza por",
+      "titleHighlight": "hacer algo real.",
+      "text": "Un reto, una especialidad y una entrega que se puede ver. El punto no es competir: es dejar una muestra real de tu trabajo.",
+      "code": { "label": "tu entrega", "value": "→ visible" },
+      "submission": {
+        "headLabel": "ENTREGA",
+        "headStatus": "RECIBIDA",
+        "tag": "FRONTEND / 01",
+        "title": "Una solución lista para revisar.",
+        "text": "El reto se convierte en una muestra concreta de tu forma de trabajar.",
+        "footer": ["Entrega", "Revisión", "Insignia"]
+      }
+    },
+    "profile": {
+      "imageAlt": "Perfil profesional con proyectos y tecnologías",
+      "title": "Deja contexto.",
+      "text": "Tu perfil reúne lo que construyes, tu stack y lo que buscas. Sin convertirte en una lista de etiquetas.",
+      "tags": ["React", "Frontend", "UI"]
+    },
+    "conversations": {
+      "imageAlt": "Conversación sobre una oportunidad profesional",
+      "title": "Abre conversaciones.",
+      "text": "Quien llega a tu perfil ya puede entender cómo trabajas. Menos interpretación, más contexto.",
+      "status": "Disponible para oportunidades"
+    },
+    "community": {
+      "imageAlt": "Personas compartiendo y dando feedback en comunidad",
+      "titleLine1": "Vuelve por",
+      "titleHighlight": "la comunidad.",
+      "text": "Feedback, preguntas y personas que están en lo mismo. A veces acaba en un proyecto; otras, en una oportunidad.",
+      "stackAriaLabel": "Comunidad activa",
+      "stack": ["Feedback", "Ideas", "Conexiones"]
+    }
+  },
+  "discord": {
+    "liveLabel": "COMUNIDAD ACTIVA",
+    "topRight": "TECHTOJOB / DISCORD",
+    "kicker": "Tu sitio te espera",
+    "titleLine1": "No busques",
+    "titleHighlight": "solo.",
+    "text": "Torneos, ofertas, feedback y gente que está construyendo lo mismo que tú.",
+    "joinLabel": "Entrar al Discord",
+    "inviteLink": "discord.gg/techtojob",
+    "copyLabel": "Copiar enlace",
+    "copiedLabel": "¡Copiado!",
+    "copyAriaCopy": "Copiar enlace de Discord",
+    "copyAriaCopied": "Enlace de Discord copiado",
+    "window": {
+      "logo": "TTJ",
+      "title": "techtojob",
+      "subtitle": "comunidad",
+      "messages": [
+        { "channel": "comunidad", "text": "Comparte tu proyecto y pide feedback." },
+        { "channel": "feedback", "text": "El feedback llega de gente que también construye." },
+        { "channel": "torneos", "text": "Nuevo reto disponible." }
+      ],
+      "channels": ["# torneos", "# ofertas", "# muestra-tu-trabajo"]
+    },
+    "floatingTags": ["BUILD", "SHARE", "CONNECT"],
+    "marquee": "BUILD · SHARE · CONNECT · GET HIRED · BUILD · SHARE · CONNECT · GET HIRED ·"
+  },
+  "tournamentsSection": {
+    "kicker": "Torneos activos",
+    "titleLine1": "Hazlo. Súbelo.",
+    "titleHighlight": "Que se vea.",
+    "text": "Cada reto deja una prueba concreta de cómo construyes. Participa, recibe feedback y llévate evidencia verificable a tu perfil.",
+    "sliderHint": "Desliza para explorar",
+    "controlsAriaLabel": "Controles de torneos",
+    "prevAriaLabel": "Ver torneos anteriores",
+    "nextAriaLabel": "Ver más torneos",
+    "railAriaLabel": "Torneos activos",
+    "overlayLabel": "TORNEO",
+    "viewChallenge": "Ver reto ↗",
+    "items": {
+      "frontend": { "status": "ABIERTA", "title": "Torneo de Frontend", "type": "Frontend", "meta": "48h · Individual", "prize": "Insignia + visibilidad" },
+      "backend": { "status": "PRÓXIMAMENTE", "title": "Torneo de Backend", "type": "Backend", "meta": "48h · Individual", "prize": "Insignia verificable" },
+      "blueteam": { "status": "PRÓXIMAMENTE", "title": "Torneo Blue Team", "type": "Seguridad", "meta": "48h · Individual", "prize": "Insignia verificable" },
+      "solver": { "status": "PRÓXIMAMENTE", "title": "Problem Solver", "type": "Algoritmos", "meta": "Reto individual", "prize": "Insignia verificable" }
+    }
+  },
+  "offersSection": {
+    "kicker": "Ofertas",
+    "titleLine1": "Más contexto.",
+    "titleHighlight": "Mejores conexiones.",
+    "text": "Las empresas pueden conocer el trabajo detrás del perfil. Añade aquí tus oportunidades reales cuando estén listas.",
+    "sliderHint": "Explora oportunidades",
+    "controlsAriaLabel": "Controles de ofertas",
+    "prevAriaLabel": "Ver ofertas anteriores",
+    "nextAriaLabel": "Ver más ofertas",
+    "railAriaLabel": "Ofertas de empleo",
+    "overlayLabel": "OFERTA",
+    "metaTag": "OFERTA",
+    "viewOffer": "Ver oferta ↗",
+    "items": {
+      "frontend": { "company": "Empresa y logo", "role": "Puesto frontend", "location": "Ubicación · Modalidad", "tags": ["React", "TypeScript"], "salary": "Condiciones por definir" },
+      "backend": { "company": "Empresa y logo", "role": "Puesto backend", "location": "Ubicación · Modalidad", "tags": ["APIs", "Node"], "salary": "Condiciones por definir" },
+      "design": { "company": "Empresa y logo", "role": "Puesto de diseño", "location": "Ubicación · Modalidad", "tags": ["UI", "Producto"], "salary": "Condiciones por definir" },
+      "data": { "company": "Empresa y logo", "role": "Puesto de datos", "location": "Ubicación · Modalidad", "tags": ["SQL", "Python"], "salary": "Condiciones por definir" }
+    }
+  },
+  "faq": {
+    "kicker": "Antes de entrar",
+    "titleLine1": "Preguntas",
+    "titleHighlight": "frecuentes.",
+    "text": "Si algo no queda claro aquí, pregúntalo directamente en el Discord.",
+    "items": {
+      "free": { "question": "¿Cuesta algo unirme?", "answer": "No. TechToJob es 100% gratis para quien busca trabajo, sin letra pequeña ni plan de pago oculto." },
+      "experience": { "question": "¿Necesito experiencia previa?", "answer": "No. Hay torneos y contenido para todos los niveles, desde quien está aprendiendo hasta quien ya trabaja en el sector." },
+      "howTournaments": { "question": "¿Cómo funcionan los torneos?", "answer": "Retos mensuales por especialidad (frontend, backend, datos...). Presentas tu solución, la comunidad la ve y te llevas una insignia para tu perfil." },
+      "companies": { "question": "Tengo una empresa, ¿puedo publicar ofertas?", "answer": "Sí. Dentro del Discord hay un canal dedicado para que las empresas publiquen vacantes directamente a la comunidad." }
+    }
+  },
+  "testimonials": {
+    "kicker": "Lo que dice quien ya ha pasado por aquí",
+    "titleLine1": "Voces reales,",
+    "titleHighlight": "no promesas.",
+    "text": "Estos testimonios son de relleno para el torneo. Antes de publicar la web los sustituimos por los reales, recogidos en el servidor, con foto y enlace a LinkedIn de cada persona.",
+    "sliderHint": "Historias de la comunidad",
+    "controlsAriaLabel": "Controles de testimonios",
+    "prevAriaLabel": "Ver testimonio anterior",
+    "nextAriaLabel": "Ver siguiente testimonio",
+    "railAriaLabel": "Testimonios de la comunidad",
+    "linkedinAriaLabel": "LinkedIn de",
+    "items": {
+      "frontend": { "name": "Nombre y apellido", "role": "Especialidad · Frontend", "quote": "Aquí irá la frase real de la persona sobre su experiencia participando en un torneo de TechToJob." },
+      "backend": { "name": "Nombre y apellido", "role": "Especialidad · Backend", "quote": "Aquí irá la frase real sobre cómo el reto le ayudó a mostrar su nivel a una empresa." },
+      "security": { "name": "Nombre y apellido", "role": "Especialidad · Seguridad", "quote": "Aquí irá la frase real sobre la experiencia en el torneo Blue Team y el feedback recibido." },
+      "data": { "name": "Nombre y apellido", "role": "Especialidad · Datos", "quote": "Aquí irá la frase real sobre lo que aportó la comunidad más allá del propio torneo." },
+      "company": { "name": "Nombre y apellido", "role": "Empresa · Contratación", "quote": "Aquí irá la frase real de una empresa que publicó una oferta y encontró talento en la comunidad." }
+    }
+  },
+  "newsletter": {
+    "kicker": "Mantente cerca",
+    "statusLabel": "TechToJob / Signal",
+    "eyebrow": "Lo importante, antes que nadie.",
+    "titleLine1": "No te enteres",
+    "titleHighlight": "demasiado tarde.",
+    "lead": "Seleccionamos para ti las oportunidades, torneos y novedades que merecen tu atención. Una señal limpia, directa y sin ruido.",
+    "proof": ["Oportunidades", "Torneos", "Comunidad"],
+    "floatingTop": { "label": "NEXT DROP", "title": "Oportunidades", "subtitle": "antes que vuelen" },
+    "floatingBottom": { "title": "Comunidad", "subtitle": "Torneos · eventos · jobs" },
+    "form": {
+      "label": "Tu email",
+      "placeholder": "tu@email.com",
+      "submit": "Quiero estar dentro",
+      "defaultNote": "Sin spam. Solo envíos cuando realmente hay algo que contar.",
+      "emptyError": "Introduce tu email para continuar.",
+      "success": "¡Listo! Te avisaremos de las novedades de TechToJob.",
+      "consent": "Al suscribirte aceptas recibir novedades de TechToJob."
+    }
+  },
+  "footer": {
+    "description": "La comunidad donde el talento tech compite, se muestra y encuentra su sitio, sin CV genéricos ni procesos eternos.",
+    "discordAriaLabel": "TechToJob en Discord",
+    "githubAriaLabel": "Perfil de GitHub",
+    "columns": {
+      "product": {
+        "title": "Producto",
+        "links": {
+          "whatIsIt": "Qué es",
+          "pillars": "Pilares",
+          "howItWorks": "Cómo funciona",
+          "tournaments": "Torneos"
+        }
+      },
+      "community": {
+        "title": "Comunidad",
+        "links": {
+          "badges": "Insignias",
+          "faq": "FAQ",
+          "testimonials": "Testimonios",
+          "newsletter": "Newsletter",
+          "github": "GitHub"
+        }
+      }
+    },
+    "cta": {
+      "text": "¿Aún no estás en el Discord? Es gratis y toma diez segundos.",
+      "join": "Unirme al Discord",
+      "inviteLink": "discord.gg/techtojob",
+      "copy": "Copiar",
+      "copied": "¡Copiado!"
+    },
+    "copyright": "TechToJob",
+    "designedBy": "Diseñada por",
+    "designerName": "Aniol Rodríguez · Portfolio ↗"
+  }
+}
