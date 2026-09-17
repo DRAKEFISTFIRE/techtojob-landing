@@ -2,8 +2,10 @@
 
 import { type FormEvent, useEffect, useRef, useState } from "react";
 import Image from "next/image";
+import dynamic from "next/dynamic";
 import esMessages from "../language/es.json";
 import enMessages from "../language/en.json";
+import HeroLogo3D from "../components/Logo3D";
 
 type Locale = "es" | "en";
 
@@ -39,6 +41,7 @@ function Icon({
   className?: string;
 }) {
   return (
+    
     <svg
       className={className}
       aria-hidden="true"
@@ -508,6 +511,47 @@ export default function Home() {
     return () => observer.disconnect();
   }, []);
 
+  // Inclinación 3D en tarjetas (pilares, insignias, testimonios y
+  // slides de torneos/ofertas). Solo CSS custom properties; el
+  // peso real de la transformación vive en css/redesign-polish.css.
+  useEffect(() => {
+    const cards = document.querySelectorAll<HTMLElement>(
+      ".pillar, .badge-mini, .testimonial-card, .wide-slide"
+    );
+
+    const handlePointerMove = (event: PointerEvent) => {
+      const card = event.currentTarget as HTMLElement;
+      const rect = card.getBoundingClientRect();
+
+      if (!rect.width || !rect.height) return;
+
+      const x = (event.clientX - rect.left) / rect.width - 0.5;
+      const y = (event.clientY - rect.top) / rect.height - 0.5;
+
+      card.style.setProperty("--tilt-x", `${(-y * 7).toFixed(2)}deg`);
+      card.style.setProperty("--tilt-y", `${(x * 9).toFixed(2)}deg`);
+    };
+
+    const handlePointerLeave = (event: PointerEvent) => {
+      const card = event.currentTarget as HTMLElement;
+      card.style.setProperty("--tilt-x", "0deg");
+      card.style.setProperty("--tilt-y", "0deg");
+    };
+
+    cards.forEach((card) => {
+      card.classList.add("tilt-3d");
+      card.addEventListener("pointermove", handlePointerMove);
+      card.addEventListener("pointerleave", handlePointerLeave);
+    });
+
+    return () => {
+      cards.forEach((card) => {
+        card.removeEventListener("pointermove", handlePointerMove);
+        card.removeEventListener("pointerleave", handlePointerLeave);
+      });
+    };
+  }, [locale]);
+
   const handleCopyInvite = async () => {
     try {
       await navigator.clipboard.writeText(
@@ -816,58 +860,16 @@ export default function Home() {
                 <div className="hero-orbit hero-orbit--one" aria-hidden="true" />
                 <div className="hero-orbit hero-orbit--two" aria-hidden="true" />
 
-                {/* CARD PRINCIPAL */}
-                <div className="code-card" id="code-card">
-                  <div className="code-card__shine" aria-hidden="true" />
+                {/* LOGO 3D PRINCIPAL */}
+                <div className="hero-logo-stage">
+                  <div className="hero-logo-glow" aria-hidden="true" />
 
-                  <Image
-                    src="/images/logoHero.png"
-                    alt={t.hero.evidenceImageAlt}
-                    className="hero-evidence__image"
-                    width={1200}
-                    height={900}
-                    priority
-                  />
+                  <HeroLogo3D />
 
-                  <div className="hero-evidence__top">
-                    <div className="hero-window">
-                      <span />
-                      <span />
-                      <span />
-                    </div>
-
-                    <span className="hero-evidence__file">
-                      {t.hero.evidenceTop.tag}
-                    </span>
-
-                    <strong className="hero-evidence__status">
-                      <span className="hero-status-dot" aria-hidden="true" />
-                      {t.hero.evidenceTop.status}
-                    </strong>
-                  </div>
-
-                  <div className="hero-evidence__body">
-                    <div className="hero-evidence__number">
-                      <span>01</span>
-                      <span className="hero-evidence__line" />
-                    </div>
-
-                    <p>{t.hero.evidenceBody.text}</p>
-
-                    <div className="hero-evidence__chips">
-                      {t.hero.evidenceBody.chips.map((chip) => (
-                        <span key={chip}>{chip}</span>
-                      ))}
-                    </div>
-                  </div>
-
-                  <div className="hero-card-footer">
-                    <span>
-                      <i aria-hidden="true" />
-                      TechToJob
-                    </span>
-
-                    <span>BUILD / 2026</span>
+                  <div className="hero-logo-caption">
+                    <span className="hero-logo-caption__line" />
+                    <span>TECH TO JOB</span>
+                    <span className="hero-logo-caption__line" />
                   </div>
                 </div>
 
