@@ -3,7 +3,7 @@ import "./globals.css";
 import "./css/index.css";
 
 export const metadata: Metadata = {
-  title: "TechToJob — Únete a la comunidad tech",
+  title: "TechToJob | Talento tech que se demuestra",
   description:
     "TechToJob es la comunidad donde el talento tech compite, se publica a sí mismo y encuentra empresas que contratan.",
 

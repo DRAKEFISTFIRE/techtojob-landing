@@ -376,10 +376,436 @@ const communityLinksConfig: { key: keyof typeof esMessages.footer.columns.commun
   { key: "github", href: "https://github.com/DRAKEFISTFIRE" },
 ];
 
+
+const orbitalCopy = {
+  es: {
+    kicker: "02 / CONEXIÓN",
+    title: "La unificación",
+    highlight: "de dos mundos",
+    text: "Talento y empresas se acercan hasta encontrar el punto exacto donde encajan.",
+    left: "TALENTO",
+    right: "OPORTUNIDAD",
+    center: "MATCH",
+    scroll: "SCROLL PARA CONECTAR",
+  },
+  en: {
+    kicker: "02 / CONNECTION",
+    title: "The unifitación",
+    highlight: "of two worlds",
+    text: "Talent and companies move closer until they find the exact point where they fit.",
+    left: "TALENT",
+    right: "OPPORTUNITY",
+    center: "MATCH",
+    scroll: "SCROLL TO CONNECT",
+  },
+} as const;
+
+function OrbitalConvergence({ locale }: { locale: Locale }) {
+  const rootRef = useRef<HTMLElement | null>(null);
+  const triggeredRef = useRef(false);
+  const progressRef = useRef(0);
+
+  useEffect(() => {
+    const root = rootRef.current;
+    if (!root) return;
+
+    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    let ticking = false;
+    let raf = 0;
+
+    const clamp = (value: number, min = 0, max = 1) =>
+      Math.min(max, Math.max(min, value));
+
+    const render = () => {
+      ticking = false;
+      const rect = root.getBoundingClientRect();
+      const travel = Math.max(root.offsetHeight - window.innerHeight, 1);
+      const raw = clamp(-rect.top / travel);
+      const p = reduce ? 1 : raw;
+      progressRef.current = p;
+
+      // Three cinematic phases: reveal -> approach -> crossing the light.
+      const approach = clamp((p - 0.18) / 0.64);
+      const rush = clamp((p - 0.68) / 0.29);
+      const door = clamp((p - 0.10) / 0.86);
+      const light = clamp((p - 0.54) / 0.42);
+      const darkness = 1 - clamp((p - 0.70) / 0.24);
+      const text = 1 - clamp((p - 0.22) / 0.24);
+
+      // Ease the approach, then accelerate hard into the exit.
+      const ease = approach * approach * (3 - 2 * approach);
+      const rushEase = rush * rush * rush * (rush * (rush * 6 - 15) + 10);
+      const camera = ease * 0.56 + rushEase * 1.55;
+      const imageScale = 1 + camera * 0.72;
+      const imageY = camera * 7.5;
+      const imageBlur = rush * 0.8;
+      const doorScale = 1 + door * 5.2 + rushEase * 5.5;
+      const doorGlow = 0.18 + light * 1.2 + rushEase * 2.4;
+      const flare = clamp((p - 0.88) / 0.11);
+      const portalOpacity = 1 - clamp((p - 0.91) / 0.07);
+
+      root.style.setProperty("--cave-progress", p.toFixed(4));
+      root.style.setProperty("--cave-camera", camera.toFixed(4));
+      root.style.setProperty("--cave-image-scale", imageScale.toFixed(4));
+      root.style.setProperty("--cave-image-y", `${imageY.toFixed(2)}%`);
+      root.style.setProperty("--cave-image-blur", `${imageBlur.toFixed(2)}px`);
+      root.style.setProperty("--cave-door-scale", doorScale.toFixed(4));
+      root.style.setProperty("--cave-door-glow", doorGlow.toFixed(4));
+      root.style.setProperty("--cave-darkness", darkness.toFixed(4));
+      root.style.setProperty("--cave-text", text.toFixed(4));
+      root.style.setProperty("--cave-flare", flare.toFixed(4));
+      root.style.setProperty("--cave-portal-opacity", portalOpacity.toFixed(4));
+
+      if (!reduce && p > 0.975 && !triggeredRef.current) {
+        triggeredRef.current = true;
+        root.classList.add("is-crossing");
+
+        // No smooth-scroll here: the user has already reached the exit.
+        // The Hero is revealed through the same white light instead of a second animation.
+        window.setTimeout(() => {
+          document.getElementById("inicio")?.scrollIntoView({ behavior: "auto", block: "start" });
+        }, 70);
+      }
+
+      // If the user reverses before the final crossing, allow the portal to work again.
+      if (p < 0.82 && triggeredRef.current) {
+        triggeredRef.current = false;
+        root.classList.remove("is-crossing");
+      }
+    };
+
+    const schedule = () => {
+      if (ticking) return;
+      ticking = true;
+      raf = window.requestAnimationFrame(render);
+    };
+
+    render();
+    window.addEventListener("scroll", schedule, { passive: true });
+    window.addEventListener("resize", schedule);
+
+    return () => {
+      window.removeEventListener("scroll", schedule);
+      window.removeEventListener("resize", schedule);
+      window.cancelAnimationFrame(raf);
+    };
+  }, []);
+
+  const copy = locale === "es"
+    ? {
+        kicker: "ENTRADA / 01",
+        title: "BUSCA TU PROPIA",
+        highlight: "SALIDA.",
+        subtitle: "No esperes a que aparezca. Acércate.",
+        scroll: "DESLIZA PARA AVANZAR",
+      }
+    : {
+        kicker: "ENTRY / 01",
+        title: "FIND YOUR OWN",
+        highlight: "WAY OUT.",
+        subtitle: "Don't wait for it to appear. Move closer.",
+        scroll: "SCROLL TO MOVE FORWARD",
+      };
+
+  return (
+    <section
+      className="orbital-convergence cave-portal"
+      id="conexion"
+      ref={rootRef}
+      aria-labelledby="cave-portal-title"
+    >
+      <div className="cave-portal__sticky">
+        <div className="cave-portal__image" aria-hidden="true" />
+        <div className="cave-portal__image-shade" aria-hidden="true" />
+        <div className="cave-portal__rock-depth cave-portal__rock-depth--left" aria-hidden="true" />
+        <div className="cave-portal__rock-depth cave-portal__rock-depth--right" aria-hidden="true" />
+
+        <div className="cave-portal__door" aria-hidden="true">
+          <span className="cave-portal__door-core" />
+          <span className="cave-portal__door-haze" />
+        </div>
+
+        <div className="cave-portal__shadow-waves" aria-hidden="true">
+          <svg className="cave-shadow-svg" viewBox="0 0 1600 900" preserveAspectRatio="none">
+            <defs>
+              <filter id="caveInkWarp" x="-25%" y="-25%" width="150%" height="150%">
+                <feTurbulence type="fractalNoise" baseFrequency="0.008 0.022" numOctaves="3" seed="19" result="noise" />
+                <feDisplacementMap in="SourceGraphic" in2="noise" scale="92" xChannelSelector="R" yChannelSelector="G" />
+                <feGaussianBlur stdDeviation="1.2" />
+              </filter>
+              <filter id="caveInkSoft" x="-30%" y="-30%" width="160%" height="160%">
+                <feTurbulence type="fractalNoise" baseFrequency="0.012 0.028" numOctaves="2" seed="7" result="noise" />
+                <feDisplacementMap in="SourceGraphic" in2="noise" scale="58" />
+                <feGaussianBlur stdDeviation="7" />
+              </filter>
+              <radialGradient id="caveInkFade">
+                <stop offset="0" stopColor="#000" stopOpacity=".88" />
+                <stop offset=".52" stopColor="#000" stopOpacity=".52" />
+                <stop offset="1" stopColor="#000" stopOpacity="0" />
+              </radialGradient>
+            </defs>
+            <g className="cave-ink-ribbons" filter="url(#caveInkWarp)">
+              <path className="cave-ink-ribbon cave-ink-ribbon--1" d="M-120 110 C120 18 250 92 360 210 C438 294 520 314 605 278 C642 262 662 242 682 214" />
+              <path className="cave-ink-ribbon cave-ink-ribbon--1b" d="M1720 125 C1490 30 1360 98 1248 220 C1170 304 1082 320 996 282 C956 264 936 242 916 212" />
+              <path className="cave-ink-ribbon cave-ink-ribbon--2" d="M-150 640 C110 500 260 528 382 628 C474 704 550 720 622 676 C652 658 676 636 700 604" />
+              <path className="cave-ink-ribbon cave-ink-ribbon--2b" d="M1750 650 C1500 508 1342 534 1224 630 C1130 706 1050 718 978 674 C948 656 924 632 900 602" />
+              <path className="cave-ink-ribbon cave-ink-ribbon--3" d="M20 900 C210 770 330 770 430 824 C500 862 558 854 612 810 C638 788 656 764 676 738" />
+              <path className="cave-ink-ribbon cave-ink-ribbon--3b" d="M1580 900 C1390 770 1270 770 1170 824 C1100 862 1042 854 988 810 C962 788 944 764 924 738" />
+            </g>
+            <g className="cave-ink-clouds" filter="url(#caveInkSoft)">
+              <ellipse cx="150" cy="245" rx="360" ry="220" fill="url(#caveInkFade)" />
+              <ellipse cx="1450" cy="265" rx="390" ry="245" fill="url(#caveInkFade)" />
+              <ellipse cx="260" cy="700" rx="430" ry="210" fill="url(#caveInkFade)" />
+              <ellipse cx="1370" cy="710" rx="440" ry="225" fill="url(#caveInkFade)" />
+            </g>
+          </svg>
+          <span className="cave-shadow-wave cave-shadow-wave--1" />
+          <span className="cave-shadow-wave cave-shadow-wave--2" />
+          <span className="cave-shadow-wave cave-shadow-wave--3" />
+          <span className="cave-shadow-wave cave-shadow-wave--4" />
+          <span className="cave-shadow-wave cave-shadow-wave--5" />
+          <span className="cave-shadow-wave cave-shadow-wave--6" />
+          <span className="cave-shadow-wave cave-shadow-wave--7" />
+          <span className="cave-shadow-wave cave-shadow-wave--8" />
+          <span className="cave-shadow-ribbon cave-shadow-ribbon--1" />
+          <span className="cave-shadow-ribbon cave-shadow-ribbon--2" />
+          <span className="cave-shadow-ribbon cave-shadow-ribbon--3" />
+          <span className="cave-shadow-ribbon cave-shadow-ribbon--4" />
+          <span className="cave-shadow-ribbon cave-shadow-ribbon--5" />
+          <span className="cave-shadow-tendril cave-shadow-tendril--1" />
+          <span className="cave-shadow-tendril cave-shadow-tendril--2" />
+          <span className="cave-shadow-tendril cave-shadow-tendril--3" />
+          <span className="cave-shadow-tendril cave-shadow-tendril--4" />
+          <span className="cave-shadow-wave cave-shadow-wave--9" />
+          <span className="cave-shadow-wave cave-shadow-wave--10" />
+          <span className="cave-shadow-wave cave-shadow-wave--11" />
+          <span className="cave-shadow-wave cave-shadow-wave--12" />
+          <span className="cave-shadow-wave cave-shadow-wave--13" />
+          <span className="cave-shadow-wave cave-shadow-wave--14" />
+          <span className="cave-shadow-wave cave-shadow-wave--15" />
+          <span className="cave-shadow-wave cave-shadow-wave--16" />
+          <span className="cave-shadow-ribbon cave-shadow-ribbon--6" />
+          <span className="cave-shadow-ribbon cave-shadow-ribbon--7" />
+          <span className="cave-shadow-ribbon cave-shadow-ribbon--8" />
+          <span className="cave-shadow-ribbon cave-shadow-ribbon--9" />
+        </div>
+
+        <div className="cave-portal__light-beams" aria-hidden="true">
+          <span className="cave-light-beam cave-light-beam--1" />
+          <span className="cave-light-beam cave-light-beam--2" />
+          <span className="cave-light-beam cave-light-beam--3" />
+          <span className="cave-light-speck cave-light-speck--1" />
+          <span className="cave-light-speck cave-light-speck--2" />
+          <span className="cave-light-speck cave-light-speck--3" />
+          <span className="cave-light-speck cave-light-speck--4" />
+        </div>
+
+        <div className="cave-portal__bounce cave-portal__bounce--floor" aria-hidden="true" />
+        <div className="cave-portal__bounce cave-portal__bounce--left" aria-hidden="true" />
+        <div className="cave-portal__bounce cave-portal__bounce--right" aria-hidden="true" />
+
+        <div className="cave-portal__cosmic" aria-hidden="true">
+          <svg viewBox="0 0 1600 900" preserveAspectRatio="none">
+            <defs>
+              <linearGradient id="caveLightFlow" x1="0" y1="0" x2="1" y2="0">
+                <stop offset="0" stopColor="#4df7e8" stopOpacity="0" />
+                <stop offset=".48" stopColor="#5deaff" stopOpacity=".52" />
+                <stop offset=".52" stopColor="#ffffff" stopOpacity=".92" />
+                <stop offset=".62" stopColor="#76bfff" stopOpacity=".42" />
+                <stop offset="1" stopColor="#5aaaff" stopOpacity="0" />
+              </linearGradient>
+              <filter id="caveLightGlow" x="-30%" y="-100%" width="160%" height="300%">
+                <feGaussianBlur stdDeviation="2.5" result="b" />
+                <feMerge><feMergeNode in="b" /><feMergeNode in="SourceGraphic" /></feMerge>
+              </filter>
+            </defs>
+            <g filter="url(#caveLightGlow)">
+              <path className="cave-light-line cave-light-line--1" d="M -30 270 C 430 220, 650 510, 970 445 C 1170 405, 1390 235, 1640 275" fill="none" stroke="url(#caveLightFlow)" />
+              <path className="cave-light-line cave-light-line--2" d="M -30 650 C 330 560, 570 350, 875 430 C 1140 500, 1350 650, 1640 570" fill="none" stroke="url(#caveLightFlow)" />
+              <path className="cave-light-line cave-light-line--3" d="M 70 120 C 360 190, 570 300, 810 420 C 1060 545, 1290 510, 1570 330" fill="none" stroke="url(#caveLightFlow)" />
+            </g>
+          </svg>
+          <i className="cave-light-particle cave-light-particle--1" />
+          <i className="cave-light-particle cave-light-particle--2" />
+          <i className="cave-light-particle cave-light-particle--3" />
+          <i className="cave-light-particle cave-light-particle--4" />
+          <i className="cave-light-particle cave-light-particle--5" />
+          <i className="cave-light-particle cave-light-particle--6" />
+        </div>
+
+        <div className="cave-portal__grain" aria-hidden="true" />
+        <div className="cave-portal__flare" aria-hidden="true" />
+
+        <div className="cave-portal__copy">
+          <span className="cave-portal__kicker">{copy.kicker}</span>
+          <h1 id="cave-portal-title">
+            {copy.title} <em>{copy.highlight}</em>
+          </h1>
+          <p>{copy.subtitle}</p>
+        </div>
+
+        <div className="cave-portal__scroll">
+          <span>{copy.scroll}</span>
+          <i />
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function CosmicPageField() {
+  const streams = Array.from({ length: 22 }, (_, index) => {
+    const side = index % 2 === 0 ? -1 : 1;
+    const y = 13 + ((index * 17) % 74);
+    const bend = 70 + ((index * 23) % 150);
+    return {
+      id: index,
+      side,
+      y,
+      bend,
+      duration: 7 + (index % 8) * 0.8,
+      delay: -(index % 9) * 0.75,
+    };
+  });
+
+  const particles = Array.from({ length: 70 }, (_, index) => ({
+    id: index,
+    left: 3 + ((index * 43) % 94),
+    top: 7 + ((index * 29) % 86),
+    size: 1 + (index % 3) * 0.55,
+    duration: 4 + (index % 7) * 0.8,
+    delay: -(index % 10) * 0.6,
+  }));
+
+  return (
+    <div className="cosmic-page-field" aria-hidden="true">
+      <div className="cosmic-page-field__atmosphere" />
+      <svg className="cosmic-page-field__flow" viewBox="0 0 1600 900" preserveAspectRatio="none">
+        <defs>
+          <linearGradient id="globalFlowGradient" x1="0" y1="0" x2="1" y2="0">
+            <stop offset="0" stopColor="#54f7e8" stopOpacity="0" />
+            <stop offset=".42" stopColor="#59e9ff" stopOpacity=".55" />
+            <stop offset=".5" stopColor="#ffffff" stopOpacity=".9" />
+            <stop offset=".6" stopColor="#73baff" stopOpacity=".55" />
+            <stop offset="1" stopColor="#5aaaff" stopOpacity="0" />
+          </linearGradient>
+          <filter id="globalFlowGlow" x="-30%" y="-100%" width="160%" height="300%">
+            <feGaussianBlur stdDeviation="2.8" result="blur" />
+            <feMerge><feMergeNode in="blur" /><feMergeNode in="SourceGraphic" /></feMerge>
+          </filter>
+        </defs>
+        <g filter="url(#globalFlowGlow)">
+          {streams.map((stream) => {
+            const startX = stream.side < 0 ? 0 : 1600;
+            const endX = stream.side < 0 ? 1600 : 0;
+            const c1 = stream.side < 0 ? 430 : 1170;
+            const c2 = stream.side < 0 ? 700 : 900;
+            const y1 = stream.y * 9;
+            const y2 = 450 + (stream.y - 50) * 2.8;
+            return (
+              <path
+                key={stream.id}
+                d={`M ${startX} ${y1} C ${c1} ${y1 + stream.bend * stream.side}, ${c2} ${y2}, ${endX} ${900 - y1}`}
+                fill="none"
+                stroke="url(#globalFlowGradient)"
+                strokeWidth="0.8"
+                strokeLinecap="round"
+                strokeDasharray="75 210"
+                style={{
+                  "--global-flow-duration": `${stream.duration}s`,
+                  "--global-flow-delay": `${stream.delay}s`,
+                } as React.CSSProperties}
+              />
+            );
+          })}
+        </g>
+      </svg>
+      <div className="cosmic-page-field__particles">
+        {particles.map((particle) => (
+          <i
+            key={particle.id}
+            style={{
+              left: `${particle.left}%`,
+              top: `${particle.top}%`,
+              width: `${particle.size}px`,
+              height: `${particle.size}px`,
+              "--global-particle-duration": `${particle.duration}s`,
+              "--global-particle-delay": `${particle.delay}s`,
+            } as React.CSSProperties}
+          />
+        ))}
+      </div>
+      <div className="cosmic-page-field__vignette" />
+    </div>
+  );
+}
+
+
+function CustomCursor() {
+  useEffect(() => {
+    const finePointer = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
+    if (!finePointer) return;
+
+    const cursor = document.createElement("div");
+    cursor.className = "site-cursor";
+    cursor.innerHTML = '<span class="site-cursor__dot"></span><span class="site-cursor__label">VIEW</span><span class="site-cursor__ring"></span>';
+    document.body.appendChild(cursor);
+
+    let x = window.innerWidth / 2;
+    let y = window.innerHeight / 2;
+    let tx = x;
+    let ty = y;
+    let raf = 0;
+
+    const updateSurface = (clientX: number, clientY: number) => {
+      const target = document.elementFromPoint(clientX, clientY) as HTMLElement | null;
+      const section = target?.closest("section");
+      const dark = Boolean(section?.classList.contains("section-dark") || section?.classList.contains("orbital-convergence"));
+      cursor.classList.toggle("is-dark", dark);
+
+      const interactive = target?.closest("a, button, [role=button], input, textarea, select");
+      cursor.classList.toggle("is-hovering", Boolean(interactive));
+      const label = cursor.querySelector(".site-cursor__label");
+      if (label) label.textContent = interactive ? (interactive.tagName === "BUTTON" ? "GO" : "OPEN") : "VIEW";
+    };
+
+    const render = () => {
+      x += (tx - x) * 0.16;
+      y += (ty - y) * 0.16;
+      cursor.style.transform = `translate3d(${x}px, ${y}px, 0)`;
+      raf = window.requestAnimationFrame(render);
+    };
+
+    const onMove = (event: PointerEvent) => {
+      tx = event.clientX;
+      ty = event.clientY;
+      cursor.classList.add("is-visible");
+      updateSurface(event.clientX, event.clientY);
+    };
+
+    const onLeave = () => cursor.classList.remove("is-visible");
+
+    window.addEventListener("pointermove", onMove, { passive: true });
+    window.addEventListener("pointerleave", onLeave);
+    raf = window.requestAnimationFrame(render);
+
+    return () => {
+      window.removeEventListener("pointermove", onMove);
+      window.removeEventListener("pointerleave", onLeave);
+      window.cancelAnimationFrame(raf);
+      cursor.remove();
+    };
+  }, []);
+
+  return null;
+}
+
+
 export default function Home() {
   const tournamentRail = useRef<HTMLDivElement>(null);
   const jobRail = useRef<HTMLDivElement>(null);
   const testimonialsRail = useRef<HTMLDivElement>(null);
+  const heroVisual = useRef<HTMLDivElement>(null);
   const [menuOpen, setMenuOpen] = useState(false);
   const [copied, setCopied] = useState(false);
   const [footerCopied, setFooterCopied] = useState(false);
@@ -415,28 +841,51 @@ export default function Home() {
   useEffect(() => {
     setYear(new Date().getFullYear());
 
+    const root = document.documentElement;
+    root.dataset.flowTheme = "light";
+    root.style.setProperty("--page-darkness", "0.18");
+
+    let frame = 0;
+
     const updateScrollProgress = () => {
-      const scrollTop = window.scrollY;
-      const documentHeight =
-        document.documentElement.scrollHeight - window.innerHeight;
+      window.cancelAnimationFrame(frame);
 
-      const progress =
-        documentHeight > 0 ? scrollTop / documentHeight : 0;
+      frame = window.requestAnimationFrame(() => {
+        const scrollTop = window.scrollY;
+        const documentHeight =
+          document.documentElement.scrollHeight - window.innerHeight;
 
-      document.documentElement.style.setProperty(
-        "--scroll-progress",
-        `${progress * 100}%`
-      );
+        const progress =
+          documentHeight > 0 ? scrollTop / documentHeight : 0;
+
+        root.style.setProperty(
+          "--scroll-progress",
+          `${progress * 100}%`
+        );
+        root.style.setProperty("--cosmic-progress", progress.toFixed(4));
+        root.style.setProperty("--cosmic-shift", `${((progress - 0.5) * -34).toFixed(2)}px`);
+
+        const hero = heroVisual.current;
+        if (hero) {
+          const rect = hero.getBoundingClientRect();
+          const vh = Math.max(window.innerHeight, 1);
+          const heroProgress = Math.max(-1, Math.min(1, (vh * 0.72 - rect.top) / Math.max(vh * 1.15, 1)));
+          hero.style.setProperty("--hero-scroll-y", `${(heroProgress * -38).toFixed(2)}px`);
+          hero.style.setProperty("--hero-scroll-rotate", `${(heroProgress * -2.6).toFixed(2)}deg`);
+          hero.style.setProperty("--hero-scroll-scale", `${(1 - Math.abs(heroProgress) * 0.025).toFixed(4)}`);
+        }
+      });
     };
 
     updateScrollProgress();
 
-    window.addEventListener("scroll", updateScrollProgress, {
-      passive: true,
-    });
+    window.addEventListener("scroll", updateScrollProgress, { passive: true });
+    window.addEventListener("resize", updateScrollProgress);
 
     return () => {
+      window.cancelAnimationFrame(frame);
       window.removeEventListener("scroll", updateScrollProgress);
+      window.removeEventListener("resize", updateScrollProgress);
     };
   }, []);
 
@@ -515,6 +964,8 @@ export default function Home() {
   // slides de torneos/ofertas). Solo CSS custom properties; el
   // peso real de la transformación vive en css/redesign-polish.css.
   useEffect(() => {
+    if (!window.matchMedia("(hover: hover) and (pointer: fine)").matches) return;
+
     const cards = document.querySelectorAll<HTMLElement>(
       ".pillar, .badge-mini, .testimonial-card, .wide-slide"
     );
@@ -551,6 +1002,48 @@ export default function Home() {
       });
     };
   }, [locale]);
+
+  // La profundidad del hero responde al cursor sin crear renders de React.
+  // En táctil y cuando el usuario reduce movimiento no se activa.
+  useEffect(() => {
+    const visual = heroVisual.current;
+    const finePointer = window.matchMedia("(hover: hover) and (pointer: fine)");
+    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+
+    if (!visual || !finePointer.matches || reducedMotion.matches) return;
+
+    let frame = 0;
+
+    const reset = () => {
+      visual.style.setProperty("--hero-x", "0px");
+      visual.style.setProperty("--hero-y", "0px");
+      visual.style.setProperty("--hero-rotate-x", "0deg");
+      visual.style.setProperty("--hero-rotate-y", "0deg");
+    };
+
+    const handleMove = (event: PointerEvent) => {
+      const rect = visual.getBoundingClientRect();
+      const x = (event.clientX - rect.left) / rect.width - 0.5;
+      const y = (event.clientY - rect.top) / rect.height - 0.5;
+
+      window.cancelAnimationFrame(frame);
+      frame = window.requestAnimationFrame(() => {
+        visual.style.setProperty("--hero-x", `${(x * 34).toFixed(2)}px`);
+        visual.style.setProperty("--hero-y", `${(y * 34).toFixed(2)}px`);
+        visual.style.setProperty("--hero-rotate-x", `${(-y * 6).toFixed(2)}deg`);
+        visual.style.setProperty("--hero-rotate-y", `${(x * 8).toFixed(2)}deg`);
+      });
+    };
+
+    visual.addEventListener("pointermove", handleMove);
+    visual.addEventListener("pointerleave", reset);
+
+    return () => {
+      window.cancelAnimationFrame(frame);
+      visual.removeEventListener("pointermove", handleMove);
+      visual.removeEventListener("pointerleave", reset);
+    };
+  }, []);
 
   const handleCopyInvite = async () => {
     try {
@@ -599,6 +1092,58 @@ export default function Home() {
     setEmail("");
   };
 
+  useEffect(() => {
+    const header = document.getElementById("site-header");
+    if (!header) return;
+
+    let raf = 0;
+
+    const updateHeaderTone = () => {
+      raf = 0;
+
+      const probeY = Math.min(
+        window.innerHeight - 24,
+        Math.max(92, window.innerHeight * 0.22)
+      );
+
+      // The fixed navbar sits above the page, so temporarily let the probe
+      // pass through it. This makes the tone follow the actual section
+      // underneath instead of accidentally reading the navbar itself.
+      const previousPointerEvents = header.style.pointerEvents;
+      header.style.pointerEvents = "none";
+      const element = document.elementFromPoint(window.innerWidth / 2, probeY);
+      header.style.pointerEvents = previousPointerEvents;
+
+      const section = element?.closest(
+        "section, footer, .section-dark, .dark-section, .cave-portal"
+      );
+
+      const isDark = Boolean(
+        section?.classList.contains("section-dark") ||
+        section?.classList.contains("dark-section") ||
+        section?.classList.contains("cave-portal") ||
+        section?.getAttribute("data-theme") === "dark"
+      );
+
+      header.classList.toggle("is-dark", isDark);
+    };
+
+    const scheduleHeaderTone = () => {
+      if (raf) return;
+      raf = window.requestAnimationFrame(updateHeaderTone);
+    };
+
+    updateHeaderTone();
+    window.addEventListener("scroll", scheduleHeaderTone, { passive: true });
+    window.addEventListener("resize", scheduleHeaderTone);
+
+    return () => {
+      window.removeEventListener("scroll", scheduleHeaderTone);
+      window.removeEventListener("resize", scheduleHeaderTone);
+      if (raf) window.cancelAnimationFrame(raf);
+    };
+  }, []);
+
   const closeMenu = () => {
     setMenuOpen(false);
   };
@@ -619,8 +1164,17 @@ export default function Home() {
     const slideWidth =
       firstSlide?.getBoundingClientRect().width || element.clientWidth * 0.82;
 
+    // Advance one complete viewport of cards:
+    // 4 cards on desktop, 3/2/1 on narrower layouts.
+    const visibleCards =
+      element.clientWidth >= 1250 ? 4 :
+      element.clientWidth >= 900 ? 3 :
+      element.clientWidth >= 600 ? 2 : 1;
+
+    const step = (slideWidth + gap) * visibleCards;
+
     element.scrollBy({
-      left: (direction === "next" ? 1 : -1) * (slideWidth + gap),
+      left: (direction === "next" ? 1 : -1) * step,
       behavior: "smooth",
     });
   };
@@ -630,6 +1184,9 @@ export default function Home() {
 
   return (
     <>
+      <CosmicPageField />
+      <CustomCursor />
+
       <div
         className="scroll-progress"
         aria-hidden="true"
@@ -777,6 +1334,8 @@ export default function Home() {
 
       <main id="main">
 
+        <OrbitalConvergence locale={locale} />
+
         <section className="hero container" id="inicio">
               <div className="hero-glow hero-glow--left" aria-hidden="true" />
               <div className="hero-glow hero-glow--right" aria-hidden="true" />
@@ -850,7 +1409,7 @@ export default function Home() {
               </div>
 
               {/* VISUAL */}
-              <div className="hero-visual reveal reveal-delay">
+              <div className="hero-visual reveal reveal-delay" ref={heroVisual}>
                 <div className="hero-grid" aria-hidden="true" />
 
                 <div className="orb orb-one" aria-hidden="true" />
@@ -919,116 +1478,155 @@ export default function Home() {
                 </div>
               </div>
             </section>
-        <section
-          className="intro container reveal"
-          id="que-es"
-          aria-labelledby="intro-title"
-        >
-          <div className="intro__side">
-            <div className="section-kicker">{t.intro.kicker}</div>
 
-            <div className="intro-visual" aria-hidden="true">
-              <span className="intro-visual__label">{t.intro.visualLabel}</span>
 
-              <div className="intro-visual__before">
-                <div className="intro-visual__before-head">
-                  <span>{t.intro.before.fileName}</span>
-                  <span>{t.intro.before.version}</span>
+            <section
+              className="intro-v2 section-dark container reveal"
+              id="que-es"
+              aria-labelledby="intro-title"
+            >
+              <div className="section-shadow-field section-shadow-field--dark section-shadow-field--intro" aria-hidden="true">
+                <span className="section-shadow-wave section-shadow-wave--a" />
+                <span className="section-shadow-wave section-shadow-wave--b" />
+                <span className="section-shadow-wave section-shadow-wave--c" />
+              </div>
+              {/* HEADER */}
+              <div className="intro-v2__header">
+                <div className="intro-v2__index">
+                  <span>01</span>
+                  <i />
+                  <span>{t.intro.kicker}</span>
                 </div>
 
-                <div className="intro-visual__lines">
-                  <span className="intro-visual__line intro-visual__line--w1" />
-                  <span className="intro-visual__line intro-visual__line--w2" />
-                  <span className="intro-visual__line intro-visual__line--w3" />
-                  <span className="intro-visual__line intro-visual__line--w2" />
+                <p className="intro-v2__microcopy">
+                  {t.intro.sideNote.line1} {t.intro.sideNote.line2}
+                </p>
+              </div>
+
+              {/* MAIN STATEMENT */}
+              <div className="intro-v2__statement">
+                <div className="intro-v2__statement-number" aria-hidden="true">
+                  01
                 </div>
 
-                <span className="intro-visual__before-strike" />
-              </div>
+                <div className="intro-v2__statement-content">
+                  <h2 id="intro-title">
+                    {t.intro.titleLine1}
+                    <span>{t.intro.titleHighlight}</span>
+                  </h2>
 
-              <div className="intro-visual__connector">
-                <span className="intro-visual__connector-line" />
-                <span className="intro-visual__connector-dot">↓</span>
-              </div>
-
-              <div className="intro-visual__after">
-                <div className="intro-visual__after-top">
-                  <i /><i /><i />
-                  <b>{t.intro.after.fileName}</b>
+                  <p>
+                    {t.intro.leadStart}
+                    <strong>{t.intro.leadStrong}</strong>
+                    {t.intro.leadEnd}
+                  </p>
                 </div>
 
-                <div className="intro-visual__after-body">
-                  <span>{t.intro.after.tag}</span>
-                  <strong>{t.intro.after.text}</strong>
+                <div className="intro-v2__signal" aria-hidden="true">
+                  <span />
+                  <span />
+                  <span />
+                </div>
+              </div>
+
+              {/* TRANSFORMATION */}
+              <div
+                className="intro-v2__transformation"
+                aria-label={t.intro.shift.ariaLabel}
+              >
+                <div className="intro-v2__transformation-label">
+                  <span>THE SHIFT</span>
+                  <i />
                 </div>
 
-                <span className="intro-visual__badge">
-                  <Icon name="check" />
-                </span>
-              </div>
-            </div>
+                <div className="intro-v2__flow">
+                  <div className="intro-v2__source">
+                    <small>{t.intro.shift.before}</small>
 
-            <div className="intro__side-note">
-              <span>01</span>
-              <p>{t.intro.sideNote.line1}<br />{t.intro.sideNote.line2}</p>
-            </div>
-          </div>
-
-          <div className="intro__main">
-            <h2 id="intro-title">
-              {t.intro.titleLine1}
-              <br />
-              <span>{t.intro.titleHighlight}</span>
-            </h2>
-
-            <p className="intro__lead">
-              {t.intro.leadStart}<strong>{t.intro.leadStrong}</strong>{t.intro.leadEnd}
-            </p>
-
-            <div className="intro-shift" aria-label={t.intro.shift.ariaLabel}>
-              <div className="intro-shift__head" aria-hidden="true">
-                <span>{t.intro.shift.before}</span>
-                <span>{t.intro.shift.after}</span>
-              </div>
-
-              <div className="intro-shift__rows">
-                {t.intro.shift.rows.map((row, index) => (
-                  <div className="intro-shift__row" key={row.before}>
-                    <div className="intro-shift__cell intro-shift__cell--before">
-                      <span className="intro-shift__index">{`0${index + 1}`}</span>
-                      <p>{row.before}</p>
+                    <div className="intro-v2__source-lines">
+                      {t.intro.shift.rows.map((row, index) => (
+                        <div key={row.before} className="intro-v2__source-row">
+                          <span>0{index + 1}</span>
+                          <p>{row.before}</p>
+                        </div>
+                      ))}
                     </div>
-                    <div className="intro-shift__cell intro-shift__cell--after">
-                      <span className="intro-shift__check" aria-hidden="true">✓</span>
-                      <p>{row.after}</p>
+
+                    <div className="intro-v2__source-stamp">
+                      <span>OLD MODEL</span>
                     </div>
                   </div>
-                ))}
-              </div>
-            </div>
 
-            <div className="intro-ecosystem" aria-label={t.intro.ecosystem.ariaLabel}>
-              <div className="intro-ecosystem__copy">
-                <span>{t.intro.ecosystem.label}</span>
-                <strong>{t.intro.ecosystem.titleLine1}<br />{t.intro.ecosystem.titleLine2}</strong>
+                  <div className="intro-v2__bridge" aria-hidden="true">
+                    <div className="intro-v2__bridge-line" />
+                    <div className="intro-v2__bridge-core">
+                      <span>→</span>
+                    </div>
+                    <small>TRANSFORM</small>
+                  </div>
+
+                  <div className="intro-v2__destination">
+                    <div className="intro-v2__destination-head">
+                      <small>{t.intro.shift.after}</small>
+                      <span>✓</span>
+                    </div>
+
+                    <div className="intro-v2__destination-content">
+                      {t.intro.shift.rows.map((row) => (
+                        <div key={row.after}>
+                          <i />
+                          <p>{row.after}</p>
+                        </div>
+                      ))}
+                    </div>
+
+                    <div className="intro-v2__destination-footer">
+                      <span>NEW MODEL</span>
+                      <b>READY</b>
+                    </div>
+                  </div>
+                </div>
               </div>
 
-              <div className="intro-ecosystem__flow">
-                {t.intro.ecosystem.flow.map((word, index) => (
-                  <span key={word}>
-                    {word}
-                    {index < t.intro.ecosystem.flow.length - 1 && <i aria-hidden="true">+</i>}
-                  </span>
-                ))}
-                <b aria-hidden="true">→</b>
-                <strong>{t.intro.ecosystem.result}</strong>
+              {/* BOTTOM PRINCIPLES */}
+              <div
+                className="intro-v2__principles"
+                aria-label={t.intro.ecosystem.ariaLabel}
+              >
+                <div className="intro-v2__principles-intro">
+                  <span>{t.intro.ecosystem.label}</span>
+
+                  <h3>
+                    {t.intro.ecosystem.titleLine1}
+                    <br />
+                    {t.intro.ecosystem.titleLine2}
+                  </h3>
+                </div>
+
+                <div className="intro-v2__principle">
+                  <span>01</span>
+                  <strong>{t.intro.ecosystem.flow[0]}</strong>
+                  <p>Skills</p>
+                </div>
+
+                <div className="intro-v2__principle">
+                  <span>02</span>
+                  <strong>{t.intro.ecosystem.flow[1]}</strong>
+                  <p>Practice</p>
+                </div>
+
+                <div className="intro-v2__principle intro-v2__principle--result">
+                  <span>03</span>
+                  <strong>{t.intro.ecosystem.result}</strong>
+                  <p>Outcome</p>
+                </div>
               </div>
-            </div>
-          </div>
-        </section>
+            </section>
+
+
 
         <section
-          className="pillars container"
+          className="pillars section-light container"
           id="pilares"
           aria-labelledby="pillars-title"
         >
@@ -1132,7 +1730,7 @@ export default function Home() {
         </section>
 
         <section
-          className="next-tournament reveal"
+          className="next-tournament section-dark reveal"
           id="proximo-torneo"
         >
           <div
@@ -1230,7 +1828,7 @@ export default function Home() {
         </section>
 
         <section
-          className="badges-section badges-section--editorial container reveal"
+          className="badges-section badges-section--editorial section-light container reveal"
           id="insignias"
           aria-labelledby="badges-title"
         >
@@ -1321,41 +1919,70 @@ export default function Home() {
         </section>
 
         <section
-          className="stats-section stats-section--editorial container reveal"
+          className="stats-section stats-section--editorial section-dark container reveal"
           aria-labelledby="stats-title"
         >
+          <div className="section-shadow-field section-shadow-field--dark section-shadow-field--stats" aria-hidden="true">
+            <span className="section-shadow-wave section-shadow-wave--a" />
+            <span className="section-shadow-wave section-shadow-wave--b" />
+          </div>
           <h2 id="stats-title" className="visually-hidden">
             {t.stats.ariaTitle}
           </h2>
 
-          <div className="stats-line">
-            {t.stats.items.map((stat) => (
-              <div className="stat-item" key={stat.value}>
-                <strong>{stat.value}</strong>
-                <span>
-                  {stat.label.split("\n").map((line, index) => (
-                    <span key={line}>
-                      {index > 0 && <br />}
-                      {line}
-                    </span>
-                  ))}
-                </span>
-              </div>
-            ))}
-
-            <div className="stat-item stat-item--accent">
-              <span className="stat-item__label">{t.stats.accent.label}</span>
-              <strong>{t.stats.accent.value}</strong>
-              <span className="stat-item__arrow">↗</span>
+          <div className="stats-intro">
+            <div>
+              <span className="stats-intro__kicker">TECHTOJOB / SIGNAL</span>
+              <p>{t.stats.ariaTitle}</p>
             </div>
+            <span className="stats-intro__index">03 — 08</span>
+          </div>
+
+          <div className="stats-dashboard">
+            <div className="stats-dashboard__metrics">
+              {t.stats.items.map((stat, index) => (
+                <article className="stat-card" key={stat.value}>
+                  <div className="stat-card__top">
+                    <span>{`0${index + 1}`}</span>
+                    <i />
+                  </div>
+                  <strong>{stat.value}</strong>
+                  <span className="stat-card__label">
+                    {stat.label.split("\n").map((line, lineIndex) => (
+                      <span key={`${stat.value}-${line}`}>
+                        {lineIndex > 0 && <br />}
+                        {line}
+                      </span>
+                    ))}
+                  </span>
+                  <div className="stat-card__meter" aria-hidden="true"><span /></div>
+                </article>
+              ))}
+            </div>
+
+            <article className="stats-dashboard__feature">
+              <div className="stats-dashboard__feature-top">
+                <span>{t.stats.accent.label}</span>
+                <span>↗</span>
+              </div>
+              <strong>{t.stats.accent.value}</strong>
+              <div className="stats-dashboard__feature-grid" aria-hidden="true">
+                <span /><span /><span /><span /><span /><span /><span /><span /><span />
+              </div>
+            </article>
           </div>
         </section>
 
         <section
-          className="process-section container reveal"
+          className="process-section section-light container reveal"
           id="como-funciona"
           aria-labelledby="process-title"
         >
+          <div className="section-shadow-field section-shadow-field--light section-shadow-field--process" aria-hidden="true">
+            <span className="section-shadow-wave section-shadow-wave--a" />
+            <span className="section-shadow-wave section-shadow-wave--b" />
+            <span className="section-shadow-wave section-shadow-wave--c" />
+          </div>
           <div className="process-header">
             <div>
               <div className="section-kicker">
@@ -1533,10 +2160,15 @@ export default function Home() {
         </section>
 
         <section
-          className="discord-section container reveal"
+          className="discord-section section-dark container reveal"
           id="discord"
           aria-labelledby="discord-title"
         >
+          <div className="section-shadow-field section-shadow-field--dark section-shadow-field--discord" aria-hidden="true">
+            <span className="section-shadow-wave section-shadow-wave--a" />
+            <span className="section-shadow-wave section-shadow-wave--b" />
+            <span className="section-shadow-wave section-shadow-wave--c" />
+          </div>
           <div className="discord-section__noise" aria-hidden="true" />
 
           <div className="discord-section__top">
@@ -1661,7 +2293,11 @@ export default function Home() {
           </div>
         </section>
 
-        <section className="showcase-section showcase-section--editorial reveal" id="oportunidades">
+        <section className="showcase-section showcase-section--editorial section-light reveal" id="oportunidades">
+          <div className="section-shadow-field section-shadow-field--light section-shadow-field--showcase" aria-hidden="true">
+            <span className="section-shadow-wave section-shadow-wave--a" />
+            <span className="section-shadow-wave section-shadow-wave--b" />
+          </div>
           <div className="showcase-head">
             <div>
               <div className="section-kicker">{t.tournamentsSection.kicker}</div>
@@ -1716,7 +2352,12 @@ export default function Home() {
           </div>
         </section>
 
-        <section className="showcase-section showcase-section--jobs showcase-section--editorial reveal" id="ofertas">
+        <section className="showcase-section showcase-section--jobs showcase-section--editorial section-dark reveal" id="ofertas">
+          <div className="section-shadow-field section-shadow-field--dark section-shadow-field--showcase-jobs" aria-hidden="true">
+            <span className="section-shadow-wave section-shadow-wave--a" />
+            <span className="section-shadow-wave section-shadow-wave--b" />
+            <span className="section-shadow-wave section-shadow-wave--c" />
+          </div>
           <div className="showcase-head">
             <div>
               <div className="section-kicker">{t.offersSection.kicker}</div>
@@ -1765,7 +2406,7 @@ export default function Home() {
         </section>
 
         <section
-          className="faq container reveal"
+          className="faq section-light container reveal"
           id="faq"
         >
           <div className="section-heading">
@@ -1812,7 +2453,7 @@ export default function Home() {
         </section>
 
         <section
-          className="testimonials-section testimonials-section--editorial container reveal"
+          className="testimonials-section testimonials-section--editorial section-dark container reveal"
           id="testimonios"
           aria-labelledby="testimonials-title"
         >
@@ -1905,7 +2546,7 @@ export default function Home() {
         </section>
 
         <section
-          className="newsletter reveal"
+          className="newsletter section-light reveal"
           id="newsletter"
         >
           <div className="container newsletter-shell">
