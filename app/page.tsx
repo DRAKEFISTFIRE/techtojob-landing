@@ -424,7 +424,9 @@ function OrbitalConvergence({ locale }: { locale: Locale }) {
       const p = reduce ? 1 : raw;
       progressRef.current = p;
 
-      // Three cinematic phases: reveal -> approach -> crossing the light.
+      // Same cinematic curve as desktop. The only mobile adaptation is the
+      // physical size of the starting doorway in CSS; the timing/curve is
+      // deliberately identical so the motion feels like the desktop version.
       const approach = clamp((p - 0.18) / 0.64);
       const rush = clamp((p - 0.68) / 0.29);
       const door = clamp((p - 0.10) / 0.86);
@@ -432,7 +434,6 @@ function OrbitalConvergence({ locale }: { locale: Locale }) {
       const darkness = 1 - clamp((p - 0.70) / 0.24);
       const text = 1 - clamp((p - 0.22) / 0.24);
 
-      // Ease the approach, then accelerate hard into the exit.
       const ease = approach * approach * (3 - 2 * approach);
       const rushEase = rush * rush * rush * (rush * (rush * 6 - 15) + 10);
       const camera = ease * 0.56 + rushEase * 1.55;
@@ -459,15 +460,13 @@ function OrbitalConvergence({ locale }: { locale: Locale }) {
       if (!reduce && p > 0.975 && !triggeredRef.current) {
         triggeredRef.current = true;
         root.classList.add("is-crossing");
-
-        // No smooth-scroll here: the user has already reached the exit.
-        // The Hero is revealed through the same white light instead of a second animation.
+        // Keep the desktop crossing. On mobile use an immediate handoff only
+        // after the light has filled the viewport, preventing the black jump.
         window.setTimeout(() => {
           document.getElementById("inicio")?.scrollIntoView({ behavior: "auto", block: "start" });
         }, 70);
       }
 
-      // If the user reverses before the final crossing, allow the portal to work again.
       if (p < 0.82 && triggeredRef.current) {
         triggeredRef.current = false;
         root.classList.remove("is-crossing");
@@ -521,6 +520,7 @@ function OrbitalConvergence({ locale }: { locale: Locale }) {
         <div className="cave-portal__rock-depth cave-portal__rock-depth--right" aria-hidden="true" />
 
         <div className="cave-portal__door" aria-hidden="true">
+          <span className="cave-portal__door-shadow" />
           <span className="cave-portal__door-core" />
           <span className="cave-portal__door-haze" />
         </div>
@@ -650,6 +650,28 @@ function OrbitalConvergence({ locale }: { locale: Locale }) {
         </div>
       </div>
     </section>
+  );
+}
+
+
+function DarkFlow({
+  variant = "left",
+  intensity = "soft",
+}: {
+  variant?: "left" | "right" | "bottom" | "top";
+  intensity?: "soft" | "strong";
+}) {
+  return (
+    <div
+      className={`dark-flow dark-flow--${variant} dark-flow--${intensity}`}
+      aria-hidden="true"
+    >
+      <span className="dark-flow__mass dark-flow__mass--one" />
+      <span className="dark-flow__mass dark-flow__mass--two" />
+      <span className="dark-flow__ribbon dark-flow__ribbon--one" />
+      <span className="dark-flow__ribbon dark-flow__ribbon--two" />
+      <span className="dark-flow__core" />
+    </div>
   );
 }
 
@@ -1148,6 +1170,41 @@ export default function Home() {
     setMenuOpen(false);
   };
 
+  // Mobile menu: lock the page, close on Escape, and close when tapping outside.
+  useEffect(() => {
+    if (!menuOpen) return;
+
+    const previousOverflow = document.body.style.overflow;
+
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        setMenuOpen(false);
+      }
+    };
+
+    const onPointerDown = (event: PointerEvent) => {
+      const target = event.target;
+      if (!(target instanceof Element)) return;
+
+      const menu = document.getElementById("nav-menu");
+      const toggle = document.querySelector<HTMLButtonElement>(".site-header .nav-toggle");
+
+      if (menu && !menu.contains(target) && toggle && !toggle.contains(target)) {
+        setMenuOpen(false);
+      }
+    };
+
+    document.body.style.overflow = "hidden";
+    document.addEventListener("keydown", onKeyDown);
+    document.addEventListener("pointerdown", onPointerDown);
+
+    return () => {
+      document.body.style.overflow = previousOverflow;
+      document.removeEventListener("keydown", onKeyDown);
+      document.removeEventListener("pointerdown", onPointerDown);
+    };
+  }, [menuOpen]);
+
   const toggleLocale = () => {
     setLocale((previous) => (previous === "es" ? "en" : "es"));
   };
@@ -1185,6 +1242,8 @@ export default function Home() {
   return (
     <>
       <CosmicPageField />
+      <div className="ambient-page-light ambient-page-light--one" aria-hidden="true" />
+      <div className="ambient-page-light ambient-page-light--two" aria-hidden="true" />
       <CustomCursor />
 
       <div
@@ -1200,7 +1259,7 @@ export default function Home() {
         className="site-header"
         id="site-header"
       >
-        <nav
+<nav
           className="navbar container"
           aria-label={t.nav.ariaLabel}
         >
@@ -1307,7 +1366,7 @@ export default function Home() {
           <div className="language-control__wrapper">
             <select
               id="language-select"
-              className="language-control__select"
+              className="language-control__select language-control__select--flow"
               value={locale}
               onChange={(event) => {
                 const newLocale = event.target.value as Locale;
@@ -1626,10 +1685,16 @@ export default function Home() {
 
 
         <section
-          className="pillars section-light container"
+          className="pillars section-light container recurring-shadow-section reveal"
           id="pilares"
           aria-labelledby="pillars-title"
         >
+          <div className="section-shadow-field section-shadow-field--light section-shadow-field--recurring" aria-hidden="true">
+  <span className="section-shadow-wave section-shadow-wave--a" />
+  <span className="section-shadow-wave section-shadow-wave--b" />
+  <span className="section-shadow-wave section-shadow-wave--c" />
+  <DarkFlow variant="left" intensity="soft" />
+</div>
           <div className="section-heading">
             <div>
               <div className="section-kicker">
@@ -1737,6 +1802,7 @@ export default function Home() {
             className="next-tournament__glow"
             aria-hidden="true"
           />
+          <DarkFlow variant="right" intensity="strong" />
 
           <div className="container next-tournament__inner">
             <div className="next-tournament__copy">
@@ -1755,7 +1821,7 @@ export default function Home() {
               </p>
 
               <a
-                className="button button-primary"
+                className="button button-primary next-tournament__cta next-tournament__discord"
                 href="https://discord.gg/W2dhUs3wa"
                 target="_blank"
                 rel="noopener noreferrer"
@@ -1770,7 +1836,7 @@ export default function Home() {
             <div
               className="countdown"
               id="countdown"
-              aria-hidden="true"
+              aria-label={t.nextTournament.hiddenNote}
             >
               <div className="countdown__unit">
                 <span className="countdown__value">
@@ -1828,10 +1894,16 @@ export default function Home() {
         </section>
 
         <section
-          className="badges-section badges-section--editorial section-light container reveal"
+          className="badges-section badges-section--editorial section-light container reveal recurring-shadow-section"
           id="insignias"
           aria-labelledby="badges-title"
         >
+          <div className="section-shadow-field section-shadow-field--light section-shadow-field--recurring" aria-hidden="true">
+  <span className="section-shadow-wave section-shadow-wave--a" />
+  <span className="section-shadow-wave section-shadow-wave--b" />
+  <span className="section-shadow-wave section-shadow-wave--c" />
+  <DarkFlow variant="left" intensity="soft" />
+</div>
           <div className="badges-header">
             <div>
               <div className="section-kicker badges__kicker">{t.badges.kicker}</div>
@@ -1925,6 +1997,7 @@ export default function Home() {
           <div className="section-shadow-field section-shadow-field--dark section-shadow-field--stats" aria-hidden="true">
             <span className="section-shadow-wave section-shadow-wave--a" />
             <span className="section-shadow-wave section-shadow-wave--b" />
+            <DarkFlow variant="left" intensity="strong" />
           </div>
           <h2 id="stats-title" className="visually-hidden">
             {t.stats.ariaTitle}
@@ -1982,6 +2055,7 @@ export default function Home() {
             <span className="section-shadow-wave section-shadow-wave--a" />
             <span className="section-shadow-wave section-shadow-wave--b" />
             <span className="section-shadow-wave section-shadow-wave--c" />
+            <DarkFlow variant="left" intensity="soft" />
           </div>
           <div className="process-header">
             <div>
@@ -2168,6 +2242,7 @@ export default function Home() {
             <span className="section-shadow-wave section-shadow-wave--a" />
             <span className="section-shadow-wave section-shadow-wave--b" />
             <span className="section-shadow-wave section-shadow-wave--c" />
+            <DarkFlow variant="right" intensity="strong" />
           </div>
           <div className="discord-section__noise" aria-hidden="true" />
 
@@ -2293,7 +2368,7 @@ export default function Home() {
           </div>
         </section>
 
-        <section className="showcase-section showcase-section--editorial section-light reveal" id="oportunidades">
+        <section className="showcase-section showcase-section--editorial section-light reveal recurring-shadow-section" id="oportunidades">
           <div className="section-shadow-field section-shadow-field--light section-shadow-field--showcase" aria-hidden="true">
             <span className="section-shadow-wave section-shadow-wave--a" />
             <span className="section-shadow-wave section-shadow-wave--b" />
@@ -2357,6 +2432,7 @@ export default function Home() {
             <span className="section-shadow-wave section-shadow-wave--a" />
             <span className="section-shadow-wave section-shadow-wave--b" />
             <span className="section-shadow-wave section-shadow-wave--c" />
+            <DarkFlow variant="right" intensity="strong" />
           </div>
           <div className="showcase-head">
             <div>
@@ -2546,9 +2622,15 @@ export default function Home() {
         </section>
 
         <section
-          className="newsletter section-light reveal"
+          className="newsletter section-light reveal recurring-shadow-section"
           id="newsletter"
         >
+          <div className="section-shadow-field section-shadow-field--light section-shadow-field--recurring" aria-hidden="true">
+  <span className="section-shadow-wave section-shadow-wave--a" />
+  <span className="section-shadow-wave section-shadow-wave--b" />
+  <span className="section-shadow-wave section-shadow-wave--c" />
+  <DarkFlow variant="left" intensity="soft" />
+</div>
           <div className="container newsletter-shell">
             <div className="newsletter-visual" aria-hidden="true">
               <div className="newsletter-grid" />

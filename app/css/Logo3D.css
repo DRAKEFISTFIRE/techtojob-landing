@@ -91,3 +91,28 @@
 
   z-index: -1;
 }
+
+/* Logo 3D más pequeño en móvil */
+@media (max-width: 768px) {
+
+  .hero-logo-stage {
+    width: 420px;
+    height: 210px;
+    left: 50%;
+    top: 50%;
+  }
+
+  .hero-logo-glow {
+    width: 340px;
+    height: 150px;
+    filter: blur(30px);
+  }
+
+  .hero-logo-stage::after {
+    width: 240px;
+    height: 16px;
+    bottom: 22px;
+    filter: blur(10px);
+  }
+
+}

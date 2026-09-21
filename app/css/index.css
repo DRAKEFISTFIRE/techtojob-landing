@@ -5280,6 +5280,97 @@ h2 span {
   }
 }
 
+/* =========================================================
+   ABSOLUTE FINAL — NEXT TOURNAMENT DISCORD BUTTON
+   NEVER BLUE — GREEN SURFACE / DARK TEXT
+   ========================================================= */
+
+.next-tournament .next-tournament__discord,
+.next-tournament a.next-tournament__discord,
+.next-tournament .next-tournament__cta.next-tournament__discord {
+  background: #84c0bf !important;
+  background-image: none !important;
+  background-color: #84c0bf !important;
+
+  color: #071111 !important;
+  -webkit-text-fill-color: #071111 !important;
+
+  border: 1px solid rgba(7, 17, 17, 0.20) !important;
+  border-color: rgba(7, 17, 17, 0.20) !important;
+
+  text-shadow: none !important;
+
+  box-shadow:
+    0 16px 38px rgba(77, 146, 146, 0.28),
+    0 5px 14px rgba(0, 0, 0, 0.18),
+    inset 0 1px 0 rgba(255, 255, 255, 0.30) !important;
+}
+
+/* Texto + flecha */
+.next-tournament .next-tournament__discord span,
+.next-tournament .next-tournament__discord strong,
+.next-tournament .next-tournament__discord svg,
+.next-tournament .next-tournament__discord svg *,
+.next-tournament a.next-tournament__discord span {
+  color: #071111 !important;
+  fill: currentColor !important;
+  -webkit-text-fill-color: #071111 !important;
+}
+
+/* Hover */
+.next-tournament .next-tournament__discord:hover,
+.next-tournament a.next-tournament__discord:hover,
+.next-tournament .next-tournament__cta.next-tournament__discord:hover {
+  background: #a3d4d3 !important;
+  background-image: none !important;
+  background-color: #a3d4d3 !important;
+
+  color: #071111 !important;
+  -webkit-text-fill-color: #071111 !important;
+
+  border-color: rgba(7, 17, 17, 0.24) !important;
+
+  transform: translateY(-3px) !important;
+
+  box-shadow:
+    0 22px 48px rgba(77, 146, 146, 0.34),
+    0 7px 18px rgba(0, 0, 0, 0.20),
+    inset 0 1px 0 rgba(255, 255, 255, 0.38) !important;
+}
+
+.next-tournament .next-tournament__discord:hover span,
+.next-tournament .next-tournament__discord:hover strong,
+.next-tournament .next-tournament__discord:hover svg,
+.next-tournament .next-tournament__discord:hover svg * {
+  color: #071111 !important;
+  fill: currentColor !important;
+  -webkit-text-fill-color: #071111 !important;
+}
+
+/* Focus / keyboard */
+.next-tournament .next-tournament__discord:focus,
+.next-tournament .next-tournament__discord:focus-visible {
+  background: #84c0bf !important;
+  background-image: none !important;
+  color: #071111 !important;
+  -webkit-text-fill-color: #071111 !important;
+  outline: 2px solid rgba(132, 192, 191, 0.75) !important;
+  outline-offset: 4px !important;
+}
+
+.next-tournament .next-tournament__discord:focus span,
+.next-tournament .next-tournament__discord:focus-visible span {
+  color: #071111 !important;
+  -webkit-text-fill-color: #071111 !important;
+}
+
+/* Visited links — evita que el navegador lo vuelva azul */
+.next-tournament a.next-tournament__discord:link,
+.next-tournament a.next-tournament__discord:visited,
+.next-tournament a.next-tournament__discord:active {
+  color: #071111 !important;
+  -webkit-text-fill-color: #071111 !important;
+}
 
 /* =========================================================
    DISCORD (banda clara con degradado teal — el único mockup
@@ -5455,7 +5546,7 @@ h2 span {
   display: grid;
   place-items: center;
 
-  background: var(--accent);
+  background-color: #84c0bf;
   color: #0b1a1a;
 
   border-radius: 50%;
@@ -16348,7 +16439,8 @@ html[data-flow-theme="dark"] .section-dark,
 @keyframes cave-wheel { 0%,100% { transform: translate(-50%,0); opacity: .4; } 50% { transform: translate(-50%,9px); opacity: 1; } }
 
 @media (max-width: 700px) {
-  .cave-portal { height: 205vh !important; }
+  /* Keep the same cinematic travel length as desktop. */
+  .cave-portal { height: 235vh !important; }
   .cave-portal__sticky { min-height: 560px; }
   .cave-portal__image { background-position: 50% 58%; }
   .cave-portal__copy { top: 84px; width: calc(100% - 28px); }
@@ -17744,4 +17836,4973 @@ nav.navbar--dark select option,
 .navbar[data-theme="dark"] select option {
   color: #fff;
   background: #17459c;
+}
+
+
+/* =========================================================
+   FINAL VISUAL PASS — depth, readable content, living light
+   ========================================================= */
+
+/* --- 1. INTRO / SECTION DIRECTLY UNDER HERO --- */
+.intro-v2 {
+  background:
+    radial-gradient(75% 90% at 10% 0%, rgba(103, 191, 255, .11), transparent 62%),
+    radial-gradient(55% 75% at 92% 100%, rgba(0, 0, 0, .34), transparent 66%),
+    linear-gradient(180deg, #071314 0%, #061010 55%, #040909 100%) !important;
+  box-shadow:
+    inset 0 22px 70px rgba(0,0,0,.24),
+    inset 0 -36px 90px rgba(0,0,0,.32);
+}
+
+.intro-v2::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(32% 40% at 17% 54%, rgba(103,191,255,.07), transparent 72%),
+    radial-gradient(28% 38% at 83% 28%, rgba(0,0,0,.30), transparent 74%);
+  mix-blend-mode: screen;
+  opacity: .8;
+}
+
+.intro-v2__statement,
+.intro-v2__transformation,
+.intro-v2__principles {
+  position: relative;
+  z-index: 1;
+}
+
+.intro-v2__source,
+.intro-v2__destination,
+.intro-v2__principles-intro,
+.intro-v2__principle {
+  box-shadow:
+    0 24px 60px rgba(0,0,0,.28),
+    0 5px 18px rgba(0,0,0,.20),
+    inset 0 1px 0 rgba(255,255,255,.045) !important;
+}
+
+.intro-v2__source { background: rgba(10, 20, 21, .92) !important; }
+.intro-v2__destination { background: rgba(13, 29, 31, .94) !important; }
+.intro-v2__principles-intro,
+.intro-v2__principle { background: rgba(9, 20, 21, .82) !important; }
+
+/* --- 2. PILLARS / THIRD SECTION --- */
+.pillars {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  background:
+    radial-gradient(42% 52% at 8% 15%, rgba(132,192,191,.12), transparent 70%),
+    radial-gradient(38% 55% at 92% 84%, rgba(0,0,0,.08), transparent 72%),
+    #f6f9f8;
+}
+
+.pillars::after {
+  content: "";
+  position: absolute;
+  width: 420px;
+  height: 420px;
+  right: -150px;
+  bottom: -210px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(132,192,191,.17), transparent 68%);
+  filter: blur(18px);
+  pointer-events: none;
+  animation: pillarsAmbient 11s ease-in-out infinite alternate;
+}
+
+.pillar {
+  box-shadow:
+    0 24px 55px rgba(18,32,31,.10),
+    0 5px 16px rgba(18,32,31,.055),
+    inset 0 1px 0 rgba(255,255,255,.8) !important;
+  transition: transform .35s cubic-bezier(.2,.8,.2,1), box-shadow .35s ease, border-color .35s ease;
+}
+
+.pillar:hover {
+  transform: translateY(-7px);
+  box-shadow:
+    0 32px 72px rgba(18,32,31,.16),
+    0 9px 24px rgba(18,32,31,.08),
+    inset 0 1px 0 rgba(255,255,255,.95) !important;
+}
+
+/* --- 3. STATS -> PROCESS: force readable text on the light section --- */
+.process-section {
+  color: #12201f !important;
+  background:
+    radial-gradient(42% 70% at 5% 10%, rgba(132,192,191,.12), transparent 70%),
+    radial-gradient(36% 55% at 96% 90%, rgba(18,32,31,.075), transparent 72%),
+    #f7faf9 !important;
+  box-shadow: inset 0 25px 70px rgba(18,32,31,.035), inset 0 -35px 80px rgba(18,32,31,.055);
+}
+
+.process-section .process-header h2,
+.process-section .process-header p,
+.process-section .process__step,
+.process-section .process__step strong,
+.process-section .section-kicker,
+.process-section .process-card__copy h3,
+.process-section .process-card__copy p,
+.process-section .process-card__copy > span {
+  color: #12201f !important;
+}
+
+.process-section .process-header p,
+.process-section .process-card__copy p {
+  opacity: .86;
+}
+
+.process-section .process__step--active,
+.process-section .process__step--active strong {
+  color: #356868 !important;
+}
+
+.process-section .process-card,
+.process-section .step-card {
+  box-shadow:
+    0 25px 60px rgba(18,32,31,.12),
+    0 7px 22px rgba(18,32,31,.06) !important;
+}
+
+/* --- 4. NEXT TOURNAMENT DISCORD CTA --- */
+.next-tournament__discord {
+  background: linear-gradient(135deg, #2f8cff 0%, #2168d9 55%, #174da9 100%) !important;
+  color: #fff !important;
+  border: 1px solid rgba(145,205,255,.58) !important;
+  box-shadow:
+    0 16px 38px rgba(27,93,190,.32),
+    0 4px 12px rgba(0,0,0,.22),
+    inset 0 1px 0 rgba(255,255,255,.18) !important;
+}
+
+.next-tournament__discord:hover {
+  background: linear-gradient(135deg, #48a0ff 0%, #2b7bea 55%, #1b5bc1 100%) !important;
+  box-shadow:
+    0 22px 48px rgba(27,93,190,.40),
+    0 7px 18px rgba(0,0,0,.25),
+    inset 0 1px 0 rgba(255,255,255,.22) !important;
+}
+
+/* --- 5. TESTIMONIALS: one exact surface for every comment --- */
+.testimonials-section--editorial .testimonial-card,
+.testimonials-section--editorial .testimonial-card:nth-child(n),
+.testimonials-section--editorial .testimonial-card:nth-child(odd),
+.testimonials-section--editorial .testimonial-card:nth-child(even) {
+  background: #102027 !important;
+  background-image: none !important;
+  border-color: rgba(142,216,255,.16) !important;
+  color: #eefaff !important;
+  box-shadow:
+    0 24px 58px rgba(0,0,0,.24),
+    0 7px 20px rgba(0,0,0,.14),
+    inset 0 1px 0 rgba(255,255,255,.045) !important;
+}
+
+.testimonials-section--editorial .testimonial-card__quote,
+.testimonials-section--editorial .testimonial-card__meta strong {
+  color: #eefaff !important;
+}
+
+.testimonials-section--editorial .testimonial-card__meta span,
+.testimonials-section--editorial .testimonial-card__mark {
+  color: #9bc9dc !important;
+}
+
+/* --- 6. DARK NAV: select + native dropdown match Discord blue --- */
+.site-header.is-dark .language-control__select,
+.language-control__select--flow {
+  background: linear-gradient(135deg, #2f8cff 0%, #2168d9 55%, #174da9 100%) !important;
+  color: #fff !important;
+  border: 1px solid rgba(145,205,255,.60) !important;
+  border-radius: 9px !important;
+  box-shadow:
+    0 9px 25px rgba(27,93,190,.30),
+    inset 0 1px 0 rgba(255,255,255,.18) !important;
+}
+
+.site-header.is-dark .language-control__select:hover,
+.language-control__select--flow:hover {
+  background: linear-gradient(135deg, #48a0ff 0%, #2b7bea 55%, #1b5bc1 100%) !important;
+  border-color: rgba(170,215,255,.82) !important;
+}
+
+.site-header.is-dark .language-control__select option,
+.language-control__select--flow option {
+  background: #2168d9 !important;
+  color: #fff !important;
+}
+
+/* --- 7. CAVE: add DARK shadows only; do not increase portal light --- */
+.cave-portal__door {
+  filter:
+    drop-shadow(0 0 34px rgba(255,255,255,.16))
+    drop-shadow(0 18px 28px rgba(0,0,0,.58))
+    drop-shadow(0 34px 55px rgba(0,0,0,.48))
+    drop-shadow(0 -14px 30px rgba(0,0,0,.34)) !important;
+}
+
+.cave-portal__door-core,
+.cave-portal__door-haze {
+  box-shadow:
+    0 22px 46px rgba(0,0,0,.45),
+    0 45px 85px rgba(0,0,0,.36) !important;
+}
+
+/* --- 8. LIVING PAGE: moving light + deep shadows across the site --- */
+.ambient-page-light {
+  position: fixed;
+  z-index: 0;
+  width: min(42vw, 620px);
+  height: min(42vw, 620px);
+  border-radius: 50%;
+  pointer-events: none;
+  filter: blur(45px);
+  opacity: .13;
+  mix-blend-mode: multiply;
+  animation: pageLightFloat 16s ease-in-out infinite alternate;
+}
+
+.ambient-page-light--one {
+  left: -18vw;
+  top: 18vh;
+  background: radial-gradient(circle, rgba(77,146,146,.34), transparent 68%);
+}
+
+.ambient-page-light--two {
+  right: -20vw;
+  top: 58vh;
+  background: radial-gradient(circle, rgba(15,40,44,.28), transparent 70%);
+  animation-name: pageShadowFloat;
+  animation-duration: 19s;
+}
+
+main::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background:
+    radial-gradient(28% 18% at 12% 32%, rgba(132,192,191,.055), transparent 70%),
+    radial-gradient(24% 20% at 88% 67%, rgba(0,0,0,.075), transparent 72%);
+  animation: pageShadowBreath 14s ease-in-out infinite alternate;
+}
+
+@keyframes pageLightFloat {
+  0% { transform: translate3d(-2%, -1%, 0) scale(.94); }
+  50% { transform: translate3d(9%, 5%, 0) scale(1.06); }
+  100% { transform: translate3d(2%, 10%, 0) scale(.98); }
+}
+
+@keyframes pageShadowFloat {
+  0% { transform: translate3d(3%, 0, 0) scale(.92); }
+  50% { transform: translate3d(-7%, -5%, 0) scale(1.08); }
+  100% { transform: translate3d(-2%, 8%, 0) scale(.98); }
+}
+
+@keyframes pageShadowBreath {
+  0% { opacity: .55; transform: translate3d(0,0,0) scale(1); }
+  100% { opacity: .95; transform: translate3d(0,-1.5%,0) scale(1.015); }
+}
+
+@keyframes pillarsAmbient {
+  0% { transform: translate3d(0,0,0) scale(.92); opacity: .45; }
+  100% { transform: translate3d(-80px,-45px,0) scale(1.08); opacity: .85; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ambient-page-light,
+  main::before,
+  .pillars::after { animation: none !important; }
+}
+
+/* =========================================================
+   FINAL CONTRAST + BRAND GREEN PASS
+   ========================================================= */
+
+/* BRAND GREEN = exact navbar Join Discord accent */
+:root {
+  --brand-discord-green: #84c0bf;
+  --brand-discord-green-hover: #a3d4d3;
+  --brand-discord-green-dark: #4d9292;
+}
+
+/* Language control: same green surface as the navbar Discord button.
+   Apply it to the visible control, wrapper and native option list. */
+.site-header .language-control__wrapper {
+  background: var(--brand-discord-green) !important;
+  border: 1px solid rgba(77,146,146,.42) !important;
+  border-radius: 9px !important;
+  box-shadow:
+    0 8px 24px rgba(77,146,146,.22),
+    inset 0 1px 0 rgba(255,255,255,.20) !important;
+}
+
+.site-header .language-control__select,
+.site-header .language-control__select--flow {
+  background: var(--brand-discord-green) !important;
+  background-image: none !important;
+  color: #102c2b !important;
+  border: 1px solid rgba(77,146,146,.42) !important;
+  border-radius: 8px !important;
+  box-shadow: none !important;
+}
+
+.site-header .language-control__select:hover,
+.site-header .language-control__select--flow:hover,
+.site-header .language-control__wrapper:hover {
+  background: var(--brand-discord-green-hover) !important;
+  border-color: rgba(77,146,146,.55) !important;
+}
+
+.site-header .language-control__select option,
+.site-header .language-control__select--flow option {
+  background: var(--brand-discord-green) !important;
+  color: #102c2b !important;
+}
+
+.site-header .language-control__icon {
+  color: #102c2b !important;
+}
+
+/* Next tournament: use the exact same green brand surface as the navbar CTA. */
+.next-tournament__discord {
+  background: var(--brand-discord-green) !important;
+  background-image: none !important;
+  color: #102c2b !important;
+  border: 1px solid rgba(77,146,146,.46) !important;
+  box-shadow:
+    0 14px 34px rgba(77,146,146,.28),
+    0 5px 14px rgba(0,0,0,.20),
+    inset 0 1px 0 rgba(255,255,255,.22) !important;
+}
+
+.next-tournament__discord:hover {
+  background: var(--brand-discord-green-hover) !important;
+  background-image: none !important;
+  color: #102c2b !important;
+  box-shadow:
+    0 20px 44px rgba(77,146,146,.34),
+    0 7px 18px rgba(0,0,0,.22),
+    inset 0 1px 0 rgba(255,255,255,.30) !important;
+}
+
+/* PROCESS / SECOND SECTION BELOW STATS:
+   every text layer gets an explicit readable color. */
+.process-section.section-light {
+  color: #12201f !important;
+}
+
+.process-section.section-light .section-kicker,
+.process-section.section-light .process-header h2,
+.process-section.section-light .process-header p,
+.process-section.section-light .process-header strong,
+.process-section.section-light .process__step,
+.process-section.section-light .process__step span,
+.process-section.section-light .process__step strong,
+.process-section.section-light .process-card__number,
+.process-section.section-light .process-card h3,
+.process-section.section-light .process-card h3 em,
+.process-section.section-light .process-card > p,
+.process-section.section-light .process-card--small p,
+.process-section.section-light .process-card__copy > span,
+.process-section.section-light .process-card__copy p,
+.process-section.section-light .process-code,
+.process-section.section-light .process-code span,
+.process-section.section-light .process-code strong,
+.process-section.section-light .process-tags span,
+.process-section.section-light .process-status,
+.process-section.section-light .process-small-icon,
+.process-section.section-light .submission-card,
+.process-section.section-light .submission-card__head,
+.process-section.section-light .submission-card__head span,
+.process-section.section-light .submission-card__head strong,
+.process-section.section-light .submission-card__body,
+.process-section.section-light .submission-card__body span,
+.process-section.section-light .submission-card__body strong,
+.process-section.section-light .submission-card__body p,
+.process-section.section-light .submission-card__foot span {
+  color: #12201f !important;
+}
+
+/* Hero process card is a light card: dark ink, strong contrast. */
+.process-section.section-light .process-card--hero,
+.process-section.section-light .process-card--small {
+  background: #ffffff !important;
+  color: #12201f !important;
+}
+
+.process-section.section-light .process-card--hero h3,
+.process-section.section-light .process-card--small h3 {
+  color: #12201f !important;
+  text-shadow: none !important;
+}
+
+.process-section.section-light .process-card--hero h3 em,
+.process-section.section-light .process-card--small h3 em {
+  color: #356868 !important;
+}
+
+.process-section.section-light .process-card--hero .process-card__copy p,
+.process-section.section-light .process-card--small p {
+  color: #304544 !important;
+  opacity: 1 !important;
+}
+
+.process-section.section-light .process-card--hero .process-card__number,
+.process-section.section-light .process-card--small .process-card__number {
+  color: #5a7371 !important;
+}
+
+.process-section.section-light .process-card--hero .process-card__copy > span {
+  color: var(--brand-discord-green-dark) !important;
+}
+
+.process-section.section-light .process-tags span {
+  background: rgba(132,192,191,.14) !important;
+  color: #356868 !important;
+  border-color: rgba(77,146,146,.24) !important;
+}
+
+.process-section.section-light .process-status {
+  color: #356868 !important;
+}
+
+/* The community card intentionally stays dark, so its copy must be light. */
+.process-section.section-light .process-card--wide h3,
+.process-section.section-light .process-card--wide .process-card__number,
+.process-section.section-light .process-card--wide p,
+.process-section.section-light .process-card--wide h3 em,
+.process-section.section-light .process-card--wide .people-stack span {
+  color: #ffffff !important;
+}
+
+.process-section.section-light .process-card--wide h3 em {
+  color: #a3d4d3 !important;
+}
+
+.process-section.section-light .process-card--wide p {
+  color: rgba(255,255,255,.88) !important;
+}
+
+/* Keep the small dark visual widgets readable as well. */
+.process-section.section-light .submission-card {
+  background: #102027 !important;
+  border-color: rgba(132,192,191,.22) !important;
+  color: #eefaf9 !important;
+}
+
+.process-section.section-light .submission-card,
+.process-section.section-light .submission-card * {
+  color: #eefaf9 !important;
+}
+
+.process-section.section-light .submission-card__head strong {
+  color: #84c0bf !important;
+}
+
+.process-section.section-light .submission-card__body span {
+  color: #84c0bf !important;
+}
+
+/* Don't let old dark-section accent overrides make light-section text vanish. */
+.process-section.section-light [style*="color"] {
+  color: inherit !important;
+}
+
+/* Single source of truth: navbar Join Discord and every requested CTA use the same green. */
+.site-header .nav-cta {
+  background: var(--brand-discord-green) !important;
+  background-image: none !important;
+  color: #102c2b !important;
+  border-color: rgba(77,146,146,.42) !important;
+  box-shadow: 0 8px 24px rgba(77,146,146,.22) !important;
+}
+
+.site-header .nav-cta:hover {
+  background: var(--brand-discord-green-hover) !important;
+  color: #102c2b !important;
+  box-shadow: 0 12px 30px rgba(77,146,146,.30) !important;
+}
+
+/* =========================================================
+   LANGUAGE CONTROL — DARK NAV MUST USE DISCORD GREEN
+   Final override: this intentionally comes LAST.
+   ========================================================= */
+.site-header.is-dark .language-control__select,
+.site-header.is-dark .language-control__select--flow {
+  background: #39b56b !important;
+  background-image: none !important;
+  color: #ffffff !important;
+  border-color: #39b56b !important;
+  box-shadow: 0 9px 24px rgba(24,126,72,.30), inset 0 1px 0 rgba(255,255,255,.18) !important;
+}
+.site-header.is-dark .language-control__select:hover,
+.site-header.is-dark .language-control__select:focus,
+.site-header.is-dark .language-control__select:focus-visible,
+.site-header.is-dark .language-control__select--flow:hover,
+.site-header.is-dark .language-control__select--flow:focus,
+.site-header.is-dark .language-control__select--flow:focus-visible {
+  background: #39b56b !important;
+  color: #ffffff !important;
+  border-color: #39b56b !important;
+}
+.site-header.is-dark .language-control__select option,
+.site-header.is-dark .language-control__select--flow option {
+  background: #39b56b !important;
+  color: #ffffff !important;
+}
+
+/* =========================================================
+   FINAL — LANGUAGE CONTROL ALWAYS MATCHES NAVBAR DISCORD GREEN
+   Light and dark navbar use the exact same brand token.
+   ========================================================= */
+.site-header .language-control__wrapper,
+.site-header.is-dark .language-control__wrapper {
+  background: var(--brand-discord-green) !important;
+  border-color: rgba(77,146,146,.42) !important;
+}
+
+.site-header .language-control__select,
+.site-header .language-control__select--flow,
+.site-header.is-dark .language-control__select,
+.site-header.is-dark .language-control__select--flow {
+  background: var(--brand-discord-green) !important;
+  background-image: none !important;
+  color: #102c2b !important;
+  border-color: rgba(77,146,146,.42) !important;
+  box-shadow: 0 8px 24px rgba(77,146,146,.22) !important;
+}
+
+.site-header .language-control__select:hover,
+.site-header .language-control__select:focus,
+.site-header .language-control__select:focus-visible,
+.site-header .language-control__select--flow:hover,
+.site-header .language-control__select--flow:focus,
+.site-header .language-control__select--flow:focus-visible,
+.site-header.is-dark .language-control__select:hover,
+.site-header.is-dark .language-control__select:focus,
+.site-header.is-dark .language-control__select:focus-visible,
+.site-header.is-dark .language-control__select--flow:hover,
+.site-header.is-dark .language-control__select--flow:focus,
+.site-header.is-dark .language-control__select--flow:focus-visible {
+  background: var(--brand-discord-green) !important;
+  color: #102c2b !important;
+  border-color: rgba(77,146,146,.55) !important;
+}
+
+.site-header .language-control__select option,
+.site-header .language-control__select--flow option,
+.site-header.is-dark .language-control__select option,
+.site-header.is-dark .language-control__select--flow option {
+  background: var(--brand-discord-green) !important;
+  color: #102c2b !important;
+}
+
+.site-header .language-control__icon,
+.site-header.is-dark .language-control__icon {
+  color: #102c2b !important;
+}
+
+/* The navbar Discord CTA is the source of truth for the color. */
+.site-header .nav-cta,
+.site-header.is-dark .nav-cta {
+  background: var(--brand-discord-green) !important;
+  background-image: none !important;
+  color: #102c2b !important;
+  border-color: rgba(77,146,146,.42) !important;
+}
+
+.site-header .nav-cta:hover,
+.site-header.is-dark .nav-cta:hover {
+  background: var(--brand-discord-green-hover) !important;
+  color: #102c2b !important;
+}
+
+/* =========================================================
+   FINAL FINAL — DARK NAV LANGUAGE CONTAINER MUST MATCH DISCORD
+   The entire language-control box, not only the <select>, uses
+   the exact same base green as the navbar Discord button.
+   ========================================================= */
+.site-header.is-dark .language-control,
+.site-header.is-dark .language-control__wrapper {
+  background: var(--brand-discord-green) !important;
+  background-image: none !important;
+  border-color: rgba(77,146,146,.42) !important;
+  color: #102c2b !important;
+  box-shadow: 0 8px 24px rgba(77,146,146,.22) !important;
+}
+
+.site-header.is-dark .language-control__wrapper:hover,
+.site-header.is-dark .language-control:hover {
+  background: var(--brand-discord-green-hover) !important;
+  background-image: none !important;
+}
+
+.site-header.is-dark .language-control__label,
+.site-header.is-dark .language-control__icon {
+  color: #102c2b !important;
+}
+
+.site-header.is-dark .language-control__select,
+.site-header.is-dark .language-control__select--flow {
+  background: var(--brand-discord-green) !important;
+  background-image: none !important;
+  color: #102c2b !important;
+  border-color: rgba(77,146,146,.42) !important;
+}
+
+.site-header.is-dark .language-control__select option,
+.site-header.is-dark .language-control__select--flow option {
+  background: var(--brand-discord-green) !important;
+  color: #102c2b !important;
+}
+
+/* =========================================================
+   TECHTOJOB — CINEMATIC FLOW PASS
+   Redesign of the section immediately below the hero +
+   page-wide depth / moving darkness.
+   ========================================================= */
+
+/* ---------- SECTION BELOW HERO: editorial command deck ---------- */
+.intro-v2 {
+  position: relative !important;
+  isolation: isolate;
+  overflow: hidden;
+  min-height: 640px;
+  padding-top: clamp(82px, 8vw, 126px) !important;
+  padding-bottom: clamp(82px, 8vw, 126px) !important;
+  background:
+    radial-gradient(70% 80% at 8% 8%, rgba(132,192,191,.12), transparent 62%),
+    radial-gradient(60% 70% at 96% 92%, rgba(0,0,0,.48), transparent 68%),
+    linear-gradient(135deg, #071415 0%, #091b1c 48%, #040b0c 100%) !important;
+  box-shadow:
+    inset 0 34px 100px rgba(0,0,0,.34),
+    inset 0 -48px 110px rgba(0,0,0,.48),
+    0 34px 90px rgba(0,0,0,.20) !important;
+}
+
+.intro-v2::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+  pointer-events: none;
+  background:
+    linear-gradient(115deg, transparent 18%, rgba(255,255,255,.035) 34%, transparent 49%),
+    radial-gradient(35% 60% at 50% 0%, rgba(132,192,191,.055), transparent 75%);
+  opacity: .9;
+}
+
+.intro-v2::after {
+  content: "";
+  position: absolute;
+  width: 52vw;
+  height: 52vw;
+  min-width: 460px;
+  min-height: 460px;
+  right: -22vw;
+  bottom: -32vw;
+  z-index: -1;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(0,0,0,.58) 0%, rgba(0,0,0,.18) 44%, transparent 72%);
+  filter: blur(12px);
+  pointer-events: none;
+  animation: introShadowDrift 13s ease-in-out infinite alternate;
+}
+
+.intro-v2 > * {
+  position: relative;
+  z-index: 1;
+}
+
+.intro-v2 .section-kicker {
+  color: #84c0bf !important;
+  letter-spacing: .18em;
+  text-shadow: 0 0 24px rgba(132,192,191,.16);
+}
+
+.intro-v2 h2,
+.intro-v2 h2 span,
+.intro-v2 h3,
+.intro-v2 strong {
+  color: #f2fbfb !important;
+  text-shadow: 0 10px 35px rgba(0,0,0,.34);
+}
+
+.intro-v2 p,
+.intro-v2__source p,
+.intro-v2__destination p,
+.intro-v2__principle p,
+.intro-v2__principles-intro p {
+  color: #c6d7d8 !important;
+}
+
+.intro-v2__eyebrow,
+.intro-v2__source,
+.intro-v2__destination,
+.intro-v2__principles-intro,
+.intro-v2__principle,
+.intro-v2__transformation,
+.intro-v2__principles {
+  border-color: rgba(132,192,191,.16) !important;
+}
+
+.intro-v2__source,
+.intro-v2__destination,
+.intro-v2__principles-intro,
+.intro-v2__principle {
+  background: linear-gradient(145deg, rgba(16,34,35,.96), rgba(7,17,18,.92)) !important;
+  box-shadow:
+    0 30px 70px rgba(0,0,0,.38),
+    0 8px 24px rgba(0,0,0,.22),
+    inset 0 1px 0 rgba(255,255,255,.055),
+    inset 0 -20px 40px rgba(0,0,0,.16) !important;
+}
+
+.intro-v2__source:hover,
+.intro-v2__destination:hover,
+.intro-v2__principle:hover {
+  transform: translateY(-4px);
+  border-color: rgba(132,192,191,.28) !important;
+  box-shadow:
+    0 38px 82px rgba(0,0,0,.44),
+    0 12px 30px rgba(0,0,0,.24),
+    inset 0 1px 0 rgba(255,255,255,.07) !important;
+}
+
+.intro-v2__source,
+.intro-v2__destination,
+.intro-v2__principle {
+  transition: transform .35s ease, box-shadow .35s ease, border-color .35s ease;
+}
+
+.intro-v2__principle--result {
+  background: linear-gradient(145deg, rgba(28,62,61,.98), rgba(10,25,25,.96)) !important;
+  box-shadow:
+    0 34px 78px rgba(0,0,0,.42),
+    0 8px 26px rgba(45,110,106,.16),
+    inset 0 1px 0 rgba(255,255,255,.07) !important;
+}
+
+
+/* =========================================================
+   PAGE-WIDE ORGANIC SHADOW FIELD
+   Capas oscuras irregulares que se mueven lentamente por
+   toda la página. No son líneas ni círculos: son masas
+   blandas, deformadas y profundas.
+   ========================================================= */
+
+main {
+  position: relative;
+  isolation: isolate;
+  background: var(--bg);
+}
+
+/* Elimina las sombras que estaban creando franjas grises
+   entre secciones. La profundidad ahora vive en el campo
+   orgánico, no en bordes artificiales. */
+main > section,
+main > section.container,
+main > section.section-light,
+main > section.section-dark,
+main > section[class*="section-"] {
+  box-shadow: none !important;
+}
+
+main > section + section::after {
+  display: none !important;
+}
+
+.page-shadow-field {
+  position: fixed;
+  inset: -18vh -12vw;
+  z-index: 0;
+  pointer-events: none;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+.page-shadow {
+  position: absolute;
+  display: block;
+  pointer-events: none;
+
+  /* Forma irregular, no circular */
+  border-radius: 57% 43% 68% 32% / 39% 61% 42% 58%;
+
+  background:
+    radial-gradient(
+      ellipse at 48% 50%,
+      rgba(5, 18, 18, .26) 0%,
+      rgba(5, 18, 18, .15) 35%,
+      rgba(5, 18, 18, .055) 57%,
+      transparent 76%
+    );
+
+  filter: blur(34px);
+  mix-blend-mode: multiply;
+  opacity: .62;
+  will-change: transform;
+}
+
+.page-shadow--1 {
+  width: 58vw;
+  height: 31vw;
+  left: -13vw;
+  top: 5vh;
+  transform: rotate(-14deg);
+  animation: pageShadowMorph1 22s ease-in-out infinite alternate;
+}
+
+.page-shadow--2 {
+  width: 47vw;
+  height: 39vw;
+  right: -11vw;
+  top: 22vh;
+  border-radius: 31% 69% 44% 56% / 63% 35% 65% 37%;
+  opacity: .48;
+  transform: rotate(19deg);
+  animation: pageShadowMorph2 27s ease-in-out infinite alternate;
+}
+
+.page-shadow--3 {
+  width: 64vw;
+  height: 25vw;
+  left: 16vw;
+  top: 43vh;
+  border-radius: 72% 28% 37% 63% / 46% 64% 36% 54%;
+  opacity: .34;
+  transform: rotate(-7deg);
+  animation: pageShadowMorph3 31s ease-in-out infinite alternate;
+}
+
+.page-shadow--4 {
+  width: 49vw;
+  height: 43vw;
+  left: -18vw;
+  top: 63vh;
+  border-radius: 42% 58% 71% 29% / 57% 41% 59% 43%;
+  opacity: .43;
+  transform: rotate(22deg);
+  animation: pageShadowMorph4 25s ease-in-out infinite alternate;
+}
+
+.page-shadow--5 {
+  width: 56vw;
+  height: 30vw;
+  right: -14vw;
+  top: 79vh;
+  border-radius: 64% 36% 29% 71% / 34% 62% 38% 66%;
+  opacity: .30;
+  transform: rotate(-18deg);
+  animation: pageShadowMorph5 29s ease-in-out infinite alternate;
+}
+
+.page-shadow--6 {
+  width: 72vw;
+  height: 28vw;
+  left: 11vw;
+  top: 104vh;
+  border-radius: 29% 71% 54% 46% / 62% 38% 67% 33%;
+  opacity: .25;
+  transform: rotate(8deg);
+  animation: pageShadowMorph6 34s ease-in-out infinite alternate;
+}
+
+/* Content siempre por encima del campo ambiental. */
+main > section,
+main > .orbital-convergence,
+main > .page-shadow-field ~ * {
+  position: relative;
+  z-index: 1;
+}
+
+/* El portal conserva absoluta prioridad visual. */
+main > .orbital-convergence {
+  z-index: 2;
+}
+
+/* Entrada/salida suave para que las sombras no parezcan
+   un overlay estático. */
+@keyframes pageShadowMorph1 {
+  0%   { transform: translate3d(-2vw, -1vh, 0) rotate(-14deg) scale(.92) skewX(-3deg); }
+  50%  { transform: translate3d(7vw, 5vh, 0) rotate(-4deg) scale(1.08) skewX(7deg); }
+  100% { transform: translate3d(13vw, -2vh, 0) rotate(8deg) scale(.96) skewX(-5deg); }
+}
+
+@keyframes pageShadowMorph2 {
+  0%   { transform: translate3d(3vw, -5vh, 0) rotate(19deg) scale(.94) skewY(3deg); }
+  50%  { transform: translate3d(-8vw, 7vh, 0) rotate(31deg) scale(1.10) skewY(-7deg); }
+  100% { transform: translate3d(-2vw, 13vh, 0) rotate(9deg) scale(.91) skewY(5deg); }
+}
+
+@keyframes pageShadowMorph3 {
+  0%   { transform: translate3d(-8vw, 2vh, 0) rotate(-7deg) scale(.95); }
+  50%  { transform: translate3d(4vw, -6vh, 0) rotate(9deg) scale(1.06); }
+  100% { transform: translate3d(12vw, 5vh, 0) rotate(-12deg) scale(.97); }
+}
+
+@keyframes pageShadowMorph4 {
+  0%   { transform: translate3d(4vw, -4vh, 0) rotate(22deg) scale(.90); }
+  50%  { transform: translate3d(15vw, 6vh, 0) rotate(4deg) scale(1.08); }
+  100% { transform: translate3d(2vw, 12vh, 0) rotate(-11deg) scale(.96); }
+}
+
+@keyframes pageShadowMorph5 {
+  0%   { transform: translate3d(-4vw, 6vh, 0) rotate(-18deg) scale(.96); }
+  50%  { transform: translate3d(-13vw, -3vh, 0) rotate(-31deg) scale(1.09); }
+  100% { transform: translate3d(-5vw, 8vh, 0) rotate(-5deg) scale(.93); }
+}
+
+@keyframes pageShadowMorph6 {
+  0%   { transform: translate3d(-5vw, 0, 0) rotate(8deg) scale(.94); }
+  50%  { transform: translate3d(10vw, 5vh, 0) rotate(-6deg) scale(1.07); }
+  100% { transform: translate3d(18vw, -4vh, 0) rotate(12deg) scale(.98); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .page-shadow {
+    animation: none !important;
+  }
+}
+
+@media (max-width: 700px) {
+  .page-shadow-field {
+    inset: -10vh -35vw;
+  }
+
+  .page-shadow {
+    filter: blur(30px);
+    opacity: .34;
+  }
+
+  .page-shadow--1,
+  .page-shadow--2 {
+    width: 90vw;
+    height: 58vw;
+  }
+
+  .page-shadow--3,
+  .page-shadow--6 {
+    width: 105vw;
+    height: 48vw;
+  }
+}
+
+/* =========================================================
+   SECTION 3 — LIVING SILK / LIGHT MOTION
+   The global shadows stay subtle here: this section gets
+   moving luminous layers instead of moving dark masses.
+   ========================================================= */
+
+.intro-v2 {
+  --intro-flow-a: rgba(132, 192, 191, .13);
+  --intro-flow-b: rgba(103, 191, 255, .10);
+  --intro-flow-c: rgba(255, 255, 255, .055);
+  overflow: hidden !important;
+}
+
+/* Remove the old dark orbital blob from the motion layer. */
+.intro-v2::after {
+  width: auto !important;
+  height: auto !important;
+  min-width: 0 !important;
+  min-height: 0 !important;
+  inset: -18% -12% !important;
+  right: auto !important;
+  bottom: auto !important;
+  border-radius: 0 !important;
+  filter: blur(28px) !important;
+  background:
+    radial-gradient(42% 30% at 8% 22%, var(--intro-flow-a), transparent 72%),
+    radial-gradient(38% 28% at 88% 72%, var(--intro-flow-b), transparent 74%),
+    radial-gradient(30% 24% at 54% 46%, var(--intro-flow-c), transparent 76%) !important;
+  mix-blend-mode: screen !important;
+  opacity: .72 !important;
+  transform: translate3d(-8%, 4%, 0) rotate(-3deg) scale(1.08) !important;
+  animation: introSilkFloat 18s cubic-bezier(.45,0,.55,1) infinite alternate !important;
+}
+
+/* Organic luminous fold crossing the section. It is deliberately
+   asymmetrical so it reads like a moving material layer, not a ring. */
+.intro-v2__header::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  width: 72%;
+  height: 190px;
+  left: -20%;
+  top: -48px;
+  pointer-events: none;
+  border-radius: 58% 42% 67% 33% / 44% 62% 38% 56%;
+  background:
+    linear-gradient(105deg,
+      transparent 0%,
+      rgba(132,192,191,.03) 24%,
+      rgba(132,192,191,.16) 43%,
+      rgba(255,255,255,.065) 51%,
+      rgba(103,191,255,.07) 60%,
+      transparent 82%);
+  filter: blur(18px);
+  opacity: .85;
+  transform: rotate(-7deg) translate3d(0,0,0) scaleX(1.08);
+  animation: introSilkSweep 11s cubic-bezier(.42,0,.58,1) infinite alternate;
+}
+
+.intro-v2__transformation {
+  position: relative;
+}
+
+.intro-v2__transformation::after {
+  content: "";
+  position: absolute;
+  z-index: 0;
+  width: 55%;
+  height: 130px;
+  right: -17%;
+  top: 32%;
+  pointer-events: none;
+  border-radius: 41% 59% 33% 67% / 61% 37% 63% 39%;
+  background:
+    linear-gradient(90deg,
+      transparent,
+      rgba(132,192,191,.08) 34%,
+      rgba(255,255,255,.06) 50%,
+      rgba(103,191,255,.09) 66%,
+      transparent);
+  filter: blur(20px);
+  opacity: .7;
+  transform: rotate(5deg) translate3d(0,0,0);
+  animation: introSilkFold 14s ease-in-out infinite alternate;
+}
+
+.intro-v2__flow,
+.intro-v2__transformation-label {
+  position: relative;
+  z-index: 1;
+}
+
+@keyframes introSilkFloat {
+  0% {
+    transform: translate3d(-10%, 5%, 0) rotate(-4deg) scale(1.04);
+    opacity: .48;
+  }
+  45% {
+    transform: translate3d(3%, -2%, 0) rotate(2deg) scale(1.10);
+    opacity: .76;
+  }
+  100% {
+    transform: translate3d(11%, 7%, 0) rotate(5deg) scale(1.06);
+    opacity: .58;
+  }
+}
+
+@keyframes introSilkSweep {
+  0% {
+    left: -24%;
+    transform: rotate(-8deg) translate3d(0,0,0) scaleX(1.02);
+  }
+  100% {
+    left: 47%;
+    transform: rotate(5deg) translate3d(0,26px,0) scaleX(.92);
+  }
+}
+
+@keyframes introSilkFold {
+  0% {
+    right: -20%;
+    transform: rotate(7deg) translate3d(0,12px,0) scaleX(.92);
+  }
+  100% {
+    right: 18%;
+    transform: rotate(-5deg) translate3d(0,-18px,0) scaleX(1.12);
+  }
+}
+
+@media (max-width: 700px) {
+  .intro-v2__header::before {
+    width: 105%;
+    left: -38%;
+    height: 150px;
+  }
+
+  .intro-v2__transformation::after {
+    width: 90%;
+    right: -38%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .intro-v2::after,
+  .intro-v2__header::before,
+  .intro-v2__transformation::after {
+    animation: none !important;
+  }
+}
+
+/* ================================================================
+   TECHTOJOB — SECTION 3 / ORGANIC LIGHT-SHADOW PASS
+   Applies to the white PILLARS section.
+   Reference: the cave/door shadow language, but translated to a
+   bright surface: soft architectural shadow masses that breathe,
+   deform and slide across the edges without creating circles/lines.
+   ================================================================ */
+
+.pillars {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  background: #f7faf9;
+}
+
+/* Deep organic shadow entering from the upper-left edge.
+   It stays away from the main text and map. */
+.pillars::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  pointer-events: none;
+
+  width: clamp(420px, 48vw, 820px);
+  height: clamp(260px, 30vw, 520px);
+
+  left: -16%;
+  top: -12%;
+
+  background:
+    radial-gradient(
+      ellipse at 58% 48%,
+      rgba(16, 39, 38, .17) 0%,
+      rgba(16, 39, 38, .10) 31%,
+      rgba(16, 39, 38, .045) 55%,
+      transparent 75%
+    );
+
+  border-radius: 62% 38% 51% 49% / 42% 58% 42% 58%;
+  filter: blur(24px);
+
+  transform:
+    translate3d(-2%, 0, 0)
+    rotate(-14deg)
+    scale(1);
+
+  opacity: .82;
+  will-change: transform, border-radius, opacity;
+
+  animation: pillarsOrganicShadowA 13s ease-in-out infinite alternate;
+}
+
+/* Second shadow mass: comes from the lower-right, much lighter.
+   This creates the "door/cave wall" feeling without making the
+   white section look dirty. */
+.pillars::after {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  pointer-events: none;
+
+  width: clamp(360px, 40vw, 700px);
+  height: clamp(230px, 26vw, 460px);
+
+  right: -14%;
+  bottom: -13%;
+
+  background:
+    radial-gradient(
+      ellipse at 42% 42%,
+      rgba(35, 67, 65, .13) 0%,
+      rgba(35, 67, 65, .07) 34%,
+      rgba(35, 67, 65, .025) 58%,
+      transparent 76%
+    );
+
+  border-radius: 41% 59% 37% 63% / 61% 39% 61% 39%;
+  filter: blur(27px);
+
+  transform:
+    translate3d(0, 0, 0)
+    rotate(16deg)
+    scale(1.04);
+
+  opacity: .72;
+  will-change: transform, border-radius, opacity;
+
+  animation: pillarsOrganicShadowB 17s ease-in-out infinite alternate;
+}
+
+/* A third very subtle "fold" sits behind the illustration.
+   This is deliberately not circular: it behaves like a moving
+   shadow cast by an enormous curved surface outside the frame. */
+.pillars-layout {
+  position: relative;
+  z-index: 1;
+}
+
+.pillars-layout::before {
+  content: "";
+  position: absolute;
+  pointer-events: none;
+  z-index: -1;
+
+  width: min(48vw, 760px);
+  height: min(30vw, 470px);
+
+  left: 12%;
+  top: 27%;
+
+  background:
+    linear-gradient(
+      118deg,
+      rgba(11, 29, 28, .085),
+      rgba(11, 29, 28, .025) 42%,
+      transparent 70%
+    );
+
+  clip-path: polygon(
+    0 28%,
+    13% 10%,
+    31% 2%,
+    51% 9%,
+    70% 28%,
+    87% 51%,
+    100% 76%,
+    82% 92%,
+    57% 100%,
+    33% 91%,
+    13% 70%
+  );
+
+  filter: blur(22px);
+  opacity: .48;
+
+  transform:
+    translate3d(0, 0, 0)
+    rotate(-5deg)
+    scale(1);
+
+  animation: pillarsOrganicFold 19s ease-in-out infinite alternate;
+}
+
+/* Keep the actual cards readable above the atmosphere. */
+.pillars .section-heading,
+.pillars .pillars-layout,
+.pillars .pillar-grid,
+.pillars .pillars-illustration-wrap {
+  position: relative;
+  z-index: 2;
+}
+
+/* The illustration gets a tiny moving contact shadow, like the
+   door's bounce-light relationship with its surroundings. */
+.pillars-illustration-wrap::after {
+  content: "";
+  position: absolute;
+  pointer-events: none;
+  z-index: -1;
+
+  width: 82%;
+  height: 22%;
+
+  left: 9%;
+  bottom: 4%;
+
+  background:
+    radial-gradient(
+      ellipse at center,
+      rgba(14, 36, 35, .18) 0%,
+      rgba(14, 36, 35, .075) 38%,
+      transparent 74%
+    );
+
+  filter: blur(20px);
+  opacity: .58;
+
+  transform: scaleX(.92);
+  animation: pillarsContactShadow 8s ease-in-out infinite alternate;
+}
+
+/* ================================================================
+   ORGANIC MOTION
+   ================================================================ */
+
+@keyframes pillarsOrganicShadowA {
+  0% {
+    transform:
+      translate3d(-3%, -1%, 0)
+      rotate(-14deg)
+      scale(1);
+    border-radius: 62% 38% 51% 49% / 42% 58% 42% 58%;
+    opacity: .70;
+  }
+
+  45% {
+    transform:
+      translate3d(4%, 5%, 0)
+      rotate(-9deg)
+      scale(1.08);
+    border-radius: 48% 52% 39% 61% / 57% 43% 63% 37%;
+    opacity: .86;
+  }
+
+  100% {
+    transform:
+      translate3d(10%, 8%, 0)
+      rotate(-4deg)
+      scale(1.14);
+    border-radius: 38% 62% 58% 42% / 46% 54% 39% 61%;
+    opacity: .64;
+  }
+}
+
+@keyframes pillarsOrganicShadowB {
+  0% {
+    transform:
+      translate3d(2%, 3%, 0)
+      rotate(16deg)
+      scale(1.02);
+    border-radius: 41% 59% 37% 63% / 61% 39% 61% 39%;
+    opacity: .48;
+  }
+
+  50% {
+    transform:
+      translate3d(-7%, -4%, 0)
+      rotate(9deg)
+      scale(1.12);
+    border-radius: 57% 43% 64% 36% / 39% 61% 44% 56%;
+    opacity: .72;
+  }
+
+  100% {
+    transform:
+      translate3d(-13%, -8%, 0)
+      rotate(3deg)
+      scale(1.17);
+    border-radius: 66% 34% 47% 53% / 53% 47% 62% 38%;
+    opacity: .42;
+  }
+}
+
+@keyframes pillarsOrganicFold {
+  0% {
+    transform: translate3d(-2%, 1%, 0) rotate(-5deg) scale(.98);
+    opacity: .28;
+  }
+
+  50% {
+    transform: translate3d(5%, -3%, 0) rotate(-1deg) scale(1.07);
+    opacity: .48;
+  }
+
+  100% {
+    transform: translate3d(10%, 4%, 0) rotate(4deg) scale(1.12);
+    opacity: .22;
+  }
+}
+
+@keyframes pillarsContactShadow {
+  0% {
+    transform: translateX(-2%) scaleX(.88);
+    opacity: .38;
+  }
+
+  100% {
+    transform: translateX(4%) scaleX(1.08);
+    opacity: .66;
+  }
+}
+
+/* Responsive: keep the masses close to the edges on smaller screens. */
+@media (max-width: 900px) {
+  .pillars::before {
+    width: 520px;
+    height: 330px;
+    left: -32%;
+    top: -7%;
+  }
+
+  .pillars::after {
+    width: 480px;
+    height: 310px;
+    right: -30%;
+    bottom: -8%;
+  }
+
+  .pillars-layout::before {
+    left: 0;
+    top: 35%;
+    width: 560px;
+    height: 330px;
+  }
+}
+
+@media (max-width: 600px) {
+  .pillars::before {
+    width: 380px;
+    height: 250px;
+    left: -42%;
+    top: -4%;
+    filter: blur(20px);
+  }
+
+  .pillars::after {
+    width: 360px;
+    height: 230px;
+    right: -42%;
+    bottom: -5%;
+    filter: blur(21px);
+  }
+
+  .pillars-layout::before {
+    display: none;
+  }
+
+  .pillars-illustration-wrap::after {
+    width: 76%;
+    left: 12%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pillars::before,
+  .pillars::after,
+  .pillars-layout::before,
+  .pillars-illustration-wrap::after {
+    animation: none !important;
+  }
+}
+
+
+/* =========================================================
+   DARKNESS TAKES FORM — recurring visual language
+   The portal's cave-shadow idea now leaks into the white world.
+   ========================================================= */
+
+.recurring-shadow-section {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+}
+
+.recurring-shadow-section > .section-shadow-field {
+  z-index: 0;
+}
+
+.section-shadow-field--recurring {
+  inset: -18% -10%;
+  overflow: visible;
+}
+
+.section-shadow-field--recurring .section-shadow-wave {
+  filter: blur(30px);
+  opacity: .46;
+  transition: opacity .8s ease, transform .8s cubic-bezier(.16,1,.3,1);
+}
+
+.section-shadow-field--recurring .section-shadow-wave--a {
+  left: -13%;
+  top: 8%;
+  width: clamp(360px, 48vw, 860px);
+  height: clamp(220px, 31vw, 560px);
+  transform: rotate(-17deg) scale(1.12);
+}
+
+.section-shadow-field--recurring .section-shadow-wave--b {
+  right: -15%;
+  bottom: -3%;
+  width: clamp(380px, 51vw, 920px);
+  height: clamp(250px, 34vw, 620px);
+  transform: rotate(18deg) scale(1.08);
+  opacity: .30;
+}
+
+.section-shadow-field--recurring .section-shadow-wave--c {
+  left: 34%;
+  bottom: -24%;
+  width: clamp(280px, 36vw, 660px);
+  height: clamp(170px, 24vw, 420px);
+  opacity: .16;
+}
+
+/* A large liquid mass, not a generic blob. */
+.dark-flow {
+  position: absolute;
+  inset: -15% -8%;
+  pointer-events: none;
+  z-index: 0;
+  filter: contrast(112%);
+  opacity: .78;
+  mix-blend-mode: multiply;
+}
+
+.dark-flow__mass,
+.dark-flow__ribbon,
+.dark-flow__core {
+  position: absolute;
+  display: block;
+  pointer-events: none;
+  transform-origin: center;
+}
+
+.dark-flow__mass {
+  width: clamp(420px, 55vw, 980px);
+  height: clamp(260px, 34vw, 610px);
+  border-radius: 63% 37% 51% 49% / 44% 58% 42% 56%;
+  background:
+    radial-gradient(
+      ellipse at 48% 50%,
+      rgba(8, 12, 13, .30) 0 18%,
+      rgba(8, 12, 13, .18) 38%,
+      rgba(8, 12, 13, .07) 59%,
+      transparent 76%
+    );
+  filter: blur(18px);
+}
+
+.dark-flow__mass--one {
+  left: -11%;
+  top: -5%;
+  transform: rotate(-15deg);
+  animation: darkMassOne 17s ease-in-out infinite alternate;
+}
+
+.dark-flow__mass--two {
+  right: -17%;
+  bottom: -10%;
+  width: clamp(360px, 48vw, 820px);
+  height: clamp(220px, 29vw, 520px);
+  opacity: .72;
+  border-radius: 39% 61% 58% 42% / 57% 41% 59% 43%;
+  transform: rotate(17deg);
+  animation: darkMassTwo 21s ease-in-out infinite alternate;
+}
+
+.dark-flow__ribbon {
+  height: clamp(90px, 9vw, 170px);
+  width: 72%;
+  border-radius: 50%;
+  border: clamp(18px, 2.1vw, 34px) solid rgba(8, 12, 13, .11);
+  border-left-color: transparent;
+  border-bottom-color: rgba(8, 12, 13, .05);
+  filter: blur(7px);
+}
+
+.dark-flow__ribbon--one {
+  left: -9%;
+  top: 21%;
+  transform: rotate(-13deg);
+  animation: darkRibbonOne 13s ease-in-out infinite alternate;
+}
+
+.dark-flow__ribbon--two {
+  right: -14%;
+  bottom: 17%;
+  transform: rotate(15deg) scale(.82);
+  opacity: .65;
+  animation: darkRibbonTwo 16s ease-in-out infinite alternate;
+}
+
+.dark-flow__core {
+  width: clamp(240px, 29vw, 520px);
+  height: clamp(100px, 13vw, 230px);
+  left: 35%;
+  top: 35%;
+  border-radius: 50%;
+  background:
+    radial-gradient(
+      ellipse,
+      rgba(5, 9, 10, .16) 0 8%,
+      rgba(5, 9, 10, .08) 32%,
+      transparent 72%
+    );
+  filter: blur(18px);
+  animation: darkCorePulse 10s ease-in-out infinite alternate;
+}
+
+/* Each light section gets a slightly different entry direction. */
+.recurring-shadow-section:nth-of-type(2n) .dark-flow--left {
+  transform: scaleX(-1);
+}
+
+.recurring-shadow-section:nth-of-type(3n) .dark-flow {
+  transform: rotate(2deg) scale(1.04);
+}
+
+.recurring-shadow-section:nth-of-type(4n) .dark-flow__mass--one {
+  top: auto;
+  bottom: -8%;
+  transform: rotate(12deg);
+}
+
+.recurring-shadow-section:hover .dark-flow {
+  opacity: .92;
+}
+
+.recurring-shadow-section:hover .section-shadow-wave {
+  opacity: .56;
+}
+
+/* The section edges behave like the darkness is physically crossing the seam. */
+.recurring-shadow-section::before,
+.recurring-shadow-section::after {
+  content: "";
+  position: absolute;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.recurring-shadow-section::before {
+  left: -12%;
+  right: -12%;
+  top: -22px;
+  height: 110px;
+  background:
+    radial-gradient(
+      ellipse at 20% 55%,
+      rgba(8, 12, 13, .16) 0 10%,
+      rgba(8, 12, 13, .07) 28%,
+      transparent 63%
+    );
+  filter: blur(12px);
+  transform: rotate(-1.2deg);
+  animation: seamBreath 12s ease-in-out infinite alternate;
+}
+
+.recurring-shadow-section::after {
+  left: -10%;
+  right: -10%;
+  bottom: -34px;
+  height: 125px;
+  background:
+    radial-gradient(
+      ellipse at 72% 45%,
+      rgba(8, 12, 13, .13) 0 11%,
+      rgba(8, 12, 13, .05) 31%,
+      transparent 67%
+    );
+  filter: blur(13px);
+  transform: rotate(.8deg);
+  animation: seamBreathReverse 15s ease-in-out infinite alternate;
+}
+
+@keyframes darkMassOne {
+  0%   { transform: translate3d(-2%, -2%, 0) rotate(-17deg) scale(1); }
+  50%  { transform: translate3d(5%, 4%, 0) rotate(-8deg) scale(1.08); }
+  100% { transform: translate3d(0%, 8%, 0) rotate(2deg) scale(.96); }
+}
+
+@keyframes darkMassTwo {
+  0%   { transform: translate3d(2%, 4%, 0) rotate(18deg) scale(1); }
+  50%  { transform: translate3d(-5%, -3%, 0) rotate(8deg) scale(1.08); }
+  100% { transform: translate3d(3%, -7%, 0) rotate(-4deg) scale(.95); }
+}
+
+@keyframes darkRibbonOne {
+  0%   { transform: translate3d(-2%, 0, 0) rotate(-15deg) scaleX(.94); }
+  100% { transform: translate3d(7%, 6%, 0) rotate(-7deg) scaleX(1.05); }
+}
+
+@keyframes darkRibbonTwo {
+  0%   { transform: translate3d(2%, 3%, 0) rotate(17deg) scale(.82); }
+  100% { transform: translate3d(-7%, -5%, 0) rotate(8deg) scale(.94); }
+}
+
+@keyframes darkCorePulse {
+  0%   { transform: translate3d(-3%, 2%, 0) scale(.92); opacity: .55; }
+  100% { transform: translate3d(5%, -3%, 0) scale(1.08); opacity: .95; }
+}
+
+@keyframes seamBreath {
+  0%   { transform: translate3d(-2%, 0, 0) rotate(-1.2deg) scaleX(.96); }
+  100% { transform: translate3d(3%, 4px, 0) rotate(1deg) scaleX(1.04); }
+}
+
+@keyframes seamBreathReverse {
+  0%   { transform: translate3d(2%, 0, 0) rotate(.8deg) scaleX(1); }
+  100% { transform: translate3d(-3%, -5px, 0) rotate(-.8deg) scaleX(.96); }
+}
+
+@media (max-width: 800px) {
+  .section-shadow-field--recurring {
+    inset: -12% -28%;
+  }
+
+  .dark-flow {
+    opacity: .58;
+  }
+
+  .dark-flow__mass {
+    width: 760px;
+    height: 430px;
+  }
+
+  .dark-flow__ribbon {
+    width: 120%;
+  }
+
+  .dark-flow__core {
+    left: 24%;
+    top: 40%;
+  }
+
+  .recurring-shadow-section::before,
+  .recurring-shadow-section::after {
+    height: 78px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .dark-flow *,
+  .recurring-shadow-section::before,
+  .recurring-shadow-section::after {
+    animation: none !important;
+  }
+}
+
+
+/* =========================================================
+   FINAL VISUAL PASS — MORE SHADOW, MORE MOTION, CLEANER TYPE
+   ========================================================= */
+
+/* Let the new organic darkness sit behind every section's content. */
+.recurring-shadow-section,
+.next-tournament,
+.discord-section,
+.showcase-section--jobs,
+.stats-section,
+.process-section,
+.cave-portal {
+  isolation: isolate;
+}
+
+/* Dark sections get actual moving depth, not a flat black rectangle. */
+.section-dark::after {
+  content: "";
+  position: absolute;
+  inset: -25% -15%;
+  z-index: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse at 18% 22%, rgba(255,255,255,.035), transparent 28%),
+    radial-gradient(ellipse at 82% 78%, rgba(77,146,146,.055), transparent 31%),
+    radial-gradient(ellipse at 54% 50%, rgba(0,0,0,.30), transparent 68%);
+  filter: blur(18px);
+  animation: darkSectionBreath 15s ease-in-out infinite alternate;
+}
+
+.section-dark > * {
+  position: relative;
+  z-index: 1;
+}
+
+@keyframes darkSectionBreath {
+  0% { transform: translate3d(-2%, 0, 0) scale(.98); opacity: .72; }
+  100% { transform: translate3d(3%, -1.5%, 0) scale(1.05); opacity: 1; }
+}
+
+/* Stronger version of the reusable liquid shadow. */
+.dark-flow--strong {
+  opacity: .98;
+}
+
+.dark-flow--strong .dark-flow__mass {
+  background:
+    radial-gradient(ellipse at 48% 50%, rgba(3,7,8,.52) 0 17%, rgba(3,7,8,.30) 38%, rgba(3,7,8,.11) 58%, transparent 78%);
+  filter: blur(15px);
+}
+
+.dark-flow--strong .dark-flow__ribbon {
+  border-width: clamp(22px, 2.5vw, 42px);
+  border-color: rgba(0,0,0,.20);
+  border-left-color: transparent;
+  filter: blur(6px);
+}
+
+.dark-flow--strong .dark-flow__core {
+  background: radial-gradient(ellipse, rgba(0,0,0,.30) 0 9%, rgba(0,0,0,.13) 34%, transparent 72%);
+}
+
+/* Make the portal feel like the source of all the later shadows. */
+.cave-portal__door-shadow {
+  position: absolute;
+  inset: -35% -95%;
+  border-radius: 50%;
+  background:
+    radial-gradient(ellipse at center, rgba(0,0,0,.78) 0 16%, rgba(0,0,0,.45) 33%, rgba(0,0,0,.18) 51%, transparent 73%);
+  filter: blur(17px);
+  transform: scaleX(.82) rotate(-7deg);
+  animation: doorShadowMove 8s ease-in-out infinite alternate;
+  z-index: -1;
+}
+
+@keyframes doorShadowMove {
+  0% { transform: translate3d(-4%, 2%, 0) scaleX(.78) rotate(-9deg); opacity: .72; }
+  100% { transform: translate3d(5%, -2%, 0) scaleX(1.02) rotate(7deg); opacity: 1; }
+}
+
+.cave-portal__copy h1,
+.cave-portal__copy p,
+.cave-portal__kicker {
+  color: #fff !important;
+  text-shadow: 0 2px 18px rgba(0,0,0,.58);
+}
+
+.cave-portal__copy h1 em {
+  color: #fff !important;
+}
+
+/* =========================================================
+   FINAL CTA CONTRAST — GREEN SURFACE / BLACK TEXT
+   The Discord CTAs use one source of truth. No blue text.
+   ========================================================= */
+:root {
+  --cta-green: #84c0bf;
+  --cta-green-hover: #a3d4d3;
+  --cta-ink: #071111;
+}
+
+.next-tournament__discord,
+.discord-join,
+.site-header .nav-cta {
+  background: var(--cta-green) !important;
+  color: var(--cta-ink) !important;
+  border-color: rgba(7,17,17,.18) !important;
+  text-decoration: none !important;
+  box-shadow:
+    0 12px 34px rgba(77,146,146,.30),
+    inset 0 1px 0 rgba(255,255,255,.30) !important;
+}
+
+.next-tournament__discord *,
+.discord-join *,
+.site-header .nav-cta *,
+.next-tournament__discord span,
+.discord-join span,
+.discord-join strong {
+  color: var(--cta-ink) !important;
+}
+
+.next-tournament__discord:hover,
+.discord-join:hover,
+.site-header .nav-cta:hover,
+.next-tournament__discord:focus-visible,
+.discord-join:focus-visible,
+.site-header .nav-cta:focus-visible {
+  background: var(--cta-green-hover) !important;
+  color: var(--cta-ink) !important;
+  border-color: rgba(7,17,17,.24) !important;
+}
+
+.next-tournament__discord:hover *,
+.discord-join:hover *,
+.site-header .nav-cta:hover *,
+.next-tournament__discord:focus-visible *,
+.discord-join:focus-visible *,
+.site-header .nav-cta:focus-visible * {
+  color: var(--cta-ink) !important;
+}
+
+/* Navbar Discord CTA: black in both light and dark header states. */
+.site-header .nav-cta,
+.site-header.is-dark .nav-cta,
+.site-header.is-scrolled .nav-cta {
+  background: var(--cta-green) !important;
+  color: var(--cta-ink) !important;
+}
+
+.site-header .nav-cta span,
+.site-header .nav-cta strong,
+.site-header .nav-cta svg,
+.site-header .nav-cta svg *,
+.site-header.is-dark .nav-cta span,
+.site-header.is-dark .nav-cta strong,
+.site-header.is-dark .nav-cta svg,
+.site-header.is-dark .nav-cta svg * {
+  color: var(--cta-ink) !important;
+  fill: currentColor;
+}
+
+.site-header .nav-cta:hover,
+.site-header.is-dark .nav-cta:hover,
+.site-header.is-scrolled .nav-cta:hover {
+  background: var(--cta-green-hover) !important;
+  color: var(--cta-ink) !important;
+}
+
+/* Discord section CTA follows the same black-on-green treatment. */
+.discord-section .discord-join,
+.discord-section .discord-join:hover,
+.discord-section .discord-join:focus-visible,
+.discord-section .discord-join span,
+.discord-section .discord-join strong {
+  color: var(--cta-ink) !important;
+}
+
+/* No washed-out grey copy in the dark sections. */
+.next-tournament,
+.discord-section,
+.showcase-section--jobs,
+.stats-section {
+  color: #fff;
+}
+
+.next-tournament h2,
+.next-tournament p,
+.discord-copy h2,
+.discord-copy p,
+.discord-copy .section-kicker,
+.discord-section__top,
+.discord-section__top span,
+.showcase-section--jobs h2,
+.showcase-section--jobs p {
+  color: #fff !important;
+}
+
+.next-tournament p,
+.discord-copy p,
+.showcase-section--jobs p {
+  opacity: .92 !important;
+}
+
+/* Fix the copy immediately after the four-image process: keep it crisp on the dark surface. */
+.discord-section .discord-copy {
+  color: #fff !important;
+}
+
+.discord-section .discord-copy h2 {
+  color: #fff !important;
+  text-shadow: 0 4px 28px rgba(0,0,0,.40);
+}
+
+.discord-section .discord-copy h2 em {
+  color: #a3d4d3 !important;
+}
+
+.discord-section .discord-copy p {
+  color: rgba(255,255,255,.90) !important;
+  max-width: 58ch;
+}
+
+.discord-section .discord-join {
+  color: var(--cta-ink) !important;
+}
+
+.discord-section .invite-copy code,
+.discord-section .invite-copy__btn {
+  color: #fff !important;
+}
+
+/* Remove the stray grey section-edge look. Cards can keep their own borders. */
+main > section,
+main > section.section-light,
+main > section.section-dark {
+  outline: none !important;
+  border-left-color: transparent !important;
+  border-right-color: transparent !important;
+}
+
+main > section::before,
+main > section::after {
+  /* Do not allow an old generic grey edge pseudo-element to survive. */
+  outline: none;
+}
+
+.section-light {
+  border-color: transparent !important;
+}
+
+/* Keep intentional card borders, but remove neutral grey from section shells. */
+.process-section.section-light,
+.badges-section.section-light,
+.showcase-section.section-light,
+.pillars.section-light,
+.faq.section-light,
+.newsletter.section-light {
+  border-color: transparent !important;
+  box-shadow: none;
+}
+
+/* Give the white sections more visual continuity: the shadow crosses their seams. */
+.recurring-shadow-section::before,
+.recurring-shadow-section::after {
+  background:
+    radial-gradient(ellipse at 22% 50%, rgba(0,0,0,.20) 0 8%, rgba(0,0,0,.08) 27%, transparent 64%);
+  filter: blur(15px);
+}
+
+.recurring-shadow-section::after {
+  background:
+    radial-gradient(ellipse at 76% 50%, rgba(0,0,0,.16) 0 8%, rgba(0,0,0,.06) 29%, transparent 66%);
+}
+
+@media (max-width: 800px) {
+  .dark-flow--strong { opacity: .78; }
+  .cave-portal__door-shadow { filter: blur(13px); }
+  .next-tournament__discord,
+  .discord-join { transform: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .section-dark::after,
+  .cave-portal__door-shadow { animation: none !important; }
+}
+
+
+/* Layering correction: shadows remain behind the copy on dark sections. */
+.section-dark > .dark-flow {
+  z-index: 0 !important;
+}
+
+.section-dark > .container,
+.section-dark > .discord-section__noise,
+.section-dark > .discord-section__top,
+.section-dark > .discord-section__main,
+.section-dark > .discord-marquee {
+  position: relative;
+  z-index: 2;
+}
+
+.cave-portal__door-shadow {
+  z-index: 0 !important;
+}
+
+.cave-portal__door-core,
+.cave-portal__door-haze {
+  z-index: 8 !important;
+}
+
+
+/* =========================================================
+   MOBILE NAVIGATION + MOBILE-FIRST POLISH
+   ========================================================= */
+
+.mobile-menu-toggle {
+  display: none;
+  position: relative;
+  width: 46px;
+  height: 46px;
+  padding: 0;
+  border: 1px solid rgba(10, 14, 15, .12);
+  border-radius: 14px;
+  background: rgba(255,255,255,.78);
+  box-shadow: 0 12px 32px rgba(10,14,15,.08);
+  cursor: pointer;
+  z-index: 1002;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.mobile-menu-toggle span {
+  position: absolute;
+  left: 13px;
+  width: 20px;
+  height: 2px;
+  border-radius: 99px;
+  background: #0a0e0f;
+  transition: transform .35s cubic-bezier(.16,1,.3,1), opacity .2s ease;
+}
+
+.mobile-menu-toggle span:nth-child(1) { top: 15px; }
+.mobile-menu-toggle span:nth-child(2) { top: 22px; }
+.mobile-menu-toggle span:nth-child(3) { top: 29px; }
+
+.mobile-menu-toggle.is-open span:nth-child(1) {
+  transform: translateY(7px) rotate(45deg);
+}
+.mobile-menu-toggle.is-open span:nth-child(2) { opacity: 0; }
+.mobile-menu-toggle.is-open span:nth-child(3) {
+  transform: translateY(-7px) rotate(-45deg);
+}
+
+.mobile-navigation {
+  display: none;
+}
+
+@media (max-width: 900px) {
+  body {
+    overflow-x: hidden;
+  }
+
+  .mobile-menu-toggle {
+    display: inline-flex;
+  }
+
+  /* Hide desktop navigation while retaining the header/logo. */
+  header nav:not(.mobile-navigation__panel nav),
+  .site-header nav:not(.mobile-navigation__panel nav),
+  .header nav:not(.mobile-navigation__panel nav) {
+    display: none !important;
+  }
+
+  .mobile-navigation {
+    display: block;
+    position: fixed;
+    inset: 0;
+    z-index: 1001;
+    visibility: hidden;
+    pointer-events: none;
+  }
+
+  .mobile-navigation.is-open {
+    visibility: visible;
+    pointer-events: auto;
+  }
+
+  .mobile-navigation__backdrop {
+    position: absolute;
+    inset: 0;
+    background: rgba(5, 9, 10, .46);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    opacity: 0;
+    transition: opacity .35s ease;
+  }
+
+  .mobile-navigation.is-open .mobile-navigation__backdrop {
+    opacity: 1;
+  }
+
+  .mobile-navigation__panel {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    width: min(88vw, 390px);
+    min-height: calc(100dvh - 20px);
+    padding: 22px;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    border: 1px solid rgba(255,255,255,.14);
+    border-radius: 28px;
+    background:
+      radial-gradient(circle at 90% 5%, rgba(61, 221, 188, .16), transparent 32%),
+      radial-gradient(circle at 10% 90%, rgba(7, 16, 18, .65), transparent 48%),
+      #0a0e0f;
+    box-shadow: -30px 30px 100px rgba(0,0,0,.42);
+    transform: translate3d(105%,0,0) rotate(1deg);
+    transition: transform .55s cubic-bezier(.16,1,.3,1);
+  }
+
+  .mobile-navigation.is-open .mobile-navigation__panel {
+    transform: translate3d(0,0,0) rotate(0);
+  }
+
+  .mobile-navigation__panel::before,
+  .mobile-navigation__panel::after {
+    content: "";
+    position: absolute;
+    pointer-events: none;
+    border-radius: 50%;
+    filter: blur(35px);
+  }
+
+  .mobile-navigation__panel::before {
+    width: 260px;
+    height: 180px;
+    right: -90px;
+    top: 110px;
+    background: rgba(46, 214, 179, .13);
+    animation: mobileMenuGlow 9s ease-in-out infinite alternate;
+  }
+
+  .mobile-navigation__panel::after {
+    width: 300px;
+    height: 180px;
+    left: -170px;
+    bottom: -40px;
+    background: rgba(255,255,255,.07);
+    animation: mobileMenuGlow 12s ease-in-out infinite alternate-reverse;
+  }
+
+  .mobile-navigation__top {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 30px;
+  }
+
+  .mobile-navigation__eyebrow {
+    color: rgba(255,255,255,.48);
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: .2em;
+  }
+
+  .mobile-navigation__close {
+    width: 42px;
+    height: 42px;
+    border: 1px solid rgba(255,255,255,.14);
+    border-radius: 12px;
+    background: rgba(255,255,255,.07);
+    color: #fff;
+    font-size: 28px;
+    line-height: 1;
+    cursor: pointer;
+  }
+
+  .mobile-navigation__links {
+    position: relative;
+    z-index: 1;
+    display: grid;
+    gap: 4px;
+  }
+
+  .mobile-navigation__link {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    min-height: 58px;
+    padding: 0 14px;
+    border-bottom: 1px solid rgba(255,255,255,.09);
+    color: #fff !important;
+    text-decoration: none;
+    font-size: clamp(17px, 5vw, 21px);
+    font-weight: 700;
+    letter-spacing: -.025em;
+    transition: padding .3s ease, color .3s ease, background .3s ease;
+  }
+
+  .mobile-navigation__link span:last-child {
+    color: #48d7ba;
+    font-size: 17px;
+  }
+
+  .mobile-navigation__link:active,
+  .mobile-navigation__link:hover {
+    padding-left: 22px;
+    color: #48d7ba !important;
+    background: linear-gradient(90deg, rgba(72,215,186,.09), transparent);
+  }
+
+  .mobile-navigation__discord {
+    position: relative;
+    z-index: 1;
+    margin-top: auto;
+    min-height: 56px;
+    padding: 0 18px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-radius: 15px;
+    background: #48d7ba;
+    color: #071113 !important;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 850;
+    box-shadow: 0 15px 40px rgba(72,215,186,.18);
+  }
+
+  /* General mobile rhythm */
+  main {
+    overflow: clip;
+  }
+
+  section,
+  .section-light,
+  .section-dark {
+    scroll-margin-top: 76px;
+  }
+
+  .container {
+    width: min(100% - 32px, 1180px);
+  }
+
+  .hero,
+  .showcase-section,
+  .pillars,
+  .badges-section,
+  .faq,
+  .newsletter,
+  .next-tournament {
+    min-height: unset;
+  }
+
+  /* Prevent decorative darkness from eating the content on phones. */
+  .dark-flow {
+    opacity: .46;
+  }
+
+  .dark-flow__mass {
+    filter: blur(24px);
+  }
+
+  .dark-flow__ribbon {
+    filter: blur(9px);
+  }
+
+  .section-shadow-field--recurring {
+    inset: -18% -42%;
+  }
+
+  /* Mobile cards become one clean vertical rhythm. */
+  .pillars-grid,
+  .showcase-grid,
+  .badges-grid,
+  .faq-grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  /* Images should feel immersive instead of tiny thumbnails. */
+  .showcase-section img,
+  .showcase-grid img {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  /* Bigger tap targets everywhere. */
+  a.button,
+  button,
+  .button {
+    min-height: 48px;
+  }
+
+  /* Discord CTA: green/teal button + black text. */
+  .next-tournament__discord,
+  a.next-tournament__discord,
+  .next-tournament__cta.next-tournament__discord {
+    background: #48d7ba !important;
+    background-color: #48d7ba !important;
+    color: #071113 !important;
+    border-color: #48d7ba !important;
+    text-shadow: none !important;
+    box-shadow:
+      0 14px 38px rgba(72,215,186,.20),
+      inset 0 1px 0 rgba(255,255,255,.24);
+  }
+
+  .next-tournament__discord *,
+  .next-tournament__discord span {
+    color: #071113 !important;
+  }
+
+  .next-tournament__discord:hover,
+  .next-tournament__discord:focus-visible {
+    background: #59e3c7 !important;
+    color: #071113 !important;
+    transform: translateY(-2px);
+  }
+
+  /* Dark sections: force readable white typography. */
+  .section-dark,
+  .section-dark h1,
+  .section-dark h2,
+  .section-dark h3,
+  .section-dark p,
+  .section-dark li {
+    color: #fff;
+  }
+
+  .section-dark .muted,
+  .section-dark .eyebrow,
+  .section-dark small {
+    color: rgba(255,255,255,.62);
+  }
+
+  /* Remove accidental grey "frames" caused by generic borders. */
+  .section-light,
+  .section-dark,
+  .recurring-shadow-section {
+    border-left: 0 !important;
+    border-right: 0 !important;
+  }
+
+  .recurring-shadow-section::before,
+  .recurring-shadow-section::after {
+    opacity: .8;
+  }
+}
+
+@keyframes mobileMenuGlow {
+  0% { transform: translate3d(-8%, -4%, 0) scale(.9); }
+  100% { transform: translate3d(8%, 7%, 0) scale(1.08); }
+}
+
+@media (max-width: 560px) {
+  .mobile-navigation__panel {
+    top: 7px;
+    right: 7px;
+    width: calc(100vw - 14px);
+    min-height: calc(100dvh - 14px);
+    border-radius: 23px;
+    padding: 18px;
+  }
+
+  .mobile-navigation__link {
+    min-height: 55px;
+  }
+
+  .next-tournament__discord {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .next-tournament__discord span[aria-hidden="true"] {
+    margin-left: 7px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .mobile-navigation__panel,
+  .mobile-navigation__backdrop,
+  .mobile-navigation__link,
+  .mobile-navigation__panel::before,
+  .mobile-navigation__panel::after {
+    animation: none !important;
+    transition-duration: .01ms !important;
+  }
+}
+
+
+/* =========================================================
+   MOBILE NAV — production override
+   Uses the existing React menuOpen/nav-toggle/nav-menu markup.
+   ========================================================= */
+@media (max-width: 900px) {
+  .site-header {
+    z-index: 1000;
+  }
+
+  .site-header .nav-toggle {
+    display: inline-flex;
+    position: relative;
+    z-index: 1003;
+    width: 46px;
+    height: 46px;
+    padding: 0;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 5px;
+    border: 1px solid rgba(10, 14, 15, .12);
+    border-radius: 14px;
+    background: rgba(255,255,255,.82);
+    box-shadow: 0 10px 28px rgba(10,14,15,.08);
+    color: #0a0e0f;
+    cursor: pointer;
+  }
+
+  .site-header .nav-toggle span {
+    display: block;
+    width: 20px;
+    height: 2px;
+    border-radius: 99px;
+    background: currentColor;
+    transition: transform .32s cubic-bezier(.16,1,.3,1), opacity .2s ease;
+  }
+
+  .site-header .nav-toggle[aria-expanded="true"] span:nth-child(1) {
+    transform: translateY(7px) rotate(45deg);
+  }
+  .site-header .nav-toggle[aria-expanded="true"] span:nth-child(2) {
+    opacity: 0;
+  }
+  .site-header .nav-toggle[aria-expanded="true"] span:nth-child(3) {
+    transform: translateY(-7px) rotate(-45deg);
+  }
+
+  .site-header .nav-menu {
+    position: fixed;
+    top: 72px;
+    left: 12px;
+    right: 12px;
+    z-index: 1002;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    max-height: calc(100dvh - 88px);
+    padding: 12px;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    border: 1px solid rgba(255,255,255,.12);
+    border-radius: 24px;
+    background:
+      radial-gradient(circle at 90% 0%, rgba(72,215,186,.15), transparent 34%),
+      #0a0e0f;
+    box-shadow: 0 28px 80px rgba(0,0,0,.32);
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transform: translateY(-10px) scale(.985);
+    transform-origin: top center;
+    transition:
+      opacity .25s ease,
+      transform .4s cubic-bezier(.16,1,.3,1),
+      visibility .25s ease;
+  }
+
+  .site-header .nav-menu.is-open {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+    transform: translateY(0) scale(1);
+  }
+
+  .site-header .nav-menu > a {
+    min-height: 52px;
+    padding: 0 14px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-radius: 13px;
+    border-bottom: 1px solid rgba(255,255,255,.07);
+    color: #fff !important;
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: 700;
+  }
+
+  .site-header .nav-menu > a:not(.nav-cta):active,
+  .site-header .nav-menu > a:not(.nav-cta):focus-visible {
+    background: rgba(72,215,186,.08);
+    color: #48d7ba !important;
+  }
+
+  .site-header .nav-menu .nav-cta {
+    margin-top: 10px;
+    justify-content: center;
+    gap: 7px;
+    min-height: 52px;
+    border: 0;
+    background: #48d7ba !important;
+    color: #071113 !important;
+    box-shadow: 0 14px 35px rgba(72,215,186,.18);
+  }
+
+  .site-header .nav-menu .nav-cta * {
+    color: #071113 !important;
+  }
+
+  .site-header .language-control {
+    margin-top: 8px;
+    padding: 10px 4px 2px;
+  }
+
+  .site-header .language-control__label {
+    color: rgba(255,255,255,.5);
+  }
+
+  .site-header .language-control__select {
+    color: #fff;
+    background: rgba(255,255,255,.07);
+    border-color: rgba(255,255,255,.1);
+  }
+}
+
+@media (min-width: 901px) {
+  .site-header .nav-toggle {
+    display: none;
+  }
+}
+
+@media (max-width: 560px) {
+  .site-header .nav-menu {
+    top: 68px;
+    left: 8px;
+    right: 8px;
+    border-radius: 20px;
+  }
+}
+
+/* =========================================================
+   FINAL MOBILE NAV — v10 CLEAN LAYER
+   This intentionally leaves the portal/scroll animation untouched.
+   ========================================================= */
+@media (max-width: 1100px) {
+  .site-header {
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    bottom: auto !important;
+    z-index: 2147483000 !important;
+    height: 68px !important;
+    display: block !important;
+    background: rgba(3, 8, 10, .94) !important;
+    border-bottom: 1px solid rgba(255,255,255,.12) !important;
+    box-shadow: 0 12px 40px rgba(0,0,0,.38) !important;
+    backdrop-filter: blur(18px) !important;
+    -webkit-backdrop-filter: blur(18px) !important;
+  }
+
+  .site-header .navbar {
+    width: 100% !important;
+    max-width: none !important;
+    height: 68px !important;
+    min-height: 68px !important;
+    margin: 0 !important;
+    padding: 0 12px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    gap: 8px !important;
+    box-sizing: border-box !important;
+  }
+
+  .site-header .brand {
+    min-width: 0 !important;
+    max-width: calc(100% - 62px) !important;
+    overflow: hidden !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    flex: 1 1 auto !important;
+  }
+
+  .site-header .brand-mark {
+    display: block !important;
+    width: clamp(118px, 38vw, 190px) !important;
+    height: auto !important;
+    max-width: 100% !important;
+    object-fit: contain !important;
+    object-position: left center !important;
+  }
+
+  .site-header .nav-toggle {
+    display: inline-flex !important;
+    flex: 0 0 46px !important;
+    width: 46px !important;
+    height: 46px !important;
+    min-width: 46px !important;
+    min-height: 46px !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    align-items: center !important;
+    justify-content: center !important;
+    flex-direction: column !important;
+    gap: 5px !important;
+    position: relative !important;
+    z-index: 2147483002 !important;
+    border: 1px solid rgba(125,235,225,.62) !important;
+    border-radius: 13px !important;
+    background: rgba(5,16,19,.72) !important;
+    color: #f5ffff !important;
+    box-shadow: 0 8px 28px rgba(0,0,0,.32), inset 0 1px 0 rgba(255,255,255,.08) !important;
+    cursor: pointer !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+  }
+
+  .site-header .nav-toggle span {
+    display: block !important;
+    width: 22px !important;
+    height: 2px !important;
+    margin: 0 !important;
+    border-radius: 999px !important;
+    background: #f5ffff !important;
+    opacity: 1 !important;
+    transform-origin: center !important;
+    transition: transform .28s cubic-bezier(.16,1,.3,1), opacity .18s ease !important;
+  }
+
+  .site-header .nav-toggle[aria-expanded="true"] span:nth-child(1) { transform: translateY(7px) rotate(45deg) !important; }
+  .site-header .nav-toggle[aria-expanded="true"] span:nth-child(2) { opacity: 0 !important; }
+  .site-header .nav-toggle[aria-expanded="true"] span:nth-child(3) { transform: translateY(-7px) rotate(-45deg) !important; }
+
+  .site-header .nav-menu,
+  .site-header .nav-menu.is-open {
+    position: fixed !important;
+    top: 76px !important;
+    left: 10px !important;
+    right: 10px !important;
+    width: auto !important;
+    height: auto !important;
+    max-height: calc(100dvh - 86px) !important;
+    margin: 0 !important;
+    padding: 10px !important;
+    box-sizing: border-box !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: stretch !important;
+    gap: 4px !important;
+    overflow-x: hidden !important;
+    overflow-y: auto !important;
+    overscroll-behavior: contain !important;
+    -webkit-overflow-scrolling: touch !important;
+    z-index: 2147483001 !important;
+    border: 1px solid rgba(125,235,225,.20) !important;
+    border-radius: 20px !important;
+    background: rgba(4,10,12,.98) !important;
+    box-shadow: 0 28px 90px rgba(0,0,0,.62), inset 0 1px 0 rgba(255,255,255,.06) !important;
+    opacity: 0 !important;
+    visibility: hidden !important;
+    pointer-events: none !important;
+    transform: translateY(-10px) scale(.985) !important;
+    transform-origin: top center !important;
+    transition: opacity .22s ease, transform .32s cubic-bezier(.16,1,.3,1), visibility .22s ease !important;
+  }
+
+  .site-header .nav-menu.is-open {
+    opacity: 1 !important;
+    visibility: visible !important;
+    pointer-events: auto !important;
+    transform: translateY(0) scale(1) !important;
+  }
+
+  .site-header .nav-menu > a {
+    display: flex !important;
+    width: 100% !important;
+    min-height: 50px !important;
+    flex: 0 0 50px !important;
+    box-sizing: border-box !important;
+    align-items: center !important;
+    justify-content: flex-start !important;
+    padding: 0 14px !important;
+    border-radius: 12px !important;
+    border: 0 !important;
+    color: #f4fbfb !important;
+    background: transparent !important;
+    font-size: 15px !important;
+    line-height: 1.2 !important;
+    text-decoration: none !important;
+    white-space: nowrap !important;
+  }
+
+  .site-header .nav-menu > a:hover,
+  .site-header .nav-menu > a:focus-visible {
+    background: rgba(114,230,220,.09) !important;
+    color: #fff !important;
+  }
+
+  .site-header .nav-menu .nav-cta {
+    justify-content: center !important;
+    margin-top: 6px !important;
+    min-height: 50px !important;
+    flex-basis: 50px !important;
+    border: 0 !important;
+    background: #84c0bf !important;
+    color: #071111 !important;
+  }
+
+  .site-header .language-control {
+    display: block !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+    margin: 4px 0 0 !important;
+    padding: 10px 4px 4px !important;
+    border-top: 1px solid rgba(255,255,255,.08) !important;
+  }
+
+  .site-header .language-control__label {
+    display: block !important;
+    margin: 0 0 6px !important;
+    color: rgba(245,255,255,.58) !important;
+    font-size: 11px !important;
+  }
+
+  .site-header .language-control__wrapper {
+    position: relative !important;
+    width: 100% !important;
+  }
+
+  .site-header .language-control__select,
+  .site-header .language-control__select--flow {
+    display: block !important;
+    width: 100% !important;
+    height: 46px !important;
+    min-height: 46px !important;
+    box-sizing: border-box !important;
+    padding: 0 38px 0 12px !important;
+    border: 1px solid rgba(255,255,255,.16) !important;
+    border-radius: 11px !important;
+    background: #132125 !important;
+    color: #fff !important;
+    font-size: 14px !important;
+    appearance: auto !important;
+    -webkit-appearance: auto !important;
+  }
+
+  .site-header .language-control__icon {
+    pointer-events: none !important;
+    position: absolute !important;
+    right: 13px !important;
+    top: 50% !important;
+    transform: translateY(-50%) !important;
+    color: #fff !important;
+  }
+}
+
+@media (max-width: 340px) {
+  .site-header,
+  .site-header .navbar { height: 62px !important; min-height: 62px !important; }
+  .site-header .navbar { padding-inline: 8px !important; }
+  .site-header .brand-mark { width: 116px !important; }
+  .site-header .nav-toggle { width: 42px !important; height: 42px !important; min-width: 42px !important; min-height: 42px !important; flex-basis: 42px !important; }
+  .site-header .nav-menu, .site-header .nav-menu.is-open { top: 69px !important; left: 6px !important; right: 6px !important; max-height: calc(100dvh - 76px) !important; }
+}
+
+
+/* =========================================================
+   V11 — FINAL MOBILE NAV + 3D BRAND
+   ========================================================= */
+
+/* Keep the header above every portal layer without changing desktop layout. */
+.site-header {
+  position: fixed !important;
+  inset: 0 0 auto 0 !important;
+  z-index: 2147483647 !important;
+}
+
+.site-header .navbar {
+  position: relative !important;
+  z-index: 2 !important;
+}
+
+/* Brand: larger, sharper and with a restrained 3D/extruded glow. */
+.site-header .brand {
+  position: relative !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  flex: 0 1 auto !important;
+  min-width: 0 !important;
+  isolation: isolate !important;
+}
+
+.site-header .brand::before {
+  content: "";
+  position: absolute;
+  left: 2%;
+  right: 6%;
+  top: 24%;
+  bottom: 18%;
+  z-index: -1;
+  border-radius: 999px;
+  background: radial-gradient(ellipse, rgba(91, 222, 218, .22), transparent 68%);
+  filter: blur(12px);
+  transform: translate3d(0, 7px, 0) scale(1.03);
+  pointer-events: none;
+}
+
+.site-header .brand-mark {
+  width: clamp(180px, 20vw, 260px) !important;
+  height: auto !important;
+  max-width: min(52vw, 260px) !important;
+  display: block !important;
+  object-fit: contain !important;
+  object-position: left center !important;
+  transform: perspective(900px) rotateX(2deg) translate3d(0, -1px, 0) !important;
+  filter:
+    drop-shadow(0 2px 0 rgba(0,0,0,.78))
+    drop-shadow(0 5px 0 rgba(0,0,0,.34))
+    drop-shadow(0 9px 15px rgba(0,0,0,.42))
+    drop-shadow(0 0 13px rgba(92,222,218,.12)) !important;
+  transition: transform .28s cubic-bezier(.16,1,.3,1), filter .28s ease !important;
+}
+
+.site-header .brand:hover .brand-mark {
+  transform: perspective(900px) rotateX(2deg) translate3d(0,-2px,0) scale(1.018) !important;
+  filter:
+    drop-shadow(0 2px 0 rgba(0,0,0,.82))
+    drop-shadow(0 6px 0 rgba(0,0,0,.36))
+    drop-shadow(0 12px 18px rgba(0,0,0,.48))
+    drop-shadow(0 0 18px rgba(92,222,218,.18)) !important;
+}
+
+/* Desktop: keep the original full navigation. */
+@media (min-width: 1101px) {
+  .site-header .navbar {
+    height: 80px !important;
+  }
+
+  .site-header .nav-toggle {
+    display: none !important;
+  }
+
+  .site-header .nav-menu {
+    position: static !important;
+    display: flex !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    pointer-events: auto !important;
+    transform: none !important;
+    width: auto !important;
+    max-height: none !important;
+    overflow: visible !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    background: transparent !important;
+    border: 0 !important;
+    box-shadow: none !important;
+  }
+
+  .site-header .language-control {
+    width: auto !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    border: 0 !important;
+  }
+
+  .site-header .language-control__label {
+    display: none !important;
+  }
+
+  .site-header .language-control__wrapper,
+  .site-header .language-control__select,
+  .site-header .language-control__select--flow {
+    width: auto !important;
+  }
+
+  .site-header .language-control__select,
+  .site-header .language-control__select--flow {
+    height: 40px !important;
+    min-height: 40px !important;
+    padding: 0 32px 0 10px !important;
+    background: rgba(255,255,255,.06) !important;
+    border: 1px solid rgba(255,255,255,.15) !important;
+    color: inherit !important;
+    border-radius: 9px !important;
+  }
+}
+
+/* Mobile/tablet: hamburger and menu are always available. */
+@media (max-width: 1100px) {
+  .site-header {
+    height: 68px !important;
+    min-height: 68px !important;
+    background: rgba(3,8,10,.96) !important;
+    border-bottom: 1px solid rgba(255,255,255,.12) !important;
+    box-shadow: 0 12px 38px rgba(0,0,0,.45) !important;
+  }
+
+  .site-header .navbar {
+    width: 100% !important;
+    max-width: none !important;
+    height: 68px !important;
+    min-height: 68px !important;
+    padding: 0 12px !important;
+    box-sizing: border-box !important;
+    gap: 10px !important;
+  }
+
+  .site-header .brand {
+    max-width: calc(100% - 60px) !important;
+    overflow: visible !important;
+  }
+
+  .site-header .brand-mark {
+    width: clamp(150px, 38vw, 210px) !important;
+    max-width: calc(100vw - 70px) !important;
+  }
+
+  .site-header .nav-toggle {
+    display: inline-flex !important;
+    position: relative !important;
+    flex: 0 0 46px !important;
+    width: 46px !important;
+    height: 46px !important;
+    min-width: 46px !important;
+    min-height: 46px !important;
+    margin-left: auto !important;
+    align-items: center !important;
+    justify-content: center !important;
+    z-index: 2147483647 !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    border: 1px solid rgba(125,235,225,.65) !important;
+    border-radius: 13px !important;
+    background: rgba(5,16,19,.82) !important;
+    box-shadow: 0 8px 28px rgba(0,0,0,.42), inset 0 1px 0 rgba(255,255,255,.08) !important;
+  }
+
+  .site-header .nav-menu {
+    position: fixed !important;
+    top: 76px !important;
+    left: 8px !important;
+    right: 8px !important;
+    width: auto !important;
+    max-height: calc(100dvh - 84px) !important;
+    overflow-x: hidden !important;
+    overflow-y: auto !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: stretch !important;
+    gap: 5px !important;
+    padding: 12px !important;
+    margin: 0 !important;
+    box-sizing: border-box !important;
+    visibility: hidden !important;
+    opacity: 0 !important;
+    pointer-events: none !important;
+    transform: translate3d(0,-12px,0) scale(.985) !important;
+    transform-origin: top center !important;
+    z-index: 2147483646 !important;
+    border: 1px solid rgba(125,235,225,.25) !important;
+    border-radius: 18px !important;
+    background: rgba(4,10,12,.985) !important;
+    box-shadow: 0 30px 90px rgba(0,0,0,.72), inset 0 1px 0 rgba(255,255,255,.07) !important;
+    transition: opacity .2s ease, transform .28s cubic-bezier(.16,1,.3,1), visibility .2s ease !important;
+  }
+
+  .site-header .nav-menu.is-open {
+    visibility: visible !important;
+    opacity: 1 !important;
+    pointer-events: auto !important;
+    transform: translate3d(0,0,0) scale(1) !important;
+  }
+
+  .site-header .nav-menu > a {
+    width: 100% !important;
+    min-height: 50px !important;
+    flex: 0 0 50px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: flex-start !important;
+    box-sizing: border-box !important;
+    padding: 0 14px !important;
+    border-radius: 11px !important;
+    color: #f4fbfb !important;
+    font-size: 15px !important;
+    line-height: 1.2 !important;
+    text-decoration: none !important;
+    white-space: nowrap !important;
+  }
+
+  .site-header .nav-menu > a:hover,
+  .site-header .nav-menu > a:focus-visible {
+    background: rgba(114,230,220,.10) !important;
+    color: #fff !important;
+  }
+
+  .site-header .nav-menu .nav-cta {
+    justify-content: center !important;
+    margin-top: 5px !important;
+    background: #84c0bf !important;
+    color: #071111 !important;
+  }
+
+  .site-header .language-control {
+    display: block !important;
+    width: 100% !important;
+    margin: 4px 0 0 !important;
+    padding: 10px 2px 2px !important;
+    box-sizing: border-box !important;
+    border-top: 1px solid rgba(255,255,255,.09) !important;
+  }
+
+  .site-header .language-control__label {
+    display: block !important;
+    margin: 0 0 6px !important;
+    color: rgba(245,255,255,.62) !important;
+    font-size: 11px !important;
+  }
+
+  .site-header .language-control__wrapper {
+    position: relative !important;
+    width: 100% !important;
+  }
+
+  .site-header .language-control__select,
+  .site-header .language-control__select--flow {
+    display: block !important;
+    width: 100% !important;
+    height: 48px !important;
+    min-height: 48px !important;
+    box-sizing: border-box !important;
+    padding: 0 40px 0 12px !important;
+    border: 1px solid rgba(255,255,255,.18) !important;
+    border-radius: 11px !important;
+    background: #132125 !important;
+    color: #fff !important;
+    font-size: 14px !important;
+    appearance: auto !important;
+    -webkit-appearance: auto !important;
+  }
+
+  .site-header .language-control__icon {
+    position: absolute !important;
+    right: 13px !important;
+    top: 50% !important;
+    transform: translateY(-50%) !important;
+    pointer-events: none !important;
+    color: #fff !important;
+  }
+}
+
+@media (max-width: 340px) {
+  .site-header,
+  .site-header .navbar {
+    height: 62px !important;
+    min-height: 62px !important;
+  }
+
+  .site-header .navbar {
+    padding: 0 7px !important;
+  }
+
+  .site-header .brand {
+    max-width: calc(100% - 52px) !important;
+  }
+
+  .site-header .brand-mark {
+    width: 142px !important;
+    max-width: calc(100vw - 58px) !important;
+  }
+
+  .site-header .nav-toggle {
+    flex-basis: 42px !important;
+    width: 42px !important;
+    min-width: 42px !important;
+    height: 42px !important;
+    min-height: 42px !important;
+    border-radius: 12px !important;
+  }
+
+  .site-header .nav-menu {
+    top: 69px !important;
+    left: 5px !important;
+    right: 5px !important;
+    max-height: calc(100dvh - 75px) !important;
+    padding: 9px !important;
+  }
+
+  .site-header .nav-menu > a {
+    min-height: 47px !important;
+    flex-basis: 47px !important;
+    font-size: 14px !important;
+  }
+}
+
+/* =========================================================
+   V11 — PORTAL HANDOFF: NEVER JUMP TO HERO MID-ZOOM
+   ========================================================= */
+
+/* The handoff must remain visible until the zoom is essentially complete. */
+.cave-portal.is-crossing .cave-portal__image,
+.cave-portal.is-crossing .cave-portal__copy,
+.cave-portal.is-crossing .cave-portal__scroll,
+.cave-portal.is-crossing .cave-portal__cosmic {
+  visibility: visible !important;
+}
+
+.cave-portal.is-crossing .cave-portal__copy,
+.cave-portal.is-crossing .cave-portal__scroll {
+  opacity: 0 !important;
+}
+
+/* Make the final light takeover happen only at the end. */
+.cave-portal__flare {
+  opacity: clamp(0, calc((var(--cave-progress) - .955) / .045), 1) !important;
+}
+
+@media (max-width: 1100px) {
+  .cave-portal__sticky {
+    height: 100svh !important;
+    min-height: 0 !important;
+  }
+}
+
+/* =========================================================
+   MOBILE FINAL FIX — NAV + CAVE HANDOFF
+   ========================================================= */
+
+@media (max-width: 900px) {
+
+  /* -------------------------------------------------------
+     NAVBAR
+     La regla antigua "header nav:not(...)" la ocultaba.
+     Aquí la recuperamos con mayor especificidad.
+     ------------------------------------------------------- */
+
+  header.site-header > nav.navbar {
+    display: flex !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    position: relative !important;
+    z-index: 2 !important;
+  }
+
+  .site-header .brand {
+    display: inline-flex !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    flex: 1 1 auto !important;
+  }
+
+  .site-header .brand-mark {
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+  }
+
+  .site-header .nav-toggle {
+    display: inline-flex !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    pointer-events: auto !important;
+  }
+
+  /* El menú cerrado no ocupa ni intercepta la pantalla. */
+  .site-header .nav-menu {
+    visibility: hidden !important;
+    opacity: 0 !important;
+    pointer-events: none !important;
+  }
+
+  /* El menú abierto sí queda por encima de TODO. */
+  .site-header .nav-menu.is-open {
+    visibility: visible !important;
+    opacity: 1 !important;
+    pointer-events: auto !important;
+    z-index: 2147483646 !important;
+  }
+
+  /* -------------------------------------------------------
+     CAVE / PORTAL
+     Más recorrido en móvil para que la transición no
+     termine antes de que la luz cubra completamente
+     el viewport.
+     ------------------------------------------------------- */
+
+  .cave-portal {
+    height: 235vh !important;
+    min-height: 0 !important;
+    overflow: clip !important;
+  }
+
+  .cave-portal__sticky {
+    height: 100svh !important;
+    min-height: 0 !important;
+  }
+
+  .cave-portal__door {
+    top: 68% !important;
+    width: 30px !important;
+    height: 74px !important;
+  }
+
+  /* La luz final debe poder cubrir literalmente todo el viewport. */
+  .cave-portal__flare {
+    position: absolute !important;
+    inset: 0 !important;
+    z-index: 9999 !important;
+    background: #fff !important;
+    pointer-events: none !important;
+    opacity: clamp(
+      0,
+      calc((var(--cave-progress) - .985) / .015),
+      1
+    ) !important;
+  }
+
+  /*
+   * Cuando termina el portal, no dejamos capas oscuras
+   * por encima de la luz final.
+   */
+  .cave-portal.is-crossing .cave-portal__flare {
+    opacity: 1 !important;
+    visibility: visible !important;
+  }
+
+  .cave-portal.is-crossing .cave-portal__image,
+  .cave-portal.is-crossing .cave-portal__image-shade,
+  .cave-portal.is-crossing .cave-portal__rock-depth,
+  .cave-portal.is-crossing .cave-portal__shadow-waves,
+  .cave-portal.is-crossing .cave-portal__bounce,
+  .cave-portal.is-crossing .cave-portal__cosmic,
+  .cave-portal.is-crossing .cave-portal__grain {
+    opacity: 0 !important;
+    visibility: hidden !important;
+  }
+
+  .cave-portal.is-crossing .cave-portal__door {
+    opacity: 0 !important;
+  }
+}
+
+
+/* Pantallas muy pequeñas */
+@media (max-width: 340px) {
+  .site-header .brand-mark {
+    width: 135px !important;
+    max-width: calc(100vw - 58px) !important;
+  }
+
+  .site-header .nav-toggle {
+    width: 42px !important;
+    height: 42px !important;
+    min-width: 42px !important;
+    min-height: 42px !important;
+    flex-basis: 42px !important;
+  }
+}
+
+/* =========================================================
+   FINAL RESPONSIVE PATCH — logo 3D + sections
+   ========================================================= */
+
+/* 3D logo: smaller and proportional on every viewport. */
+.site-header .brand-mark {
+  width: clamp(150px, 14vw, 190px);
+  height: 42px;
+  object-fit: contain;
+  object-position: left center;
+}
+
+.hero-logo-stage {
+  --hero-logo-scale: .78;
+  transform:
+    translate3d(var(--hero-x, 0px), calc(var(--hero-y, 0px) + var(--hero-scroll-y, 0px)), 0)
+    rotateX(var(--hero-rotate-x, 0deg))
+    rotateY(var(--hero-rotate-y, 0deg))
+    rotateZ(var(--hero-scroll-rotate, 0deg))
+    scale(calc(var(--hero-scroll-scale, 1) * var(--hero-logo-scale)));
+  transform-origin: center;
+  transform-style: preserve-3d;
+}
+
+/* Keep full-width sections, but constrain their inner content cleanly. */
+main > section {
+  width: 100%;
+  max-width: none;
+  overflow-x: clip;
+}
+
+main > section > .container,
+main > section > .section-inner,
+main > section > .section-content {
+  width: min(100% - 48px, var(--max-width));
+  margin-inline: auto;
+}
+
+/* Prevent wide decorative elements from creating horizontal scroll. */
+.hero,
+.hero-visual,
+.orbital-convergence,
+.process-section,
+.badges-section,
+.stats-section,
+.discord-section,
+.showcase-section,
+.newsletter,
+.faq,
+.pillars {
+  max-width: 100%;
+  overflow-x: clip;
+}
+
+/* ---------- TABLET ---------- */
+@media (max-width: 1100px) {
+  .navbar {
+    height: 68px;
+    gap: 18px;
+  }
+
+  .site-header .brand-mark {
+    width: 170px;
+    height: 38px;
+  }
+
+  main > section > .container,
+  main > section > .section-inner,
+  main > section > .section-content {
+    width: min(100% - 40px, var(--max-width));
+  }
+
+  .hero {
+    grid-template-columns: 1fr 1fr;
+    gap: clamp(24px, 4vw, 48px);
+  }
+
+  .hero-visual {
+    min-width: 0;
+  }
+
+  .hero-logo-stage {
+    --hero-logo-scale: .70;
+  }
+
+  .hero-proof {
+    gap: 8px 12px;
+  }
+}
+
+/* ---------- MOBILE ---------- */
+@media (max-width: 900px) {
+  .site-header .brand-mark {
+    width: 150px;
+    height: 34px;
+  }
+
+  .navbar {
+    height: 68px;
+    padding-block: 0;
+  }
+
+  main > section > .container,
+  main > section > .section-inner,
+  main > section > .section-content {
+    width: min(100% - 32px, var(--max-width));
+  }
+
+  .hero {
+    grid-template-columns: 1fr;
+    gap: 42px;
+    padding-top: 105px;
+    padding-bottom: 55px;
+  }
+
+  .hero-copy,
+  .hero-text,
+  .hero-proof {
+    width: 100%;
+    max-width: none;
+  }
+
+  .hero h1 {
+    max-width: 100%;
+    font-size: clamp(2.8rem, 10.5vw, 5rem);
+  }
+
+  .hero-visual {
+    height: clamp(390px, 82vw, 500px);
+    min-height: 0;
+  }
+
+  .hero-logo-stage {
+    --hero-logo-scale: .64;
+  }
+
+  /* Generic section headers become single-column instead of squeezing. */
+  .badges-header,
+  .process-header,
+  .showcase-head,
+  .discord-section__main,
+  .section-heading {
+    grid-template-columns: 1fr;
+  }
+
+  .badges-header,
+  .process-header {
+    gap: 24px;
+  }
+
+  .stats-line {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .showcase-grid,
+  .badges-showcase {
+    grid-template-columns: 1fr;
+  }
+
+  .badges-showcase__list {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  /* Cards must never force the page wider than the viewport. */
+  .code-card,
+  .process-card,
+  .job-card,
+  .tournament-card,
+  .badge-feature,
+  .showcase-panel {
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+  }
+
+  .floating-card {
+    max-width: min(230px, 62vw);
+    min-width: 0;
+  }
+}
+
+/* ---------- SMALL MOBILE ---------- */
+@media (max-width: 600px) {
+  .site-header .brand-mark {
+    width: 136px;
+    height: 31px;
+  }
+
+  .navbar {
+    height: 64px;
+  }
+
+  main > section > .container,
+  main > section > .section-inner,
+  main > section > .section-content {
+    width: calc(100% - 28px);
+  }
+
+  .hero {
+    padding-top: 94px;
+    padding-bottom: 44px;
+    gap: 34px;
+  }
+
+  .hero h1 {
+    font-size: clamp(2.45rem, 13vw, 4rem);
+    line-height: .94;
+  }
+
+  .hero-text {
+    margin-top: 22px;
+    margin-bottom: 24px;
+    font-size: .95rem;
+    line-height: 1.6;
+  }
+
+  .hero-actions {
+    width: 100%;
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .hero-actions .button {
+    width: 100%;
+  }
+
+  .hero-proof {
+    margin-top: 22px;
+    padding-top: 16px;
+  }
+
+  .hero-visual {
+    height: 365px;
+    margin-inline: -2px;
+  }
+
+  .hero-logo-stage {
+    --hero-logo-scale: .55;
+  }
+
+  .hero-grid {
+    width: min(88vw, 350px);
+    height: min(88vw, 350px);
+  }
+
+  .orb-one {
+    width: min(96vw, 390px);
+    height: min(96vw, 390px);
+  }
+
+  .orb-two {
+    width: min(76vw, 300px);
+    height: min(76vw, 300px);
+  }
+
+  .hero-orbit--one {
+    width: min(98vw, 390px);
+    height: min(46vw, 180px);
+  }
+
+  .hero-orbit--two {
+    width: min(82vw, 330px);
+    height: min(38vw, 150px);
+  }
+
+  .badges-showcase__list,
+  .stats-line {
+    grid-template-columns: 1fr;
+  }
+
+  .badges-showcase__note {
+    grid-column: auto;
+  }
+
+  .badge-feature {
+    min-height: 470px;
+  }
+
+  .badge-feature__emblem {
+    width: min(62vw, 250px);
+    height: min(62vw, 250px);
+  }
+
+  .section-kicker {
+    font-size: .68rem;
+  }
+
+  .process-section,
+  .badges-section,
+  .stats-section,
+  .showcase-section,
+  .discord-section,
+  .newsletter,
+  .faq,
+  .pillars {
+    padding-left: 0;
+    padding-right: 0;
+  }
+}
+
+/* ---------- VERY SMALL PHONES ---------- */
+@media (max-width: 380px) {
+  .site-header .brand-mark {
+    width: 122px;
+    height: 29px;
+  }
+
+  main > section > .container,
+  main > section > .section-inner,
+  main > section > .section-content {
+    width: calc(100% - 24px);
+  }
+
+  .hero {
+    padding-top: 88px;
+  }
+
+  .hero h1 {
+    font-size: 2.35rem;
+  }
+
+  .hero-visual {
+    height: 330px;
+  }
+
+  .hero-logo-stage {
+    --hero-logo-scale: .50;
+  }
+
+  .floating-card {
+    transform: scale(.9);
+    transform-origin: center;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-logo-stage {
+    transform: scale(var(--hero-logo-scale, .78)) !important;
+  }
+}
+
+/* =========================================================
+   FINAL OVERRIDE — 3ª SECCIÓN / 4 TARJETAS
+   ========================================================= */
+
+.process-section {
+  width: min(calc(100% - 40px), 1180px);
+  margin-inline: auto;
+  padding: 90px 0 110px;
+}
+
+.process-header {
+  display: grid;
+  grid-template-columns: minmax(0, 1.15fr) minmax(260px, .65fr);
+  gap: 50px;
+  align-items: end;
+  margin-bottom: 38px;
+}
+
+.process-header h2 {
+  max-width: 720px;
+  margin: 12px 0 0;
+  font-size: clamp(2.8rem, 5vw, 5.4rem);
+  line-height: .92;
+  letter-spacing: -.065em;
+  text-wrap: balance;
+}
+
+.process-header > p {
+  max-width: 390px;
+  margin: 0 0 4px;
+  color: var(--muted);
+  font-size: .9rem;
+  line-height: 1.65;
+}
+
+.process__content { display: block; }
+
+.process__content > .process-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 14px;
+  width: 100%;
+  height: auto;
+}
+
+.process-card,
+.process-card--hero,
+.process-card--small,
+.process-card--wide {
+  position: relative;
+  isolation: isolate;
+  width: 100%;
+  height: 330px;
+  min-height: 330px;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: 22px;
+  background: linear-gradient(145deg, rgba(255,255,255,.98), rgba(238,242,241,.92));
+  box-shadow: 0 12px 35px rgba(18,32,31,.07), inset 0 1px 0 rgba(255,255,255,.75);
+  transition: transform .35s cubic-bezier(.2,.8,.2,1), box-shadow .35s ease, border-color .35s ease;
+}
+
+.process-card--hero,
+.process-card--wide {
+  grid-column: auto !important;
+  grid-row: auto !important;
+  min-height: 330px;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .process-card:hover {
+    transform: translateY(-6px);
+    border-color: rgba(77,146,146,.25);
+    box-shadow: 0 24px 55px rgba(18,32,31,.12), 0 0 0 1px rgba(132,192,191,.08);
+  }
+  .process-card:hover .process-card__number { transform: translateY(-2px); }
+  .process-card:hover .process-card__circle { transform: scale(1.08) rotate(8deg); }
+}
+
+.process-card__image {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: .10;
+  filter: saturate(.7) contrast(1.04);
+  z-index: -3;
+  transition: opacity .4s ease, transform .6s cubic-bezier(.2,.8,.2,1);
+}
+
+.process-card:hover .process-card__image {
+  opacity: .16;
+  transform: scale(1.045);
+}
+
+.process-card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+  pointer-events: none;
+  background: linear-gradient(150deg, rgba(255,255,255,.97) 0%, rgba(246,248,247,.88) 58%, rgba(246,248,247,.72) 100%);
+}
+
+.process-card > *:not(.process-card__image) {
+  position: relative;
+  z-index: 2;
+}
+
+.process-card__copy {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  padding: 24px;
+}
+
+.process-card__number {
+  display: inline-flex;
+  align-items: center;
+  width: fit-content;
+  color: var(--accent-text);
+  font: 700 .65rem/1 ui-monospace, SFMono-Regular, Menlo, monospace;
+  letter-spacing: .12em;
+  transition: transform .3s ease;
+}
+
+.process-card__copy h3 {
+  max-width: 240px;
+  margin: 72px 0 12px;
+  color: var(--text);
+  font-family: var(--font-display);
+  font-size: clamp(1.45rem, 2vw, 2rem);
+  line-height: .98;
+  letter-spacing: -.045em;
+  text-wrap: balance;
+}
+
+.process-card__copy p {
+  max-width: 245px;
+  margin: 0;
+  color: var(--muted);
+  font-size: .78rem;
+  line-height: 1.6;
+}
+
+.process-card__circle {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  width: 72px;
+  height: 72px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 30%, rgba(255,255,255,.75), rgba(255,255,255,.15) 30%, transparent 65%), var(--circle-color, var(--accent));
+  box-shadow: 0 12px 30px color-mix(in srgb, var(--circle-color, var(--accent)) 25%, transparent);
+  transition: transform .4s cubic-bezier(.2,.8,.2,1), box-shadow .4s ease;
+}
+
+.process-card__circle::before {
+  content: "";
+  position: absolute;
+  inset: -8px;
+  border: 1px solid color-mix(in srgb, var(--circle-color, var(--accent)) 28%, transparent);
+  border-radius: 50%;
+}
+
+.process-card__circle::after {
+  content: "";
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: rgba(255,255,255,.72);
+  box-shadow: 0 0 0 7px rgba(255,255,255,.10);
+}
+
+.process-card:nth-child(1) { --circle-color: #84c0bf; }
+.process-card:nth-child(2) { --circle-color: #d9a441; }
+.process-card:nth-child(3) { --circle-color: #4f7fc0; }
+.process-card:nth-child(4) { --circle-color: #9b7ac9; }
+
+.process-card__tag {
+  display: inline-flex;
+  align-items: center;
+  width: fit-content;
+  margin-top: auto;
+  padding: 7px 10px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: rgba(255,255,255,.58);
+  color: var(--muted-2);
+  font-size: .58rem;
+  font-weight: 800;
+  letter-spacing: .05em;
+  text-transform: uppercase;
+}
+
+@media (max-width: 1000px) {
+  .process-section { width: min(calc(100% - 36px), 900px); }
+  .process-header { grid-template-columns: 1fr; gap: 18px; }
+  .process-header > p { max-width: 560px; }
+  .process__content > .process-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
+  .process-card,
+  .process-card--hero,
+  .process-card--small,
+  .process-card--wide { height: 310px; min-height: 310px; }
+}
+
+@media (max-width: 640px) {
+  .process-section { width: min(calc(100% - 28px), 520px); padding: 70px 0 80px; }
+  .process-header { margin-bottom: 28px; }
+  .process-header h2 { font-size: clamp(2.65rem, 13vw, 4rem); line-height: .91; }
+  .process-header > p { font-size: .86rem; line-height: 1.6; }
+  .process__content > .process-grid { grid-template-columns: 1fr; gap: 12px; }
+  .process-card,
+  .process-card--hero,
+  .process-card--small,
+  .process-card--wide { height: 285px; min-height: 285px; border-radius: 19px; }
+  .process-card__copy { padding: 21px; }
+  .process-card__circle { width: 62px; height: 62px; top: 18px; right: 18px; }
+  .process-card__circle::after { width: 15px; height: 15px; }
+  .process-card__copy h3 { margin-top: 62px; max-width: 75%; font-size: 1.55rem; }
+  .process-card__copy p { max-width: 92%; font-size: .76rem; }
+  .process-card__tag { font-size: .54rem; }
+}
+
+@media (max-width: 390px) {
+  .process-section { width: min(calc(100% - 24px), 360px); }
+  .process-card,
+  .process-card--hero,
+  .process-card--small,
+  .process-card--wide { height: 270px; min-height: 270px; }
+  .process-card__copy { padding: 18px; }
+  .process-card__circle { width: 54px; height: 54px; top: 16px; right: 16px; }
+  .process-card__copy h3 { margin-top: 55px; font-size: 1.4rem; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .process-card,
+  .process-card__image,
+  .process-card__circle,
+  .process-card__number { transition: none !important; }
+  .process-card:hover { transform: none; }
+}
+
+/* =========================================================
+   MOBILE MASTER PASS — TODA LA WEB
+   Pensado para 320 / 360 / 390 / 430 / 480 / 640 px.
+   Último bloque = máxima prioridad sobre estilos antiguos.
+   ========================================================= */
+
+html {
+  overflow-x: clip;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  overflow-x: clip;
+}
+
+img,
+video,
+svg {
+  max-width: 100%;
+}
+
+button,
+a,
+input,
+textarea,
+select {
+  -webkit-tap-highlight-color: transparent;
+}
+
+@media (max-width: 640px) {
+  :root {
+    --mobile-gutter: 16px;
+    --mobile-radius: 18px;
+  }
+
+  body {
+    font-size: 15px;
+  }
+
+  .container,
+  .section,
+  .section-light,
+  .section-dark {
+    width: min(calc(100% - (var(--mobile-gutter) * 2)), 100%);
+    max-width: none;
+    margin-inline: auto;
+  }
+
+  section {
+    scroll-margin-top: 76px;
+  }
+
+  .section-kicker {
+    font-size: .58rem;
+    letter-spacing: .12em;
+  }
+
+  /* Titulares: menos altura, mejor lectura y menos overflow */
+  h1,
+  h2,
+  h3 {
+    overflow-wrap: anywhere;
+    text-wrap: balance;
+  }
+
+  p {
+    overflow-wrap: break-word;
+    text-wrap: pretty;
+  }
+
+  /* Grids generales: nunca fuerzan ancho horizontal en móvil */
+  [class*="grid"] {
+    min-width: 0;
+  }
+
+  /* Botones y controles cómodos para dedo */
+  .btn,
+  .button,
+  button,
+  [role="button"] {
+    min-height: 44px;
+  }
+
+  /* Evita animaciones pesadas que empeoran la sensación en móvil */
+  .section-shadow-field,
+  .section-shadow-wave {
+    pointer-events: none;
+  }
+}
+
+
+/* =========================================================
+   CÓMO FUNCIONA — MOBILE REBUILD
+   ========================================================= */
+
+@media (max-width: 800px) {
+  .process-section {
+    width: min(calc(100% - 32px), 520px);
+    padding: 72px 0 82px;
+  }
+
+  .process-header {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 18px;
+    margin-bottom: 26px;
+  }
+
+  .process-header h2 {
+    max-width: 100%;
+    margin-top: 10px;
+    font-size: clamp(2.65rem, 12.5vw, 4.2rem);
+    line-height: .88;
+    letter-spacing: -.065em;
+  }
+
+  .process-header > p {
+    max-width: 39rem;
+    margin: 0;
+    font-size: .78rem;
+    line-height: 1.62;
+  }
+
+  .process__content {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    width: 100%;
+    height: auto;
+  }
+
+  /* HERO: compacto, pero sigue siendo la tarjeta protagonista */
+  .process-card--hero {
+    width: 100%;
+    height: 500px;
+    min-height: 500px;
+    border-radius: var(--mobile-radius);
+  }
+
+  .process-card--hero .process-card__image {
+    object-position: 56% center !important;
+  }
+
+  .process-card--hero::after {
+    background:
+      linear-gradient(180deg,
+        rgba(5,18,18,.48) 0%,
+        rgba(5,18,18,.20) 27%,
+        rgba(5,18,18,.30) 45%,
+        rgba(5,18,18,.90) 100%),
+      linear-gradient(90deg,
+        rgba(5,18,18,.42),
+        rgba(5,18,18,0) 75%);
+  }
+
+  .process-card--hero .process-card__number {
+    top: 16px;
+    left: 17px;
+  }
+
+  .process-card--hero .process-card__copy {
+    top: auto;
+    right: 0;
+    bottom: 112px;
+    left: 0;
+    width: 100%;
+    padding: 0 18px;
+  }
+
+  .process-card--hero .process-card__copy > span {
+    margin-bottom: 11px;
+    padding: 6px 8px;
+    font-size: .50rem;
+  }
+
+  .process-card--hero .process-card__copy h3 {
+    max-width: 100%;
+    font-size: clamp(2rem, 10.8vw, 3.1rem);
+    line-height: .91;
+    letter-spacing: -.06em;
+  }
+
+  .process-card--hero .process-card__copy p {
+    max-width: 100%;
+    margin-top: 12px;
+    font-size: .67rem;
+    line-height: 1.5;
+  }
+
+  .process-card--hero .process-code {
+    max-width: 100%;
+    margin-top: 13px;
+    padding-top: 10px;
+    gap: 7px;
+    font-size: .49rem;
+  }
+
+  .process-card--hero .process-visual {
+    left: 14px;
+    right: 14px;
+    bottom: 14px;
+    width: auto;
+  }
+
+  .process-card--hero .submission-card {
+    border-radius: 12px;
+  }
+
+  .process-card--hero .submission-card__head,
+  .process-card--hero .submission-card__foot {
+    padding: 8px 11px;
+    font-size: .46rem;
+  }
+
+  .process-card--hero .submission-card__body {
+    gap: 6px;
+    padding: 12px 12px 13px;
+  }
+
+  .process-card--hero .submission-card__body > span {
+    font-size: .47rem;
+  }
+
+  .process-card--hero .submission-card__body strong {
+    font-size: .94rem;
+  }
+
+  .process-card--hero .submission-card__body p {
+    font-size: .55rem;
+    line-height: 1.45;
+  }
+
+  /* 02 + 03: una columna, tarjetas realmente compactas */
+  .process__content > .process-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: none;
+    gap: 12px;
+    width: 100%;
+    height: auto;
+    margin: 0;
+  }
+
+  .process-card--small,
+  .process-card--wide {
+    grid-column: auto !important;
+    grid-row: auto !important;
+    width: 100%;
+    height: 270px;
+    min-height: 270px;
+    border-radius: var(--mobile-radius);
+  }
+
+  .process-card--small {
+    padding: 0 17px 17px;
+  }
+
+  .process-card--small .process-card__number {
+    top: 15px;
+    left: 16px;
+    font-size: .49rem;
+  }
+
+  .process-card--small .process-small-icon {
+    width: 34px;
+    height: 34px;
+    margin: auto 0 11px;
+    border-radius: 10px;
+  }
+
+  .process-card--small .process-small-icon .icon {
+    width: 14px;
+    height: 14px;
+  }
+
+  .process-card--small h3 {
+    max-width: 90%;
+    margin-bottom: 6px;
+    font-size: 1.28rem;
+    line-height: .96;
+  }
+
+  .process-card--small p {
+    font-size: .61rem;
+    line-height: 1.45;
+    -webkit-line-clamp: 3;
+  }
+
+  .process-card--small .process-tags,
+  .process-card--small .process-status {
+    margin-top: 9px;
+  }
+
+  .process-card--small .process-tags {
+    gap: 4px;
+  }
+
+  .process-card--small .process-tags span {
+    padding: 4px 6px;
+    font-size: .44rem;
+  }
+
+  .process-card--small .process-status {
+    font-size: .50rem;
+  }
+
+  /* 04: comunidad más baja para que el scroll móvil no sea interminable */
+  .process-card--wide {
+    height: 300px;
+    min-height: 300px;
+    display: block;
+  }
+
+  .process-card--wide .process-card__image {
+    object-position: 58% center !important;
+  }
+
+  .process-card--wide::after {
+    background:
+      linear-gradient(180deg,
+        rgba(255,255,255,.02) 0%,
+        rgba(255,255,255,.10) 28%,
+        rgba(255,255,255,.72) 69%,
+        rgba(255,255,255,.97) 100%);
+  }
+
+  .process-card--wide > div:nth-child(2) {
+    position: relative;
+    z-index: 3;
+    width: min(86%, 390px);
+    max-width: 390px;
+    padding: 18px 17px;
+  }
+
+  .process-card--wide .process-card__number {
+    margin-bottom: 10px;
+    font-size: .49rem;
+  }
+
+  .process-card--wide h3 {
+    max-width: 100%;
+    font-size: clamp(1.8rem, 9vw, 2.55rem);
+    line-height: .92;
+  }
+
+  .process-card--wide p {
+    max-width: 100%;
+    margin-top: 10px;
+    font-size: .59rem;
+    line-height: 1.48;
+    -webkit-line-clamp: 3;
+  }
+
+  .process-card--wide .people-stack {
+    left: 14px;
+    right: 14px;
+    bottom: 14px;
+    gap: 4px;
+    max-width: calc(100% - 28px);
+  }
+
+  .process-card--wide .people-stack span {
+    padding: 5px 7px;
+    font-size: .43rem;
+  }
+
+  /* Círculos decorativos de color: no necesitan JSX adicional */
+  .process-card--small::before,
+  .process-card--wide::before {
+    content: "";
+    position: absolute;
+    z-index: 2;
+    width: 82px;
+    height: 82px;
+    top: 15px;
+    right: 15px;
+    border-radius: 50%;
+    pointer-events: none;
+    opacity: .92;
+    border: 1px solid rgba(255,255,255,.34);
+    background:
+      radial-gradient(circle at 34% 30%, rgba(255,255,255,.55), transparent 25%),
+      radial-gradient(circle, var(--process-circle, #84c0bf) 0 42%, rgba(255,255,255,.04) 43% 60%, transparent 61%);
+    box-shadow: 0 12px 28px rgba(0,0,0,.12);
+  }
+
+  .process-card--small:nth-child(1) { --process-circle: #84c0bf; }
+  .process-card--small:nth-child(2) { --process-circle: #d9a441; }
+  .process-card--wide { --process-circle: #4f7fc0; }
+
+  .process-card--small:nth-child(1)::before,
+  .process-card--small:nth-child(2)::before {
+    width: 58px;
+    height: 58px;
+    top: 14px;
+    right: 14px;
+  }
+}
+
+
+/* 480px: ajustes finos para móviles anchos */
+@media (min-width: 481px) and (max-width: 800px) {
+  .process-section {
+    width: min(calc(100% - 40px), 620px);
+  }
+
+  .process-card--hero {
+    height: 520px;
+    min-height: 520px;
+  }
+
+  .process-card--small {
+    height: 285px;
+    min-height: 285px;
+  }
+
+  .process-card--wide {
+    height: 315px;
+    min-height: 315px;
+  }
+}
+
+
+/* 390px: aquí se nota especialmente el cambio */
+@media (max-width: 390px) {
+  :root {
+    --mobile-gutter: 13px;
+  }
+
+  .process-section {
+    width: min(calc(100% - 26px), 360px);
+    padding-top: 62px;
+    padding-bottom: 70px;
+  }
+
+  .process-header {
+    gap: 15px;
+    margin-bottom: 22px;
+  }
+
+  .process-header h2 {
+    font-size: clamp(2.35rem, 12.8vw, 3.15rem);
+  }
+
+  .process-header > p {
+    font-size: .73rem;
+  }
+
+  .process__content {
+    gap: 10px;
+  }
+
+  .process-card--hero {
+    height: 455px;
+    min-height: 455px;
+    border-radius: 16px;
+  }
+
+  .process-card--hero .process-card__copy {
+    bottom: 104px;
+    padding-inline: 15px;
+  }
+
+  .process-card--hero .process-card__copy h3 {
+    font-size: 2rem;
+  }
+
+  .process-card--hero .process-card__copy p {
+    font-size: .62rem;
+  }
+
+  .process-card--hero .process-visual {
+    left: 11px;
+    right: 11px;
+    bottom: 11px;
+  }
+
+  .process-card--hero .submission-card__body strong {
+    font-size: .87rem;
+  }
+
+  .process-card--hero .submission-card__body p {
+    font-size: .52rem;
+  }
+
+  .process-card--small {
+    height: 248px;
+    min-height: 248px;
+    padding-inline: 14px;
+    border-radius: 16px;
+  }
+
+  .process-card--small h3 {
+    font-size: 1.16rem;
+  }
+
+  .process-card--small p {
+    font-size: .57rem;
+  }
+
+  .process-card--wide {
+    height: 278px;
+    min-height: 278px;
+    border-radius: 16px;
+  }
+
+  .process-card--wide > div:nth-child(2) {
+    padding: 16px 14px;
+  }
+
+  .process-card--wide h3 {
+    font-size: 1.72rem;
+  }
+
+  .process-card--wide p {
+    font-size: .56rem;
+  }
+
+  .process-card--small:nth-child(1)::before,
+  .process-card--small:nth-child(2)::before {
+    width: 50px;
+    height: 50px;
+    top: 12px;
+    right: 12px;
+  }
+
+  .process-card--wide::before {
+    width: 66px;
+    height: 66px;
+    top: 12px;
+    right: 12px;
+  }
+}
+
+
+/* 340px / teléfonos muy estrechos */
+@media (max-width: 340px) {
+  .process-section {
+    width: calc(100% - 20px);
+  }
+
+  .process-card--hero {
+    height: 440px;
+    min-height: 440px;
+  }
+
+  .process-card--hero .process-card__copy h3 {
+    font-size: 1.82rem;
+  }
+
+  .process-card--hero .process-card__copy p {
+    font-size: .58rem;
+  }
+
+  .process-card--small {
+    height: 235px;
+    min-height: 235px;
+  }
+
+  .process-card--wide {
+    height: 265px;
+    min-height: 265px;
+  }
+
+  .process-card--wide h3 {
+    font-size: 1.58rem;
+  }
+}
+
+
+/* =========================================================
+   TABLET: 2 columnas limpias antes de pasar a 1 columna
+   ========================================================= */
+
+@media (min-width: 641px) and (max-width: 1000px) {
+  .process-section {
+    width: min(calc(100% - 42px), 900px);
+    padding: 86px 0 100px;
+  }
+
+  .process-header {
+    grid-template-columns: 1fr;
+    gap: 18px;
+    margin-bottom: 30px;
+  }
+
+  .process-header h2 {
+    font-size: clamp(3rem, 7.5vw, 5rem);
+  }
+
+  .process__content {
+    grid-template-columns: 1fr;
+    height: auto;
+  }
+
+  .process-card--hero {
+    height: 520px;
+    min-height: 520px;
+  }
+
+  .process__content > .process-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-rows: 280px 280px;
+    height: auto;
+    margin-top: 12px;
+    gap: 12px;
+  }
+
+  .process-card--small,
+  .process-card--wide {
+    height: 280px;
+  }
+
+  .process-card--wide {
+    grid-column: 1 / -1 !important;
+  }
+}
+
+
+/* =========================================================
+   REDUCED MOTION — también para el nuevo sistema móvil
+   ========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+  }
+
+  .process-card,
+  .process-card__image,
+  .process-small-icon,
+  .people-stack span {
+    transition: none !important;
+  }
+}
+
+/* =========================================================
+   PILARES — REDISEÑO RESPONSIVE / STICKY MAP
+   Último override: sustituye las reglas anteriores de pilares
+   sin tocar el JSX.
+   ========================================================= */
+
+.pillars {
+  position: relative;
+  width: min(calc(100% - 40px), 1180px) !important;
+  margin-inline: auto;
+  padding-top: clamp(72px, 8vw, 120px) !important;
+  padding-bottom: clamp(80px, 9vw, 140px) !important;
+  overflow: visible !important;
+}
+
+.pillars .section-heading {
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(260px, .55fr);
+  align-items: end;
+  gap: clamp(28px, 5vw, 72px);
+  margin-bottom: clamp(34px, 4vw, 54px);
+}
+
+.pillars .section-heading h2 {
+  margin: 12px 0 0;
+  max-width: 760px;
+  font-size: clamp(2.65rem, 5.2vw, 5.5rem);
+  line-height: .91;
+  letter-spacing: -.065em;
+  text-wrap: balance;
+}
+
+.pillars .section-heading > p {
+  max-width: 390px;
+  margin: 0 0 3px;
+  font-size: clamp(.88rem, 1.1vw, .98rem);
+  line-height: 1.7;
+}
+
+/* Desktop: la ilustración acompaña al usuario al hacer scroll.
+   Sticky hace que baje al bajar y vuelva a subir al subir. */
+.pillars-layout {
+  display: grid !important;
+  grid-template-columns: minmax(280px, 360px) minmax(0, 1fr) !important;
+  align-items: start;
+  gap: clamp(28px, 4vw, 54px) !important;
+}
+
+.pillars-illustration-wrap {
+  position: sticky !important;
+  top: clamp(84px, 11vh, 125px) !important;
+  align-self: start;
+  height: fit-content;
+  z-index: 4;
+  will-change: transform;
+}
+
+.pillars-illustration-frame {
+  width: 100%;
+  padding: 9px;
+  border-radius: clamp(20px, 2vw, 28px);
+  transform: rotate(-1deg);
+  box-shadow:
+    0 24px 65px rgba(18,32,31,.12),
+    0 0 0 1px rgba(132,192,191,.08);
+}
+
+.pillars-illustration-frame::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  background: linear-gradient(145deg, rgba(255,255,255,.18), transparent 42%);
+}
+
+.pillars-illustration {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  border-radius: clamp(14px, 1.5vw, 20px);
+}
+
+.pillars-illustration-tag {
+  left: clamp(16px, 2vw, 24px);
+  bottom: clamp(16px, 2vw, 24px);
+  padding: 8px 12px;
+  font-size: .62rem;
+}
+
+.pillars-illustration-glow--one {
+  width: clamp(150px, 17vw, 230px);
+  height: clamp(150px, 17vw, 230px);
+  top: -34px;
+  left: -34px;
+}
+
+.pillars-illustration-glow--two {
+  width: clamp(120px, 13vw, 175px);
+  height: clamp(120px, 13vw, 175px);
+  right: -28px;
+  bottom: -28px;
+}
+
+.pillar-grid {
+  display: grid !important;
+  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  gap: 16px !important;
+}
+
+.pillar {
+  min-width: 0;
+  min-height: 300px;
+  padding: clamp(22px, 2.5vw, 30px);
+  border-radius: 22px;
+  box-shadow: 0 14px 38px rgba(18,32,31,.055);
+}
+
+.pillar--featured {
+  min-height: 220px;
+  padding: clamp(25px, 3vw, 38px);
+  grid-column: 1 / -1 !important;
+  grid-template-columns: auto minmax(0,1fr) !important;
+  gap: clamp(22px, 3vw, 38px);
+  border-radius: 24px;
+}
+
+.pillar--featured .pillar__top {
+  margin: 0;
+}
+
+.pillar--featured .pillar-icon {
+  width: 66px;
+  height: 66px;
+}
+
+.pillar__top {
+  margin-bottom: 26px;
+}
+
+.pillar-icon {
+  width: 48px;
+  height: 48px;
+  flex: 0 0 auto;
+  border-radius: 14px;
+}
+
+.pillar-number {
+  font-size: .66rem;
+}
+
+.pillar h3 {
+  font-size: clamp(1.05rem, 1.45vw, 1.3rem);
+  line-height: 1.2;
+}
+
+.pillar p {
+  max-width: 430px;
+  font-size: .84rem;
+  line-height: 1.65;
+}
+
+.pillar-tag {
+  padding-top: 18px;
+  font-size: .7rem;
+}
+
+/* ---------- TABLET ---------- */
+@media (max-width: 980px) {
+  .pillars {
+    width: min(calc(100% - 32px), 760px) !important;
+  }
+
+  .pillars .section-heading {
+    grid-template-columns: 1fr;
+    gap: 18px;
+  }
+
+  .pillars .section-heading > p {
+    max-width: 620px;
+  }
+
+  .pillars-layout {
+    grid-template-columns: minmax(230px, 300px) minmax(0, 1fr) !important;
+    gap: 22px !important;
+  }
+
+  .pillar-grid {
+    gap: 12px !important;
+  }
+
+  .pillar {
+    min-height: 270px;
+    padding: 22px;
+  }
+
+  .pillar--featured {
+    min-height: 210px;
+    padding: 24px;
+  }
+}
+
+/* ---------- MÓVIL ---------- */
+@media (max-width: 700px) {
+  .pillars {
+    width: calc(100% - 24px) !important;
+    padding-top: 64px !important;
+    padding-bottom: 78px !important;
+    overflow: visible !important;
+  }
+
+  .pillars .section-heading {
+    display: block;
+    margin-bottom: 28px;
+  }
+
+  .pillars .section-heading h2 {
+    max-width: 100%;
+    margin-top: 10px;
+    font-size: clamp(2.45rem, 11.5vw, 3.65rem);
+    line-height: .94;
+    letter-spacing: -.06em;
+  }
+
+  .pillars .section-heading > p {
+    max-width: 100%;
+    margin-top: 20px;
+    font-size: .9rem;
+    line-height: 1.65;
+  }
+
+  /* En móvil la caja queda arriba del contenido y acompaña el scroll
+     de forma natural; sticky evita que desaparezca demasiado pronto. */
+  .pillars-layout {
+    display: flex !important;
+    flex-direction: column;
+    gap: 24px !important;
+  }
+
+  .pillars-illustration-wrap {
+    position: sticky !important;
+    top: 76px !important;
+    width: min(100%, 430px);
+    margin-inline: auto;
+    z-index: 5;
+    order: 0;
+  }
+
+  .pillars-illustration-frame {
+    padding: 7px;
+    border-radius: 22px;
+    transform: rotate(-.6deg);
+    box-shadow: 0 18px 42px rgba(18,32,31,.13);
+  }
+
+  .pillars-illustration {
+    border-radius: 16px;
+  }
+
+  .pillars-illustration-tag {
+    left: 14px;
+    bottom: 14px;
+    padding: 7px 10px;
+    font-size: .58rem;
+  }
+
+  .pillars-illustration-glow--one {
+    width: 145px;
+    height: 145px;
+    top: -24px;
+    left: -24px;
+  }
+
+  .pillars-illustration-glow--two {
+    width: 110px;
+    height: 110px;
+    right: -18px;
+    bottom: -18px;
+  }
+
+  .pillar-grid {
+    width: 100%;
+    grid-template-columns: 1fr !important;
+    gap: 12px !important;
+    order: 1;
+  }
+
+  .pillar,
+  .pillar--featured {
+    grid-column: auto !important;
+    min-height: 0;
+    padding: 22px;
+    border-radius: 20px;
+  }
+
+  .pillar--featured {
+    display: flex !important;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0;
+  }
+
+  .pillar--featured .pillar__top {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 24px;
+  }
+
+  .pillar--featured .pillar-icon {
+    width: 54px;
+    height: 54px;
+    font-size: 1.5rem;
+  }
+
+  .pillar__top {
+    margin-bottom: 22px;
+  }
+
+  .pillar-icon {
+    width: 46px;
+    height: 46px;
+    border-radius: 13px;
+    font-size: 1.25rem;
+  }
+
+  .pillar h3,
+  .pillar--featured h3 {
+    max-width: 100%;
+    margin-bottom: 10px;
+    font-size: 1.25rem;
+    line-height: 1.18;
+  }
+
+  .pillar p,
+  .pillar--featured p {
+    max-width: 100%;
+    font-size: .88rem;
+    line-height: 1.65;
+  }
+
+  .pillar-tag {
+    padding-top: 18px;
+    font-size: .68rem;
+  }
+}
+
+/* ---------- MÓVIL ESTRECHO ---------- */
+@media (max-width: 390px) {
+  .pillars {
+    width: calc(100% - 18px) !important;
+    padding-top: 54px !important;
+  }
+
+  .pillars .section-heading h2 {
+    font-size: 2.35rem;
+  }
+
+  .pillars .section-heading > p {
+    font-size: .84rem;
+  }
+
+  .pillars-layout {
+    gap: 18px !important;
+  }
+
+  .pillars-illustration-wrap {
+    top: 70px !important;
+  }
+
+  .pillar,
+  .pillar--featured {
+    padding: 19px;
+    border-radius: 18px;
+  }
+
+  .pillar--featured .pillar-icon {
+    width: 50px;
+    height: 50px;
+  }
+
+  .pillar h3,
+  .pillar--featured h3 {
+    font-size: 1.12rem;
+  }
+
+  .pillar p,
+  .pillar--featured p {
+    font-size: .82rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pillars-illustration-frame,
+  .pillar {
+    transition: none !important;
+  }
+}
+
+
+@media (max-width: 640px) {
+
+  .section-dark {
+    width: 100% !important;
+    max-width: none !important;
+    margin-inline: 0 !important;
+  }
+
+  /* El contenido conserva los 16px laterales */
+  .section-dark > .container,
+  .section-dark .container {
+    width: min(calc(100% - 32px), 1180px);
+    margin-inline: auto;
+  }
+}
+
+@media (max-width: 640px) {
+
+  /* La sección ocupa todo el ancho */
+  .section-dark,
+  .section-light {
+    width: 100% !important;
+    max-width: none !important;
+    margin-inline: 0 !important;
+  }
+
+  /* El contenido interior mantiene márgenes cómodos */
+  .section-dark > .container,
+  .section-light > .container,
+  .section-dark .container,
+  .section-light .container {
+    width: calc(100% - 32px) !important;
+    max-width: 1180px !important;
+    margin-inline: auto !important;
+  }
+
+  /* Evita que textos/botones se peguen al borde */
+  .section-dark p,
+  .section-light p {
+    max-width: 100%;
+  }
+
+  /* Títulos más controlados en móvil */
+  .section-dark h1,
+  .section-dark h2,
+  .section-light h1,
+  .section-light h2 {
+    max-width: 100%;
+    overflow-wrap: normal;
+  }
 }
