@@ -402,8 +402,6 @@ const orbitalCopy = {
 
 function OrbitalConvergence({ locale }: { locale: Locale }) {
   const rootRef = useRef<HTMLElement | null>(null);
-  const triggeredRef = useRef(false);
-  const progressRef = useRef(0);
 
   useEffect(() => {
     const root = rootRef.current;
@@ -420,57 +418,53 @@ function OrbitalConvergence({ locale }: { locale: Locale }) {
       ticking = false;
       const rect = root.getBoundingClientRect();
       const travel = Math.max(root.offsetHeight - window.innerHeight, 1);
-      const raw = clamp(-rect.top / travel);
-      const p = reduce ? 1 : raw;
-      progressRef.current = p;
+      const p = reduce ? 1 : clamp(-rect.top / travel);
 
-      // Same cinematic curve as desktop. The only mobile adaptation is the
-      // physical size of the starting doorway in CSS; the timing/curve is
-      // deliberately identical so the motion feels like the desktop version.
-      const approach = clamp((p - 0.18) / 0.64);
-      const rush = clamp((p - 0.68) / 0.29);
-      const door = clamp((p - 0.10) / 0.86);
-      const light = clamp((p - 0.54) / 0.42);
-      const darkness = 1 - clamp((p - 0.70) / 0.24);
-      const text = 1 - clamp((p - 0.22) / 0.24);
+      // One normalized timeline for desktop + mobile.
+      // The cave advances, the door grows, and ONLY when the door is already
+      // large enough to cover the viewport does the white handoff begin.
+      const cameraT = clamp((p - 0.04) / 0.78);
+      const finalT = clamp((p - 0.78) / 0.22);
+      const doorT = clamp((p - 0.035) / 0.965);
+      const textT = 1 - clamp((p - 0.46) / 0.18);
+      const flareT = clamp((p - 0.994) / 0.006);
 
-      const ease = approach * approach * (3 - 2 * approach);
-      const rushEase = rush * rush * rush * (rush * (rush * 6 - 15) + 10);
-      const camera = ease * 0.56 + rushEase * 1.55;
-      const imageScale = 1 + camera * 0.72;
-      const imageY = camera * 7.5;
-      const imageBlur = rush * 0.8;
-      const doorScale = 1 + door * 5.2 + rushEase * 5.5;
-      const doorGlow = 0.18 + light * 1.2 + rushEase * 2.4;
-      const flare = clamp((p - 0.88) / 0.11);
-      const portalOpacity = 1 - clamp((p - 0.91) / 0.07);
+      const ease = (v: number) => v * v * (3 - 2 * v);
+      const camera = ease(cameraT) * 0.34 + ease(finalT) * 0.52;
+      const imageScale = 1 + camera * 0.34;
+      const imageY = camera * 3.2;
+
+      // Calculate a real viewport-cover scale from the actual portal size.
+      // The extra margin guarantees that no black/cave corners remain when the
+      // door becomes the transition surface.
+      const baseWidth = window.innerWidth <= 700 ? 28 : 56;
+      const baseHeight = window.innerWidth <= 700 ? 70 : 120;
+      const coverScale =
+        Math.max(
+          window.innerWidth / baseWidth,
+          window.innerHeight / baseHeight,
+        ) * 1.38;
+      const doorScale = 1 + ease(doorT) * (coverScale - 1);
+
+      // Keep the door low while approaching, then lift its center into the
+      // exact middle as it becomes the full-screen opening.
+      const doorTop = 66 - ease(finalT) * 16;
+      const doorGlow = 0.22 + ease(doorT) * 0.52;
 
       root.style.setProperty("--cave-progress", p.toFixed(4));
       root.style.setProperty("--cave-camera", camera.toFixed(4));
       root.style.setProperty("--cave-image-scale", imageScale.toFixed(4));
       root.style.setProperty("--cave-image-y", `${imageY.toFixed(2)}%`);
-      root.style.setProperty("--cave-image-blur", `${imageBlur.toFixed(2)}px`);
+      root.style.setProperty("--cave-image-blur", "0px");
       root.style.setProperty("--cave-door-scale", doorScale.toFixed(4));
+      root.style.setProperty("--cave-door-top", `${doorTop.toFixed(2)}%`);
       root.style.setProperty("--cave-door-glow", doorGlow.toFixed(4));
-      root.style.setProperty("--cave-darkness", darkness.toFixed(4));
-      root.style.setProperty("--cave-text", text.toFixed(4));
-      root.style.setProperty("--cave-flare", flare.toFixed(4));
-      root.style.setProperty("--cave-portal-opacity", portalOpacity.toFixed(4));
+      root.style.setProperty("--cave-darkness", (1 - ease(cameraT) * 0.48).toFixed(4));
+      root.style.setProperty("--cave-text", textT.toFixed(4));
+      root.style.setProperty("--cave-flare", flareT.toFixed(4));
+      root.style.setProperty("--cave-portal-opacity", "1");
 
-      if (!reduce && p > 0.975 && !triggeredRef.current) {
-        triggeredRef.current = true;
-        root.classList.add("is-crossing");
-        // Keep the desktop crossing. On mobile use an immediate handoff only
-        // after the light has filled the viewport, preventing the black jump.
-        window.setTimeout(() => {
-          document.getElementById("inicio")?.scrollIntoView({ behavior: "auto", block: "start" });
-        }, 70);
-      }
-
-      if (p < 0.82 && triggeredRef.current) {
-        triggeredRef.current = false;
-        root.classList.remove("is-crossing");
-      }
+      root.classList.toggle("is-crossing", !reduce && p >= 0.994);
     };
 
     const schedule = () => {
@@ -1170,25 +1164,21 @@ export default function Home() {
     setMenuOpen(false);
   };
 
-  // Mobile menu: lock the page, close on Escape, and close when tapping outside.
+  // Mobile navigation lifecycle only. The portal animation is intentionally untouched.
   useEffect(() => {
     if (!menuOpen) return;
 
     const previousOverflow = document.body.style.overflow;
 
     const onKeyDown = (event: KeyboardEvent) => {
-      if (event.key === "Escape") {
-        setMenuOpen(false);
-      }
+      if (event.key === "Escape") setMenuOpen(false);
     };
 
     const onPointerDown = (event: PointerEvent) => {
       const target = event.target;
       if (!(target instanceof Element)) return;
-
       const menu = document.getElementById("nav-menu");
       const toggle = document.querySelector<HTMLButtonElement>(".site-header .nav-toggle");
-
       if (menu && !menu.contains(target) && toggle && !toggle.contains(target)) {
         setMenuOpen(false);
       }
@@ -1204,6 +1194,8 @@ export default function Home() {
       document.removeEventListener("pointerdown", onPointerDown);
     };
   }, [menuOpen]);
+
+  
 
   const toggleLocale = () => {
     setLocale((previous) => (previous === "es" ? "en" : "es"));
@@ -1235,6 +1227,71 @@ export default function Home() {
       behavior: "smooth",
     });
   };
+  useEffect(() => {
+  const section = document.getElementById("pilares");
+
+  if (!section) return;
+
+  const frame = section.querySelector(
+    ".pillars-illustration-frame"
+  ) as HTMLElement | null;
+
+  if (!frame) return;
+
+  let raf = 0;
+
+  const updatePillarsScroll = () => {
+    raf = 0;
+
+    // En móvil no aplicamos el movimiento
+    if (window.innerWidth <= 900) {
+      frame.style.setProperty("--pillars-scroll-y", "0px");
+      return;
+    }
+
+    const rect = section.getBoundingClientRect();
+
+    const viewportCenter = window.innerHeight * 0.5;
+
+    // Cuánto ha avanzado la sección respecto al centro de la pantalla
+    const offset =
+      viewportCenter - (rect.top + rect.height * 0.35);
+
+    // Movimiento limitado entre -60px y +60px
+    const movement = Math.max(
+      -60,
+      Math.min(60, offset * 0.08)
+    );
+
+    frame.style.setProperty(
+      "--pillars-scroll-y",
+      `${movement}px`
+    );
+  };
+
+  const handleScroll = () => {
+    if (raf) return;
+
+    raf = requestAnimationFrame(updatePillarsScroll);
+  };
+
+  updatePillarsScroll();
+
+  window.addEventListener("scroll", handleScroll, {
+    passive: true,
+  });
+
+  window.addEventListener("resize", updatePillarsScroll);
+
+  return () => {
+    window.removeEventListener("scroll", handleScroll);
+    window.removeEventListener("resize", updatePillarsScroll);
+
+    if (raf) {
+      cancelAnimationFrame(raf);
+    }
+  };
+}, []);
 
   const activeBadgeData = badgeConfig[activeBadge];
   const activeBadgeText = activeBadgeData ? t.badges.items[activeBadgeData.id] : null;
@@ -1714,7 +1771,7 @@ export default function Home() {
           </div>
 
           <div className="pillars-layout">
-            <div className="pillars-illustration-wrap">
+            <div className="pillars-illustration-wrap pillars-scroll-object">
               <span
                 className="pillars-illustration-glow pillars-illustration-glow--one"
                 aria-hidden="true"
