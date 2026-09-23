@@ -759,56 +759,83 @@ function CosmicPageField() {
 
 function CustomCursor() {
   useEffect(() => {
-    const finePointer = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
+    const finePointer = window.matchMedia(
+      "(hover: hover) and (pointer: fine)"
+    ).matches;
+
     if (!finePointer) return;
 
     const cursor = document.createElement("div");
     cursor.className = "site-cursor";
-    cursor.innerHTML = '<span class="site-cursor__dot"></span><span class="site-cursor__label">VIEW</span><span class="site-cursor__ring"></span>';
+
+    cursor.innerHTML = `
+      <span class="site-cursor__orb"></span>
+      <span class="site-cursor__core"></span>
+    `;
+
     document.body.appendChild(cursor);
 
-    let x = window.innerWidth / 2;
-    let y = window.innerHeight / 2;
-    let tx = x;
-    let ty = y;
-    let raf = 0;
+    let mouseX = window.innerWidth / 2;
+    let mouseY = window.innerHeight / 2;
 
-    const updateSurface = (clientX: number, clientY: number) => {
-      const target = document.elementFromPoint(clientX, clientY) as HTMLElement | null;
+    let currentX = mouseX;
+    let currentY = mouseY;
+
+    let animationFrame = 0;
+
+    const updateSurface = (x: number, y: number) => {
+      const target = document.elementFromPoint(x, y) as HTMLElement | null;
+
       const section = target?.closest("section");
-      const dark = Boolean(section?.classList.contains("section-dark") || section?.classList.contains("orbital-convergence"));
+
+      const dark = Boolean(
+        section?.classList.contains("section-dark") ||
+        section?.classList.contains("orbital-convergence")
+      );
+
       cursor.classList.toggle("is-dark", dark);
 
-      const interactive = target?.closest("a, button, [role=button], input, textarea, select");
+      const interactive = target?.closest(
+        "a, button, [role='button'], input, textarea, select"
+      );
+
       cursor.classList.toggle("is-hovering", Boolean(interactive));
-      const label = cursor.querySelector(".site-cursor__label");
-      if (label) label.textContent = interactive ? (interactive.tagName === "BUTTON" ? "GO" : "OPEN") : "VIEW";
     };
 
     const render = () => {
-      x += (tx - x) * 0.16;
-      y += (ty - y) * 0.16;
-      cursor.style.transform = `translate3d(${x}px, ${y}px, 0)`;
-      raf = window.requestAnimationFrame(render);
+      currentX += (mouseX - currentX) * 0.18;
+      currentY += (mouseY - currentY) * 0.18;
+
+      cursor.style.transform = `translate3d(${currentX}px, ${currentY}px, 0)`;
+
+      animationFrame = requestAnimationFrame(render);
     };
 
-    const onMove = (event: PointerEvent) => {
-      tx = event.clientX;
-      ty = event.clientY;
+    const handlePointerMove = (event: PointerEvent) => {
+      mouseX = event.clientX;
+      mouseY = event.clientY;
+
       cursor.classList.add("is-visible");
+
       updateSurface(event.clientX, event.clientY);
     };
 
-    const onLeave = () => cursor.classList.remove("is-visible");
+    const handlePointerLeave = () => {
+      cursor.classList.remove("is-visible");
+    };
 
-    window.addEventListener("pointermove", onMove, { passive: true });
-    window.addEventListener("pointerleave", onLeave);
-    raf = window.requestAnimationFrame(render);
+    window.addEventListener("pointermove", handlePointerMove, {
+      passive: true
+    });
+
+    window.addEventListener("pointerleave", handlePointerLeave);
+
+    animationFrame = requestAnimationFrame(render);
 
     return () => {
-      window.removeEventListener("pointermove", onMove);
-      window.removeEventListener("pointerleave", onLeave);
-      window.cancelAnimationFrame(raf);
+      window.removeEventListener("pointermove", handlePointerMove);
+      window.removeEventListener("pointerleave", handlePointerLeave);
+      cancelAnimationFrame(animationFrame);
       cursor.remove();
     };
   }, []);
