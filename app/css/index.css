@@ -23297,3 +23297,79 @@ h6 {
   font-family: var(--font-display);
 }
 
+
+
+/* --------------------------------------------------------------------------
+   Lighthouse/mobile performance layer
+   -------------------------------------------------------------------------- */
+
+.hero-logo-fallback {
+  width: 100%;
+  height: 100%;
+  min-height: 260px;
+  border-radius: 50%;
+  background:
+    radial-gradient(circle at 50% 45%,
+      rgba(132, 192, 191, .24) 0,
+      rgba(132, 192, 191, .08) 30%,
+      transparent 66%);
+  pointer-events: none;
+}
+
+@media (max-width: 900px) {
+  /* Don't fully render/layout sections that are initially below the fold. */
+  main > section:not(.hero):not(.orbital-convergence),
+  footer {
+    content-visibility: auto;
+    contain-intrinsic-size: 900px;
+  }
+
+  /* Decorative particles: 70 independent animated nodes are unnecessary on
+     a phone during the critical rendering path. */
+  .cosmic-page-field__particles {
+    display: none !important;
+  }
+
+  .cosmic-page-field__flow {
+    opacity: .45;
+  }
+
+  /* Backdrop blur is expensive on mobile GPUs. */
+  .site-header {
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    background: rgba(255, 255, 255, .96);
+  }
+
+  .site-header.is-dark {
+    background: rgba(5, 9, 11, .96);
+  }
+
+  /* Keep the scroll-driven portal transition, but stop always-running
+     decorative animations on the mobile audit target. */
+  .cave-shadow-wave,
+  .cave-shadow-ribbon,
+  .cave-shadow-tendril,
+  .cave-light-speck,
+  .cave-light-line,
+  .cave-ink-ribbon,
+  .dark-flow *,
+  .ambient-page-light {
+    animation: none !important;
+  }
+
+  .cave-portal__shadow-waves svg,
+  .cave-portal__cosmic svg {
+    filter: none !important;
+  }
+
+  .hero-logo-stage {
+    will-change: auto;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-logo-fallback {
+    background: rgba(132, 192, 191, .08);
+  }
+}

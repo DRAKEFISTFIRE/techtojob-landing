@@ -5,7 +5,13 @@ import Image from "next/image";
 import dynamic from "next/dynamic";
 import esMessages from "../language/es.json";
 import enMessages from "../language/en.json";
-import HeroLogo3D from "../components/Logo3D";
+const HeroLogo3D = dynamic(
+  () => import("../components/Logo3D"),
+  {
+    ssr: false,
+    loading: () => <div className="hero-logo-fallback" aria-hidden="true" />,
+  },
+);
 
 type Locale = "es" | "en";
 
@@ -867,6 +873,14 @@ export default function Home() {
   });
 
   const [year, setYear] = useState<number | null>(null);
+  const [showHeroLogo3D, setShowHeroLogo3D] = useState(false);
+
+  useEffect(() => {
+    // Keep the 3D component out of the critical startup path.
+    // The static fallback paints immediately; the 3D bundle mounts after first paint.
+    const timer = window.setTimeout(() => setShowHeroLogo3D(true), 900);
+    return () => window.clearTimeout(timer);
+  }, []);
 
   useEffect(() => {
     const storedLocale = window.localStorage.getItem("techtojob-locale");
@@ -889,46 +903,81 @@ export default function Home() {
     root.style.setProperty("--page-darkness", "0.18");
 
     let frame = 0;
+    let documentHeight = 1;
+    let heroTop = 0;
 
-    const updateScrollProgress = () => {
-      window.cancelAnimationFrame(frame);
+    const measure = () => {
+      documentHeight = Math.max(
+        document.documentElement.scrollHeight - window.innerHeight,
+        1,
+      );
 
-      frame = window.requestAnimationFrame(() => {
-        const scrollTop = window.scrollY;
-        const documentHeight =
-          document.documentElement.scrollHeight - window.innerHeight;
-
-        const progress =
-          documentHeight > 0 ? scrollTop / documentHeight : 0;
-
-        root.style.setProperty(
-          "--scroll-progress",
-          `${progress * 100}%`
-        );
-        root.style.setProperty("--cosmic-progress", progress.toFixed(4));
-        root.style.setProperty("--cosmic-shift", `${((progress - 0.5) * -34).toFixed(2)}px`);
-
-        const hero = heroVisual.current;
-        if (hero) {
-          const rect = hero.getBoundingClientRect();
-          const vh = Math.max(window.innerHeight, 1);
-          const heroProgress = Math.max(-1, Math.min(1, (vh * 0.72 - rect.top) / Math.max(vh * 1.15, 1)));
-          hero.style.setProperty("--hero-scroll-y", `${(heroProgress * -38).toFixed(2)}px`);
-          hero.style.setProperty("--hero-scroll-rotate", `${(heroProgress * -2.6).toFixed(2)}deg`);
-          hero.style.setProperty("--hero-scroll-scale", `${(1 - Math.abs(heroProgress) * 0.025).toFixed(4)}`);
-        }
-      });
+      const hero = heroVisual.current;
+      if (hero) {
+        const rect = hero.getBoundingClientRect();
+        heroTop = rect.top + window.scrollY;
+      }
     };
 
-    updateScrollProgress();
+    const render = () => {
+      frame = 0;
+      const scrollTop = window.scrollY;
+      const progress = scrollTop / documentHeight;
 
-    window.addEventListener("scroll", updateScrollProgress, { passive: true });
-    window.addEventListener("resize", updateScrollProgress);
+      root.style.setProperty("--scroll-progress", `${progress * 100}%`);
+      root.style.setProperty("--cosmic-progress", progress.toFixed(4));
+      root.style.setProperty(
+        "--cosmic-shift",
+        `${((progress - 0.5) * -34).toFixed(2)}px`,
+      );
+
+      const hero = heroVisual.current;
+      if (hero) {
+        const vh = Math.max(window.innerHeight, 1);
+        const heroTopInViewport = heroTop - scrollTop;
+        const heroProgress = Math.max(
+          -1,
+          Math.min(
+            1,
+            (vh * 0.72 - heroTopInViewport) / Math.max(vh * 1.15, 1),
+          ),
+        );
+
+        hero.style.setProperty(
+          "--hero-scroll-y",
+          `${(heroProgress * -38).toFixed(2)}px`,
+        );
+        hero.style.setProperty(
+          "--hero-scroll-rotate",
+          `${(heroProgress * -2.6).toFixed(2)}deg`,
+        );
+        hero.style.setProperty(
+          "--hero-scroll-scale",
+          `${(1 - Math.abs(heroProgress) * 0.025).toFixed(4)}`,
+        );
+      }
+    };
+
+    const schedule = () => {
+      if (frame) return;
+      frame = window.requestAnimationFrame(render);
+    };
+
+    const handleResize = () => {
+      measure();
+      schedule();
+    };
+
+    measure();
+    render();
+
+    window.addEventListener("scroll", schedule, { passive: true });
+    window.addEventListener("resize", handleResize);
 
     return () => {
       window.cancelAnimationFrame(frame);
-      window.removeEventListener("scroll", updateScrollProgress);
-      window.removeEventListener("resize", updateScrollProgress);
+      window.removeEventListener("scroll", schedule);
+      window.removeEventListener("resize", handleResize);
     };
   }, []);
 
@@ -1255,70 +1304,83 @@ export default function Home() {
     });
   };
   useEffect(() => {
-  const section = document.getElementById("pilares");
+    const section = document.getElementById("pilares");
 
-  if (!section) return;
+    if (!section) return;
 
-  const frame = section.querySelector(
-    ".pillars-illustration-frame"
-  ) as HTMLElement | null;
+    const frame = section.querySelector(
+      ".pillars-illustration-frame"
+    ) as HTMLElement | null;
 
-  if (!frame) return;
+    if (!frame) return;
 
-  let raf = 0;
+    let raf = 0;
+    let sectionTop = 0;
+    let sectionHeight = 1;
 
-  const updatePillarsScroll = () => {
-    raf = 0;
+    const measurePillars = () => {
+      const rect = section.getBoundingClientRect();
+      sectionTop = rect.top + window.scrollY;
+      sectionHeight = Math.max(rect.height, 1);
+    };
 
-    // En móvil no aplicamos el movimiento
-    if (window.innerWidth <= 900) {
-      frame.style.setProperty("--pillars-scroll-y", "0px");
-      return;
-    }
+    const updatePillarsScroll = () => {
+      raf = 0;
 
-    const rect = section.getBoundingClientRect();
+      // En móvil no aplicamos el movimiento
+      if (window.innerWidth <= 900) {
+        frame.style.setProperty("--pillars-scroll-y", "0px");
+        return;
+      }
 
-    const viewportCenter = window.innerHeight * 0.5;
+      const viewportCenter = window.innerHeight * 0.5;
+      const sectionTopInViewport = sectionTop - window.scrollY;
 
-    // Cuánto ha avanzado la sección respecto al centro de la pantalla
-    const offset =
-      viewportCenter - (rect.top + rect.height * 0.35);
+      // Cuánto ha avanzado la sección respecto al centro de la pantalla
+      const offset =
+        viewportCenter - (sectionTopInViewport + sectionHeight * 0.35);
 
-    // Movimiento limitado entre -60px y +60px
-    const movement = Math.max(
-      -60,
-      Math.min(60, offset * 0.08)
-    );
+      // Movimiento limitado entre -60px y +60px
+      const movement = Math.max(
+        -60,
+        Math.min(60, offset * 0.08)
+      );
 
-    frame.style.setProperty(
-      "--pillars-scroll-y",
-      `${movement}px`
-    );
-  };
+      frame.style.setProperty(
+        "--pillars-scroll-y",
+        `${movement}px`
+      );
+    };
 
-  const handleScroll = () => {
-    if (raf) return;
+    const handleScroll = () => {
+      if (raf) return;
 
-    raf = requestAnimationFrame(updatePillarsScroll);
-  };
+      raf = requestAnimationFrame(updatePillarsScroll);
+    };
 
-  updatePillarsScroll();
+    const handleResize = () => {
+      measurePillars();
+      updatePillarsScroll();
+    };
 
-  window.addEventListener("scroll", handleScroll, {
-    passive: true,
-  });
+    measurePillars();
+    updatePillarsScroll();
 
-  window.addEventListener("resize", updatePillarsScroll);
+    window.addEventListener("scroll", handleScroll, {
+      passive: true,
+    });
 
-  return () => {
-    window.removeEventListener("scroll", handleScroll);
-    window.removeEventListener("resize", updatePillarsScroll);
+    window.addEventListener("resize", handleResize);
 
-    if (raf) {
-      cancelAnimationFrame(raf);
-    }
-  };
-}, []);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+      window.removeEventListener("resize", handleResize);
+
+      if (raf) {
+        cancelAnimationFrame(raf);
+      }
+    };
+  }, []);
 
   const activeBadgeData = badgeConfig[activeBadge];
   const activeBadgeText = activeBadgeData ? t.badges.items[activeBadgeData.id] : null;
@@ -1566,7 +1628,7 @@ export default function Home() {
                 <div className="hero-logo-stage">
                   <div className="hero-logo-glow" aria-hidden="true" />
 
-                  <HeroLogo3D />
+                  {showHeroLogo3D ? <HeroLogo3D /> : null}
 
                   <div className="hero-logo-caption">
                     <span className="hero-logo-caption__line" />
