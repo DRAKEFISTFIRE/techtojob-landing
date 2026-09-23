@@ -1,7 +1,8 @@
 "use client";
 
-import { type FormEvent, memo, useEffect, useRef, useState } from "react";
+import { type FormEvent, useEffect, useRef, useState } from "react";
 import Image from "next/image";
+import dynamic from "next/dynamic";
 import esMessages from "../language/es.json";
 import enMessages from "../language/en.json";
 import HeroLogo3D from "../components/Logo3D";
@@ -40,6 +41,7 @@ function Icon({
   className?: string;
 }) {
   return (
+    
     <svg
       className={className}
       aria-hidden="true"
@@ -374,7 +376,31 @@ const communityLinksConfig: { key: keyof typeof esMessages.footer.columns.commun
   { key: "github", href: "https://github.com/DRAKEFISTFIRE" },
 ];
 
-function OrbitalConvergenceBase({ locale }: { locale: Locale }) {
+
+const orbitalCopy = {
+  es: {
+    kicker: "02 / CONEXIÓN",
+    title: "La unificación",
+    highlight: "de dos mundos",
+    text: "Talento y empresas se acercan hasta encontrar el punto exacto donde encajan.",
+    left: "TALENTO",
+    right: "OPORTUNIDAD",
+    center: "MATCH",
+    scroll: "SCROLL PARA CONECTAR",
+  },
+  en: {
+    kicker: "02 / CONNECTION",
+    title: "The unifitación",
+    highlight: "of two worlds",
+    text: "Talent and companies move closer until they find the exact point where they fit.",
+    left: "TALENT",
+    right: "OPPORTUNITY",
+    center: "MATCH",
+    scroll: "SCROLL TO CONNECT",
+  },
+} as const;
+
+function OrbitalConvergence({ locale }: { locale: Locale }) {
   const rootRef = useRef<HTMLElement | null>(null);
 
   useEffect(() => {
@@ -621,11 +647,8 @@ function OrbitalConvergenceBase({ locale }: { locale: Locale }) {
   );
 }
 
-// memo: OrbitalConvergence solo debe re-renderizar cuando cambia el idioma,
-// nunca por estado ajeno (countdown, menú móvil, email del formulario...).
-const OrbitalConvergence = memo(OrbitalConvergenceBase);
 
-function DarkFlowBase({
+function DarkFlow({
   variant = "left",
   intensity = "soft",
 }: {
@@ -646,11 +669,7 @@ function DarkFlowBase({
   );
 }
 
-// memo: es puramente decorativo, sus props (variant/intensity) son fijas
-// por instancia, así que nunca necesita volver a renderizar.
-const DarkFlow = memo(DarkFlowBase);
-
-function CosmicPageFieldBase() {
+function CosmicPageField() {
   const streams = Array.from({ length: 22 }, (_, index) => {
     const side = index % 2 === 0 ? -1 : 1;
     const y = 13 + ((index * 17) % 74);
@@ -737,12 +756,8 @@ function CosmicPageFieldBase() {
   );
 }
 
-// memo: no recibe props y su contenido (92 nodos SVG/DOM) es siempre igual.
-// Sin esto, cada tick del countdown o cada cambio de idioma volvía a montar
-// los 22 streams + 70 partículas desde cero.
-const CosmicPageField = memo(CosmicPageFieldBase);
 
-function CustomCursorBase() {
+function CustomCursor() {
   useEffect(() => {
     const finePointer = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
     if (!finePointer) return;
@@ -801,90 +816,12 @@ function CustomCursorBase() {
   return null;
 }
 
-// memo: nunca recibe props ni depende de estado; evita que el efecto
-// de montaje se reevalúe por re-renders de Home ajenos al cursor.
-const CustomCursor = memo(CustomCursorBase);
-
-// --- Countdown aislado ------------------------------------------------
-// Antes, el countdown vivía como useState/useEffect dentro de Home(),
-// así que cada setInterval de 1s forzaba a React a reconciliar TODO el
-// árbol de Home: hero, sliders, CosmicPageField, OrbitalConvergence...
-// Extraerlo a su propio componente confina el re-render al único nodo
-// que de verdad cambia cada segundo.
-const CountdownUnit = memo(function CountdownUnit({
-  value,
-  label,
-}: {
-  value: number;
-  label: string;
-}) {
-  return (
-    <div className="countdown__unit">
-      <span className="countdown__value">{String(value).padStart(2, "0")}</span>
-      <span className="countdown__label">{label}</span>
-    </div>
-  );
-});
-
-const CountdownTimer = memo(function CountdownTimer({
-  labels,
-}: {
-  labels: { days: string; hours: string; minutes: string; seconds: string };
-}) {
-  const [countdown, setCountdown] = useState({
-    days: 0,
-    hours: 0,
-    minutes: 0,
-    seconds: 0,
-  });
-
-  useEffect(() => {
-    const getNextTournamentCountdown = () => {
-      const now = new Date();
-
-      const nextMonth = new Date(
-        now.getFullYear(),
-        now.getMonth() + 1,
-        1,
-        0,
-        0,
-        0
-      );
-
-      const difference = nextMonth.getTime() - now.getTime();
-
-      setCountdown({
-        days: Math.floor(difference / (1000 * 60 * 60 * 24)),
-        hours: Math.floor((difference / (1000 * 60 * 60)) % 24),
-        minutes: Math.floor((difference / (1000 * 60)) % 60),
-        seconds: Math.floor((difference / 1000) % 60),
-      });
-    };
-
-    getNextTournamentCountdown();
-
-    const interval = window.setInterval(getNextTournamentCountdown, 1000);
-
-    return () => window.clearInterval(interval);
-  }, []);
-
-  return (
-    <>
-      <CountdownUnit value={countdown.days} label={labels.days} />
-      <CountdownUnit value={countdown.hours} label={labels.hours} />
-      <CountdownUnit value={countdown.minutes} label={labels.minutes} />
-      <CountdownUnit value={countdown.seconds} label={labels.seconds} />
-    </>
-  );
-});
 
 export default function Home() {
   const tournamentRail = useRef<HTMLDivElement>(null);
   const jobRail = useRef<HTMLDivElement>(null);
   const testimonialsRail = useRef<HTMLDivElement>(null);
   const heroVisual = useRef<HTMLDivElement>(null);
-  const heroVisibleRef = useRef(true);
-  const pillarsVisibleRef = useRef(true);
   const [menuOpen, setMenuOpen] = useState(false);
   const [copied, setCopied] = useState(false);
   const [footerCopied, setFooterCopied] = useState(false);
@@ -894,6 +831,13 @@ export default function Home() {
   const [formStatus, setFormStatus] = useState<"idle" | "empty" | "success">("idle");
 
   const [activeBadge, setActiveBadge] = useState(0);
+
+  const [countdown, setCountdown] = useState({
+    days: 0,
+    hours: 0,
+    minutes: 0,
+    seconds: 0,
+  });
 
   const [year, setYear] = useState<number | null>(null);
 
@@ -909,23 +853,6 @@ export default function Home() {
     document.documentElement.lang = locale;
     window.localStorage.setItem("techtojob-locale", locale);
   }, [locale]);
-
-  // Gatea el trabajo de scroll del hero a solo cuando está cerca del viewport,
-  // para no recalcular getBoundingClientRect() en cada scroll de toda la página.
-  useEffect(() => {
-    const hero = heroVisual.current;
-    if (!hero) return;
-
-    const io = new IntersectionObserver(
-      ([entry]) => {
-        heroVisibleRef.current = entry.isIntersecting;
-      },
-      { rootMargin: "200px" }
-    );
-
-    io.observe(hero);
-    return () => io.disconnect();
-  }, []);
 
   useEffect(() => {
     setYear(new Date().getFullYear());
@@ -955,7 +882,7 @@ export default function Home() {
         root.style.setProperty("--cosmic-shift", `${((progress - 0.5) * -34).toFixed(2)}px`);
 
         const hero = heroVisual.current;
-        if (hero && heroVisibleRef.current) {
+        if (hero) {
           const rect = hero.getBoundingClientRect();
           const vh = Math.max(window.innerHeight, 1);
           const heroProgress = Math.max(-1, Math.min(1, (vh * 0.72 - rect.top) / Math.max(vh * 1.15, 1)));
@@ -976,6 +903,55 @@ export default function Home() {
       window.removeEventListener("scroll", updateScrollProgress);
       window.removeEventListener("resize", updateScrollProgress);
     };
+  }, []);
+
+  useEffect(() => {
+    const getNextTournamentCountdown = () => {
+      const now = new Date();
+
+      const nextMonth = new Date(
+        now.getFullYear(),
+        now.getMonth() + 1,
+        1,
+        0,
+        0,
+        0
+      );
+
+      const difference = nextMonth.getTime() - now.getTime();
+
+      const days = Math.floor(
+        difference / (1000 * 60 * 60 * 24)
+      );
+
+      const hours = Math.floor(
+        (difference / (1000 * 60 * 60)) % 24
+      );
+
+      const minutes = Math.floor(
+        (difference / (1000 * 60)) % 60
+      );
+
+      const seconds = Math.floor(
+        (difference / 1000) % 60
+      );
+
+      setCountdown({
+        days,
+        hours,
+        minutes,
+        seconds,
+      });
+    };
+
+    getNextTournamentCountdown();
+
+    const interval = window.setInterval(
+      getNextTournamentCountdown,
+      1000
+    );
+
+    return () => window.clearInterval(interval);
   }, []);
 
   useEffect(() => {
@@ -1132,38 +1108,56 @@ export default function Home() {
     setEmail("");
   };
 
-  // Antes: elementFromPoint + toggle de pointer-events del header en cada
-  // frame de scroll (fuerza layout/estilo continuo). Ahora: IntersectionObserver
-  // observando las secciones oscuras, que solo dispara cuando cruzan el umbral.
   useEffect(() => {
     const header = document.getElementById("site-header");
     if (!header) return;
 
-    const darkSections = document.querySelectorAll(
-      "section.section-dark, footer, .cave-portal"
-    );
+    let raf = 0;
 
-    if (darkSections.length === 0) return;
+    const updateHeaderTone = () => {
+      raf = 0;
 
-    const observer = new IntersectionObserver(
-      (entries) => {
-        const crossing = entries
-          .filter((entry) => entry.isIntersecting)
-          .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
+      const probeY = Math.min(
+        window.innerHeight - 24,
+        Math.max(92, window.innerHeight * 0.22)
+      );
 
-        header.classList.toggle("is-dark", Boolean(crossing));
-      },
-      {
-        // Franja estrecha justo debajo del header fijo: solo nos importa
-        // qué sección ocupa esa banda, no el viewport completo.
-        rootMargin: "-72px 0px -85% 0px",
-        threshold: 0,
-      }
-    );
+      // The fixed navbar sits above the page, so temporarily let the probe
+      // pass through it. This makes the tone follow the actual section
+      // underneath instead of accidentally reading the navbar itself.
+      const previousPointerEvents = header.style.pointerEvents;
+      header.style.pointerEvents = "none";
+      const element = document.elementFromPoint(window.innerWidth / 2, probeY);
+      header.style.pointerEvents = previousPointerEvents;
 
-    darkSections.forEach((section) => observer.observe(section));
+      const section = element?.closest(
+        "section, footer, .section-dark, .dark-section, .cave-portal"
+      );
 
-    return () => observer.disconnect();
+      const isDark = Boolean(
+        section?.classList.contains("section-dark") ||
+        section?.classList.contains("dark-section") ||
+        section?.classList.contains("cave-portal") ||
+        section?.getAttribute("data-theme") === "dark"
+      );
+
+      header.classList.toggle("is-dark", isDark);
+    };
+
+    const scheduleHeaderTone = () => {
+      if (raf) return;
+      raf = window.requestAnimationFrame(updateHeaderTone);
+    };
+
+    updateHeaderTone();
+    window.addEventListener("scroll", scheduleHeaderTone, { passive: true });
+    window.addEventListener("resize", scheduleHeaderTone);
+
+    return () => {
+      window.removeEventListener("scroll", scheduleHeaderTone);
+      window.removeEventListener("resize", scheduleHeaderTone);
+      if (raf) window.cancelAnimationFrame(raf);
+    };
   }, []);
 
   const closeMenu = () => {
@@ -1201,6 +1195,12 @@ export default function Home() {
     };
   }, [menuOpen]);
 
+  
+
+  const toggleLocale = () => {
+    setLocale((previous) => (previous === "es" ? "en" : "es"));
+  };
+
   const moveSlider = (
     rail: { current: HTMLDivElement | null },
     direction: "previous" | "next"
@@ -1227,86 +1227,71 @@ export default function Home() {
       behavior: "smooth",
     });
   };
-
   useEffect(() => {
-    const section = document.getElementById("pilares");
+  const section = document.getElementById("pilares");
 
-    if (!section) return;
+  if (!section) return;
 
-    const frame = section.querySelector(
-      ".pillars-illustration-frame"
-    ) as HTMLElement | null;
+  const frame = section.querySelector(
+    ".pillars-illustration-frame"
+  ) as HTMLElement | null;
 
-    if (!frame) return;
+  if (!frame) return;
 
-    // Solo recalculamos el parallax de los pilares si la sección está
-    // realmente cerca del viewport; evita trabajo en cada scroll cuando
-    // el usuario está leyendo el hero o el footer.
-    const io = new IntersectionObserver(
-      ([entry]) => {
-        pillarsVisibleRef.current = entry.isIntersecting;
-      },
-      { rootMargin: "200px" }
+  let raf = 0;
+
+  const updatePillarsScroll = () => {
+    raf = 0;
+
+    // En móvil no aplicamos el movimiento
+    if (window.innerWidth <= 900) {
+      frame.style.setProperty("--pillars-scroll-y", "0px");
+      return;
+    }
+
+    const rect = section.getBoundingClientRect();
+
+    const viewportCenter = window.innerHeight * 0.5;
+
+    // Cuánto ha avanzado la sección respecto al centro de la pantalla
+    const offset =
+      viewportCenter - (rect.top + rect.height * 0.35);
+
+    // Movimiento limitado entre -60px y +60px
+    const movement = Math.max(
+      -60,
+      Math.min(60, offset * 0.08)
     );
-    io.observe(section);
 
-    let raf = 0;
+    frame.style.setProperty(
+      "--pillars-scroll-y",
+      `${movement}px`
+    );
+  };
 
-    const updatePillarsScroll = () => {
-      raf = 0;
+  const handleScroll = () => {
+    if (raf) return;
 
-      if (!pillarsVisibleRef.current) return;
+    raf = requestAnimationFrame(updatePillarsScroll);
+  };
 
-      // En móvil no aplicamos el movimiento
-      if (window.innerWidth <= 900) {
-        frame.style.setProperty("--pillars-scroll-y", "0px");
-        return;
-      }
+  updatePillarsScroll();
 
-      const rect = section.getBoundingClientRect();
+  window.addEventListener("scroll", handleScroll, {
+    passive: true,
+  });
 
-      const viewportCenter = window.innerHeight * 0.5;
+  window.addEventListener("resize", updatePillarsScroll);
 
-      // Cuánto ha avanzado la sección respecto al centro de la pantalla
-      const offset =
-        viewportCenter - (rect.top + rect.height * 0.35);
+  return () => {
+    window.removeEventListener("scroll", handleScroll);
+    window.removeEventListener("resize", updatePillarsScroll);
 
-      // Movimiento limitado entre -60px y +60px
-      const movement = Math.max(
-        -60,
-        Math.min(60, offset * 0.08)
-      );
-
-      frame.style.setProperty(
-        "--pillars-scroll-y",
-        `${movement}px`
-      );
-    };
-
-    const handleScroll = () => {
-      if (raf) return;
-
-      raf = requestAnimationFrame(updatePillarsScroll);
-    };
-
-    updatePillarsScroll();
-
-    window.addEventListener("scroll", handleScroll, {
-      passive: true,
-    });
-
-    window.addEventListener("resize", updatePillarsScroll);
-
-    return () => {
-      io.disconnect();
-      window.removeEventListener("scroll", handleScroll);
-      window.removeEventListener("resize", updatePillarsScroll);
-
-      if (raf) {
-        cancelAnimationFrame(raf);
-      }
-    };
-  }, []);
+    if (raf) {
+      cancelAnimationFrame(raf);
+    }
+  };
+}, []);
 
   const activeBadgeData = badgeConfig[activeBadge];
   const activeBadgeText = activeBadgeData ? t.badges.items[activeBadgeData.id] : null;
@@ -1478,7 +1463,7 @@ export default function Home() {
                 className="hero-watermark"
                 width={500}
                 height={500}
-                loading="lazy"
+                priority
               />
 
               {/* COPY */}
@@ -1910,14 +1895,53 @@ export default function Home() {
               id="countdown"
               aria-label={t.nextTournament.hiddenNote}
             >
-              <CountdownTimer
-                labels={{
-                  days: t.nextTournament.countdown.days,
-                  hours: t.nextTournament.countdown.hours,
-                  minutes: t.nextTournament.countdown.minutes,
-                  seconds: t.nextTournament.countdown.seconds,
-                }}
-              />
+              <div className="countdown__unit">
+                <span className="countdown__value">
+                  {String(
+                    countdown.days
+                  ).padStart(2, "0")}
+                </span>
+
+                <span className="countdown__label">
+                  {t.nextTournament.countdown.days}
+                </span>
+              </div>
+
+              <div className="countdown__unit">
+                <span className="countdown__value">
+                  {String(
+                    countdown.hours
+                  ).padStart(2, "0")}
+                </span>
+
+                <span className="countdown__label">
+                  {t.nextTournament.countdown.hours}
+                </span>
+              </div>
+
+              <div className="countdown__unit">
+                <span className="countdown__value">
+                  {String(
+                    countdown.minutes
+                  ).padStart(2, "0")}
+                </span>
+
+                <span className="countdown__label">
+                  {t.nextTournament.countdown.minutes}
+                </span>
+              </div>
+
+              <div className="countdown__unit">
+                <span className="countdown__value">
+                  {String(
+                    countdown.seconds
+                  ).padStart(2, "0")}
+                </span>
+
+                <span className="countdown__label">
+                  {t.nextTournament.countdown.seconds}
+                </span>
+              </div>
             </div>
 
             <p className="visually-hidden">
@@ -2133,7 +2157,6 @@ export default function Home() {
                   className="process-card__image process-card__image--hero"
                   width={1200}
                   height={900}
-                  loading="lazy"
                 />
 
                 <div className="process-card__number">01</div>
@@ -2187,7 +2210,6 @@ export default function Home() {
                     className="process-card__image"
                     width={900}
                     height={560}
-                    loading="lazy"
                   />
 
                   <div className="process-small-icon">
@@ -2216,7 +2238,6 @@ export default function Home() {
                     className="process-card__image"
                     width={900}
                     height={560}
-                    loading="lazy"
                   />
 
                   <div className="process-small-icon">
@@ -2242,7 +2263,6 @@ export default function Home() {
                     className="process-card__image process-card__image--wide"
                     width={1200}
                     height={600}
-                    loading="lazy"
                   />
 
                   <div>
@@ -2445,7 +2465,6 @@ export default function Home() {
                         fill
                         sizes="(max-width: 900px) 85vw, 520px"
                         className="wide-slide__media"
-                        loading="lazy"
                       />
                       <div className="wide-slide__image-overlay" aria-hidden="true">
                         <span>{`0${index + 1}`}</span>
@@ -2500,7 +2519,6 @@ export default function Home() {
                         fill
                         sizes="(max-width: 900px) 85vw, 520px"
                         className="wide-slide__media"
-                        loading="lazy"
                       />
                       <div className="wide-slide__image-overlay" aria-hidden="true">
                         <span>{`0${index + 1}`}</span>
@@ -2792,7 +2810,6 @@ export default function Home() {
                 className="brand-mark"
                 width={168}
                 height={34}
-                loading="lazy"
               />
             </a>
 
