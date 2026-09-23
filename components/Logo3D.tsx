@@ -1,4 +1,3 @@
-
 "use client";
 
 import { useEffect, useRef } from "react";
@@ -12,11 +11,29 @@ export default function HeroLogo3D() {
     const container = containerRef.current;
     if (!container) return;
 
+    // Evita gastar GPU si el usuario ha pedido menos movimiento.
+    const reducedMotion = window.matchMedia(
+      "(prefers-reduced-motion: reduce)"
+    ).matches;
+
+    if (reducedMotion) {
+      return;
+    }
+
+    const width = container.clientWidth;
+    const height = container.clientHeight;
+
+    if (!width || !height) return;
+
+    // =====================================================
+    // SCENE
+    // =====================================================
+
     const scene = new THREE.Scene();
 
     const camera = new THREE.PerspectiveCamera(
       30,
-      container.clientWidth / container.clientHeight,
+      width / height,
       0.1,
       100
     );
@@ -24,81 +41,81 @@ export default function HeroLogo3D() {
     camera.position.set(0, 0, 7);
     camera.lookAt(0, 0, 0);
 
+    // =====================================================
+    // RENDERER
+    // =====================================================
+
     const renderer = new THREE.WebGLRenderer({
-      antialias: true,
+      antialias: false,
       alpha: true,
+      powerPreference: "high-performance",
     });
 
+    // DPR alto dispara muchísimo el coste de WebGL.
     renderer.setPixelRatio(
-      Math.min(window.devicePixelRatio, 2)
+      Math.min(window.devicePixelRatio || 1, 1.25)
     );
 
-    renderer.setSize(
-      container.clientWidth,
-      container.clientHeight
-    );
+    renderer.setSize(width, height, false);
 
     renderer.outputColorSpace = THREE.SRGBColorSpace;
 
     container.appendChild(renderer.domElement);
 
     // =====================================================
-    // LOGO
+    // TEXTURE
     // =====================================================
 
-    const texture = new THREE.TextureLoader().load(
+    const textureLoader = new THREE.TextureLoader();
+
+    const texture = textureLoader.load(
       "/images/logotechtojob.png"
     );
 
     texture.colorSpace = THREE.SRGBColorSpace;
 
-    const material = new THREE.MeshBasicMaterial({
-      map: texture,
-      transparent: true,
-      alphaTest: 0.08,
-      side: THREE.DoubleSide,
-    });
+    // =====================================================
+    // LOGO
+    // =====================================================
 
-    const geometry = new THREE.PlaneGeometry(6.4, 2.13);
+    const logo = new THREE.Group();
 
-    const logoFront = new THREE.Mesh(
-      geometry,
-      material
-    );
+    const logoWidth = 6.4;
+    const logoHeight = 2.13;
 
     // =====================================================
     // PROFUNDIDAD
     // =====================================================
 
-    const logo = new THREE.Group();
+    // Antes: 26 capas.
+    // Ahora: 6 capas.
+    //
+    // Visualmente sigue existiendo profundidad,
+    // pero reducimos muchísimo el trabajo de WebGL.
 
     const depth = 0.32;
-    const layers = 26;
+    const layers = 6;
+
+    const depthGeometry = new THREE.PlaneGeometry(
+      logoWidth,
+      logoHeight
+    );
 
     for (let i = layers; i >= 1; i--) {
       const p = i / layers;
 
-      const depthGeometry = new THREE.PlaneGeometry(
-        6.4,
-        2.13
-      );
-
-      const depthMaterial =
-        new THREE.MeshStandardMaterial({
-          map: texture,
-          transparent: true,
-          alphaTest: 0.08,
-
-          color: new THREE.Color(
-            0.05 + p * 0.035,
-            0.11 + p * 0.045,
-            0.12 + p * 0.05
-          ),
-
-          roughness: 0.24,
-          metalness: 0.16,
-          side: THREE.DoubleSide,
-        });
+      const depthMaterial = new THREE.MeshBasicMaterial({
+        map: texture,
+        transparent: true,
+        alphaTest: 0.08,
+        color: new THREE.Color(
+          0.07 + p * 0.025,
+          0.13 + p * 0.035,
+          0.14 + p * 0.04
+        ),
+        side: THREE.FrontSide,
+        depthWrite: true,
+      });
 
       const layer = new THREE.Mesh(
         depthGeometry,
@@ -112,8 +129,29 @@ export default function HeroLogo3D() {
       logo.add(layer);
     }
 
-    // Cara frontal
+    // =====================================================
+    // CARA FRONTAL
+    // =====================================================
+
+    const frontGeometry = new THREE.PlaneGeometry(
+      logoWidth,
+      logoHeight
+    );
+
+    const frontMaterial = new THREE.MeshBasicMaterial({
+      map: texture,
+      transparent: true,
+      alphaTest: 0.08,
+      side: THREE.FrontSide,
+    });
+
+    const logoFront = new THREE.Mesh(
+      frontGeometry,
+      frontMaterial
+    );
+
     logoFront.position.z = 0.02;
+
     logo.add(logoFront);
 
     scene.add(logo);
@@ -121,49 +159,24 @@ export default function HeroLogo3D() {
     // =====================================================
     // ILUMINACIÓN
     // =====================================================
-
-    scene.add(
-      new THREE.AmbientLight(0xffffff, 1.5)
-    );
-
-    const light = new THREE.DirectionalLight(
-      0xd8ffff,
-      4
-    );
-
-    light.position.set(-3, 4, 5);
-    scene.add(light);
-
-    const fill = new THREE.DirectionalLight(
-      0xffffff,
-      1.8
-    );
-
-    fill.position.set(4, -1, 4);
-    scene.add(fill);
-
-    const rim = new THREE.PointLight(
-      0x6fffff,
-      4,
-      10
-    );
-
-    rim.position.set(-3, -2, 3);
-    scene.add(rim);
+    //
+    // Las luces ya no son necesarias porque usamos
+    // MeshBasicMaterial.
+    //
+    // Esto elimina cálculos de iluminación por fragmento.
 
     // =====================================================
-    // ROTACIÓN INICIAL
+    // ROTACIÓN
     // =====================================================
 
-    const initialRotationX = 0.015;
-    const initialRotationY = -0.08;
+    const BASE_ROTATION_Y = -0.08;
+    const BASE_ROTATION_X = 0.015;
 
-    logo.rotation.y = initialRotationY;
-    logo.rotation.x = initialRotationX;
+    const MAX_ROTATION_Y = 0.22;
+    const MAX_ROTATION_X = 0.12;
 
-    // =====================================================
-    // MOUSE / TILT
-    // =====================================================
+    logo.rotation.y = BASE_ROTATION_Y;
+    logo.rotation.x = BASE_ROTATION_X;
 
     let targetX = 0;
     let targetY = 0;
@@ -171,133 +184,157 @@ export default function HeroLogo3D() {
     let currentX = 0;
     let currentY = 0;
 
-    // Intensidad del efecto
-    const MAX_ROTATION_Y = 0.22;
-    const MAX_ROTATION_X = 0.12;
-
-    // Posición inicial del logo
-    const BASE_ROTATION_Y = -0.08;
-    const BASE_ROTATION_X = 0.015;
-
-    const onPointerMove = (e: PointerEvent) => {
-    const rect = container.getBoundingClientRect();
-
-    // Centro del contenedor
-    const centerX = rect.left + rect.width / 2;
-    const centerY = rect.top + rect.height / 2;
-
-    // Distancia del ratón respecto al centro
-    // -1 ... 1
-    const normalizedX =
-        (e.clientX - centerX) / (rect.width / 2);
-
-    const normalizedY =
-        (e.clientY - centerY) / (rect.height / 2);
-
-    // Limitamos para evitar giros exagerados
-    const x = THREE.MathUtils.clamp(
-        normalizedX,
-        -1,
-        1
-    );
-
-    const y = THREE.MathUtils.clamp(
-        normalizedY,
-        -1,
-        1
-    );
-
-    targetX = x;
-    targetY = y;
-    };
-
-    const onPointerLeave = () => {
-    targetX = 0;
-    targetY = 0;
-    };
-
-    container.addEventListener(
-    "pointermove",
-    onPointerMove
-    );
-
-    container.addEventListener(
-    "pointerleave",
-    onPointerLeave
-    );
-
-    // =====================================================
-    // ANIMATION
-    // =====================================================
-
     let frame = 0;
+    let renderQueued = false;
+    let active = true;
 
-    const animate = () => {
-    frame = requestAnimationFrame(animate);
+    // Cacheamos el rectángulo.
+    // No hacemos getBoundingClientRect() en cada mousemove.
+    let rect = container.getBoundingClientRect();
 
-    // Suavizado
-    currentX +=
-        (targetX - currentX) * 0.045;
+    const updateRect = () => {
+      rect = container.getBoundingClientRect();
+    };
 
-    currentY +=
-        (targetY - currentY) * 0.045;
+    // =====================================================
+    // RENDER
+    // =====================================================
 
-    // Rotación objetivo
-    const rotationY =
+    const render = () => {
+      if (!active) return;
+
+      renderQueued = false;
+
+      currentX += (targetX - currentX) * 0.12;
+      currentY += (targetY - currentY) * 0.12;
+
+      const rotationY =
         BASE_ROTATION_Y +
         currentX * MAX_ROTATION_Y;
 
-    const rotationX =
+      const rotationX =
         BASE_ROTATION_X -
         currentY * MAX_ROTATION_X;
 
-    // Suavizado final
-    logo.rotation.y +=
-        (rotationY - logo.rotation.y) * 0.08;
+      logo.rotation.y +=
+        (rotationY - logo.rotation.y) * 0.14;
 
-    logo.rotation.x +=
-        (rotationX - logo.rotation.x) * 0.08;
+      logo.rotation.x +=
+        (rotationX - logo.rotation.x) * 0.14;
 
-    renderer.render(
-        scene,
-        camera
-    );
+      renderer.render(scene, camera);
+
+      const stillMoving =
+        Math.abs(targetX - currentX) > 0.001 ||
+        Math.abs(targetY - currentY) > 0.001 ||
+        Math.abs(rotationY - logo.rotation.y) > 0.001 ||
+        Math.abs(rotationX - logo.rotation.x) > 0.001;
+
+      if (stillMoving) {
+        frame = requestAnimationFrame(render);
+      }
     };
 
-    animate();
+    const requestRender = () => {
+      if (!active || renderQueued) return;
 
+      renderQueued = true;
+      frame = requestAnimationFrame(render);
+    };
 
+    // Primer render.
+    requestRender();
 
+    // =====================================================
+    // POINTER
+    // =====================================================
+
+    const onPointerMove = (e: PointerEvent) => {
+      const halfWidth = rect.width / 2;
+      const halfHeight = rect.height / 2;
+
+      if (halfWidth <= 0 || halfHeight <= 0) return;
+
+      const normalizedX =
+        (e.clientX - (rect.left + halfWidth)) /
+        halfWidth;
+
+      const normalizedY =
+        (e.clientY - (rect.top + halfHeight)) /
+        halfHeight;
+
+      targetX = THREE.MathUtils.clamp(
+        normalizedX,
+        -1,
+        1
+      );
+
+      targetY = THREE.MathUtils.clamp(
+        normalizedY,
+        -1,
+        1
+      );
+
+      requestRender();
+    };
+
+    const onPointerLeave = () => {
+      targetX = 0;
+      targetY = 0;
+
+      requestRender();
+    };
+
+    container.addEventListener(
+      "pointermove",
+      onPointerMove,
+      { passive: true }
+    );
+
+    container.addEventListener(
+      "pointerleave",
+      onPointerLeave,
+      { passive: true }
+    );
 
     // =====================================================
     // RESIZE
     // =====================================================
 
     const resize = () => {
-      const width = container.clientWidth;
-      const height = container.clientHeight;
+      const newWidth = container.clientWidth;
+      const newHeight = container.clientHeight;
 
-      camera.aspect = width / height;
+      if (!newWidth || !newHeight) return;
+
+      camera.aspect = newWidth / newHeight;
       camera.updateProjectionMatrix();
 
-      renderer.setSize(width, height);
+      renderer.setSize(
+        newWidth,
+        newHeight,
+        false
+      );
+
+      updateRect();
+
+      requestRender();
     };
 
-    window.addEventListener("resize", resize);
+    const resizeObserver = new ResizeObserver(resize);
 
-    resize();
+    resizeObserver.observe(container);
 
     // =====================================================
     // CLEANUP
     // =====================================================
 
     return () => {
+      active = false;
+
       cancelAnimationFrame(frame);
 
-      window.removeEventListener(
-        "resize",
-        resize
-      );
+      resizeObserver.disconnect();
 
       container.removeEventListener(
         "pointermove",
@@ -311,15 +348,19 @@ export default function HeroLogo3D() {
 
       texture.dispose();
 
-      logo.traverse((obj) => {
-        if (obj instanceof THREE.Mesh) {
-          obj.geometry.dispose();
+      logo.traverse((object) => {
+        if (!(object instanceof THREE.Mesh)) {
+          return;
+        }
 
-          if (Array.isArray(obj.material)) {
-            obj.material.forEach((m) => m.dispose());
-          } else {
-            obj.material.dispose();
-          }
+        object.geometry.dispose();
+
+        if (Array.isArray(object.material)) {
+          object.material.forEach((material) => {
+            material.dispose();
+          });
+        } else {
+          object.material.dispose();
         }
       });
 
@@ -339,7 +380,7 @@ export default function HeroLogo3D() {
     <div
       ref={containerRef}
       className="hero-logo-3d"
+      aria-hidden="true"
     />
   );
 }
-
