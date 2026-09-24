@@ -116,3 +116,82 @@
   }
 
 }
+@media (min-width: 1101px) and (max-width: 1366px) {
+  .hero-logo-stage {
+    width: min(46vw, 560px);
+    height: min(24vw, 290px);
+    left: 50%;
+    top: 48%;
+  }
+
+  .hero-logo-glow {
+    width: min(38vw, 460px);
+    height: min(16vw, 195px);
+    filter: blur(34px);
+  }
+
+  .hero-logo-stage::after {
+    width: min(24vw, 320px);
+    height: 18px;
+    bottom: 30px;
+    filter: blur(11px);
+  }
+}
+
+/* Tablet range */
+@media (min-width: 769px) and (max-width: 1100px) {
+  .hero-logo-stage {
+    width: 460px;
+    height: 235px;
+    left: 50%;
+    top: 50%;
+  }
+
+  .hero-logo-glow {
+    width: 380px;
+    height: 165px;
+    filter: blur(32px);
+  }
+
+  .hero-logo-stage::after {
+    width: 260px;
+    height: 17px;
+    bottom: 24px;
+    filter: blur(11px);
+  }
+}
+
+@media (max-width: 768px) {
+  .hero-logo-stage {
+    width: 420px;
+    height: 210px;
+    left: 50%;
+    top: 50%;
+  }
+
+  .hero-logo-glow {
+    width: 340px;
+    height: 150px;
+    filter: blur(30px);
+  }
+
+  .hero-logo-stage::after {
+    width: 240px;
+    height: 16px;
+    bottom: 22px;
+    filter: blur(10px);
+  }
+}
+
+@media (max-width: 480px) {
+  .hero-logo-stage {
+    width: min(78vw, 340px);
+    height: min(39vw, 170px);
+  }
+
+  .hero-logo-glow {
+    width: min(64vw, 280px);
+    height: min(26vw, 120px);
+    filter: blur(24px);
+  }
+}
